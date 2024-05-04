@@ -50,4 +50,9 @@ public class Debugger : MonoBehaviour
         return textMesh;
     }
 
+    public void SetRecipeFirst()
+    {
+        agent.cookSessionController.SetRecipe(0);
+    }
+
 }
