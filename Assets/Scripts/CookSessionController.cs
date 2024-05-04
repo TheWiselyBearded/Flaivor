@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class CookSessionController : MonoBehaviour
 {
-    public List<Recipe> recipes;
+    [SerializeField] public RecipeBook RecipeBook;
     public Recipe recipe;
 
     private void Awake()
     {
-        recipes = new List<Recipe>();
+        //recipes = new List<Recipe>();
     }
 
     public void SequenceSteps()
@@ -31,27 +31,36 @@ public class CookSessionController : MonoBehaviour
 
     public void CreateReceipe(string jsonRecipes)
     {
-        recipes = JsonConvert.DeserializeObject<List<Recipe>>(jsonRecipes);
+        //recipes = JsonConvert.DeserializeObject<List<Recipe>>(jsonRecipes);
 
-        foreach (Recipe recipe in recipes)
+        try
         {
-            Debug.Log($"Recipe: {recipe.RecipeName}");
-            foreach (KeyValuePair<string, string> ingredient in recipe.Ingredients)
-            {
-                Debug.Log($"Ingredient: {ingredient.Key}, Amount: {ingredient.Value}");
-            }
+            RecipeBook recipeBook = JsonConvert.DeserializeObject<RecipeBook>(jsonRecipes);
 
-            foreach (Instruction instruction in recipe.Instructions)
+            foreach (Recipe recipe in recipeBook.Recipes)
             {
-                Debug.Log($"Step {instruction.StepNumber}: {instruction.Description}");
-                foreach (string subStep in instruction.SubSteps)
+                Debug.Log($"Recipe: {recipe.RecipeName}");
+                foreach (var ingredient in recipe.Ingredients)
                 {
-                    Debug.Log($"Sub-step: {subStep}");
+                    Debug.Log($"Ingredient: {ingredient.Key}, Quantity: {ingredient.Value}");
+                }
+                foreach (Instruction instruction in recipe.Instructions)
+                {
+                    Debug.Log($"Step {instruction.StepNumber}: {instruction.Description}");
+                    foreach (string subStep in instruction.SubSteps)
+                    {
+                        Debug.Log($"Sub-step: {subStep}");
+                    }
                 }
             }
-            Debug.Log($"Successfully created recipe {recipe.RecipeName}");
+        }
+        catch (JsonSerializationException ex)
+        {
+            Debug.LogError("JsonSerializationException: " + ex.Message);
         }
     }
+
+
 
     public void SetRecipe(Recipe _recipe) => recipe= _recipe;
 
@@ -59,18 +68,36 @@ public class CookSessionController : MonoBehaviour
 }
 
 [System.Serializable]
+public class RecipeBook
+{
+    [JsonProperty("recipes")]
+    public List<Recipe> Recipes { get; set; }
+}
+
+[System.Serializable]
 public class Recipe
 {
-    public string Description { get; set; }
-    public int currentStepIndex { get; set; }
+    [JsonProperty("recipe_name")]
     public string RecipeName { get; set; }
+
+    [JsonProperty("description")]
+    public string Description { get; set; }
+
+    public int currentStepIndex;
+
     public Dictionary<string, string> Ingredients { get; set; }
+
     public List<Instruction> Instructions { get; set; }
 }
+
 [System.Serializable]
 public class Instruction
 {
+    [JsonProperty("step_number")]
     public int StepNumber { get; set; }
+
     public string Description { get; set; }
+
+    [JsonProperty("sub_steps")]
     public List<string> SubSteps { get; set; }
 }

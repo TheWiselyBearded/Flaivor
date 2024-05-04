@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AgentController : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class AgentController : MonoBehaviour
     public SpeechModule speechModule;
     public ListenerModule listenerModule;
     public ThinkerModule thinkerModule;
+
+    public UnityEvent[] thinkerEvents;
 
     [System.Serializable]
     public enum AgentState
@@ -29,6 +33,8 @@ public class AgentController : MonoBehaviour
         listenerModule.OnUserInputReceived += ListenerModule_OnUserInputReceived;
         thinkerModule.OnChatGPTInputReceived += ThinkerModule_OnChatGPTInputReceived;
     }
+
+    
 
     private void ListenerModule_OnUserInputReceived(string obj)
     {
@@ -73,7 +79,16 @@ public class AgentController : MonoBehaviour
     void ApplyThinkingModeSettings()
     {
         listenerModule.ToggleDictation(false);
+        InvokeEvents(thinkerEvents);
         // generate ui objects and such for response queue?
+    }
+
+    private void InvokeEvents(UnityEvent[] events)
+    {
+        foreach (UnityEvent uev in events)
+        {
+            uev?.Invoke();
+        }
     }
 
     void ApplySpeakingModeSettings()
