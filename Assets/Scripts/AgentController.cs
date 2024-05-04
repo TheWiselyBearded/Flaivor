@@ -43,7 +43,9 @@ public class AgentController : MonoBehaviour
 
     private void ThinkerModule_OnChatGPTInputReceived(string obj)
     {
+        Debug.Log($"Thinker Mode response fed to chef");
         SetMode(AgentState.Speaking);
+        cookSessionController.CreateReceipe(obj);
     }
 
     public void SetMode(AgentState newState)
