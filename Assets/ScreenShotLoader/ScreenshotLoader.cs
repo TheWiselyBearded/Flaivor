@@ -3,10 +3,13 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ScreenshotLoader : MonoBehaviour
 {
+    public UnityEvent OnScreenShotLoadedEvent;
+
     private const int MAX_CHECK_PERMISSION_COUNT = 100;
 
     [SerializeField] private Button requestPermissionButton = default!;
@@ -104,6 +107,7 @@ public class ScreenshotLoader : MonoBehaviour
                             texture.LoadImage(screenshotBytes);
                             texture.Apply();
                             rawImage.texture = texture;
+                            OnScreenShotLoadedEvent?.Invoke();
                         }
                     }
                 }

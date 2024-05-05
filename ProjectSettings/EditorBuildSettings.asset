@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GPT_Passthrough.unity
+    path: Assets/Scenes/Retired/GPT_Passthrough.unity
     guid: 16ca35e22ae03344ba4b3b5d20406a76
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/Retired/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 01961840a96670f41b6b1b88eab01e31, type: 2}

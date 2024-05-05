@@ -212,9 +212,9 @@ public class ThinkerModule : MonoBehaviour
         }
     }
 
-    public void SubmitChatRequest()
+    public void SubmitScreenshotChatRequest()
     {
-        StartChatAsync();
+        SubmitScreenshotChat();
     }
 
     public Texture2D ConvertRawImageToTexture2D()
@@ -231,7 +231,7 @@ public class ThinkerModule : MonoBehaviour
         return texture;
     }
 
-    public async void StartChatAsync()
+    public async void SubmitScreenshotChat()
     {
         if (api == null)
         {
