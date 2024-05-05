@@ -9,6 +9,7 @@ public class CookSessionController : MonoBehaviour
     [SerializeField] public RecipeBook recipeBook;
     public Recipe recipe;
 
+    [SerializeField] private GameObject recipeStepUIPrefab; // Drag your prefab here in the Inspector
     [SerializeField] private GameObject recipeMediumUIPrefab; // Drag your prefab here in the Inspector
     [SerializeField] private GameObject recipeFullUIPrefab; // Drag your prefab here in the Inspector
     [SerializeField] private Transform uiParent; // Assign a parent transform to control the layout
@@ -73,6 +74,7 @@ public class CookSessionController : MonoBehaviour
         // instantiate prefabs
         CreateRecipeUI(recipe);
         CreateRecipeFullUI(recipe);
+        CreateRecipeStepUI(0);
     }
 
     // Example method to create and set up the recipe UI
@@ -118,6 +120,31 @@ public class CookSessionController : MonoBehaviour
             string ingredientsText = FormatIngredients(recipe.Ingredients);
             recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText);
             recipeUI.SetInstructionsUI(recipe.Instructions);
+        }
+        else
+        {
+            Debug.LogError("RecipeMediumUI component not found on the instantiated prefab!");
+        }
+    }
+
+    public void CreateRecipeStepUI(int stepIndex)
+    {
+        if (recipeStepUIPrefab == null)
+        {
+            Debug.LogError("RecipeMediumUIPrefab is not assigned in the inspector!");
+            return;
+        }
+
+        // Instantiate the prefab as a child of uiParent
+        GameObject instance = Instantiate(recipeStepUIPrefab, uiParent);
+
+        // Get the RecipeMediumUI component and set the recipe details
+        InstructionStepProgressUI recipeUI = instance.GetComponent<InstructionStepProgressUI>();
+        if (recipeUI != null)
+        {
+
+            recipeUI.SetInstructionStepUI(recipe.Instructions[stepIndex].StepNumber.ToString() + " " + recipe.Instructions[stepIndex].Description, 
+                recipe.Instructions[stepIndex].SubSteps);
         }
         else
         {
