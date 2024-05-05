@@ -44,6 +44,7 @@ public class AgentController : MonoBehaviour
 
     private void OnDestroy()
     {
+        listenerModule.OnUserInputReceived -= ListenerModule_OnUserInputReceived;
         thinkerModule.OnChatGPTInputReceived -= ThinkerModule_OnChatGPTInputReceived;
     }
 

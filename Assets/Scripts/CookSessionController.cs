@@ -10,6 +10,7 @@ public class CookSessionController : MonoBehaviour
     public Recipe recipe;
 
     [SerializeField] private GameObject recipeMediumUIPrefab; // Drag your prefab here in the Inspector
+    [SerializeField] private GameObject recipeFullUIPrefab; // Drag your prefab here in the Inspector
     [SerializeField] private Transform uiParent; // Assign a parent transform to control the layout
 
     private void Awake()
@@ -65,13 +66,13 @@ public class CookSessionController : MonoBehaviour
     }
 
 
-    public void SetRecipe(int _recipe) => SetRecipe(recipeBook.Recipes[0]);
+    public void SetRecipe(int _recipeIndex) => SetRecipe(recipeBook.Recipes[_recipeIndex]);
     public void SetRecipe(Recipe _recipe)
     {
         recipe = _recipe;
         // instantiate prefabs
         CreateRecipeUI(recipe);
-
+        CreateRecipeFullUI(recipe);
     }
 
     // Example method to create and set up the recipe UI
@@ -92,6 +93,31 @@ public class CookSessionController : MonoBehaviour
         {
             string ingredientsText = FormatIngredients(recipe.Ingredients);
             recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText);
+        }
+        else
+        {
+            Debug.LogError("RecipeMediumUI component not found on the instantiated prefab!");
+        }
+    }
+
+    public void CreateRecipeFullUI(Recipe recipe)
+    {
+        if (recipeFullUIPrefab == null)
+        {
+            Debug.LogError("RecipeMediumUIPrefab is not assigned in the inspector!");
+            return;
+        }
+
+        // Instantiate the prefab as a child of uiParent
+        GameObject instance = Instantiate(recipeFullUIPrefab, uiParent);
+
+        // Get the RecipeMediumUI component and set the recipe details
+        RecipeFullUI recipeUI = instance.GetComponent<RecipeFullUI>();
+        if (recipeUI != null)
+        {
+            string ingredientsText = FormatIngredients(recipe.Ingredients);
+            recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText);
+            recipeUI.SetInstructionsUI(recipe.Instructions);
         }
         else
         {

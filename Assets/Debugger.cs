@@ -31,6 +31,7 @@ public class Debugger : MonoBehaviour
 
     public void SetAgentThinkingMode() => agent.SetMode(AgentState.Thinking);
 
+    // example query: I have the following ingredients with me, Eggs, spices, green onions, steak, potatoes, tortilla, bread, sugar, and milk
     public void SubmitChatRequest()
     {
         agent.thinkerModule.SubmitChatJSON(userInput.text); 
