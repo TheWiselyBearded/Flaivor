@@ -71,7 +71,15 @@ public class AgentController : MonoBehaviour
     {
         Debug.Log($"Thinker Mode response fed to chef");
         SetMode(AgentState.Speaking);
-        cookSessionController.CreateReceipe(obj);
+        cookSessionController.CreateRecipeBook(obj);
+        if (cookSessionController.recipeBook.Recipes.Count > 0 )
+        {
+            foreach (Recipe recipe in cookSessionController.recipeBook.Recipes)
+            {
+                // create prefab of recipe
+                cookSessionController.CreateRecipeObjects(recipe);
+            }
+        }
     }
 
     public void SetMode(AgentState newState)
