@@ -123,137 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &216831550
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 216831551}
-  - component: {fileID: 216831553}
-  - component: {fileID: 216831552}
-  - component: {fileID: 216831556}
-  - component: {fileID: 216831555}
-  - component: {fileID: 216831554}
-  - component: {fileID: 216831557}
-  m_Layer: 0
-  m_Name: CookingAgent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &216831551
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216831550}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &216831552
+--- !u!114 &216831557 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6354909809246583487, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+  m_PrefabInstance: {fileID: 5582925352426756871}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216831550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e2909f204bbdca4db78db0e3aac000d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recipe:
-    currentStepIndex: 0
-  recipeStepUIPrefab: {fileID: 8121697904051867522, guid: aa08c3e4aba576c4ba549a8eb0822913, type: 3}
-  recipeMediumUIPrefab: {fileID: 8179606109955081864, guid: fb60f9ee9410bc64986bb70b4b99e080, type: 3}
-  recipeFullUIPrefab: {fileID: 9130093154248787626, guid: c5c49372c6a98ed4680d48a7e5977399, type: 3}
-  uiParent: {fileID: 0}
---- !u!114 &216831553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216831550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bd771deaae075b45b1f06c00026911e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cookSessionController: {fileID: 216831552}
-  speechModule: {fileID: 216831556}
-  listenerModule: {fileID: 216831555}
-  thinkerModule: {fileID: 216831554}
-  thinkerEvents: []
-  agentState: 0
---- !u!114 &216831554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216831550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e9fa6483e250bd4b9297aefb9a3e6b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputImage: {fileID: 408396157}
-  preprompt: 0
-  Personality:
-    Name: 
-    Description: 
---- !u!114 &216831555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216831550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e736da70e78912b468b24a41cbd5bc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  witDictation: {fileID: 1263665997}
---- !u!114 &216831556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216831550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f5e8130f6d4e87408372325ad5c8713, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &216831557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216831550}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6122449e1fd18e42916ea9798afa2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userInput: {fileID: 1732713888}
-  agent: {fileID: 216831553}
-  contentArea: {fileID: 1944097371}
-  scrollView: {fileID: 470461664}
 --- !u!1 &221689740
 GameObject:
   m_ObjectHideFlags: 0
@@ -4019,6 +3899,83 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa08c3e4aba576c4ba549a8eb0822913, type: 3}
+--- !u!1001 &5582925352426756871
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 14062612684765218, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: inputImage
+      value: 
+      objectReference: {fileID: 408396157}
+    - target: {fileID: 3097176336805704310, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: witDictation
+      value: 
+      objectReference: {fileID: 1263665997}
+    - target: {fileID: 3129935000305174085, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129935000305174085, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129935000305174085, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129935000305174085, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129935000305174085, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129935000305174085, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129935000305174085, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129935000305174085, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129935000305174085, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129935000305174085, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612974362769774258, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: m_Name
+      value: CookingAgent
+      objectReference: {fileID: 0}
+    - target: {fileID: 6354909809246583487, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: userInput
+      value: 
+      objectReference: {fileID: 1732713888}
+    - target: {fileID: 6354909809246583487, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: scrollView
+      value: 
+      objectReference: {fileID: 470461664}
+    - target: {fileID: 6354909809246583487, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: contentArea
+      value: 
+      objectReference: {fileID: 1944097371}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4027,7 +3984,7 @@ SceneRoots:
   - {fileID: 1862549029}
   - {fileID: 520090924}
   - {fileID: 1297265990}
-  - {fileID: 216831551}
+  - {fileID: 5582925352426756871}
   - {fileID: 1263665998}
   - {fileID: 981086516814536617}
   - {fileID: 3057483780067864844}

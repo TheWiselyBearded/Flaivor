@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5612974362769774258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3129935000305174085}
+  - component: {fileID: 5805672213246953848}
+  - component: {fileID: 1535753350758390216}
+  - component: {fileID: 8754848213950973262}
+  - component: {fileID: 3097176336805704310}
+  - component: {fileID: 14062612684765218}
+  - component: {fileID: 6354909809246583487}
+  m_Layer: 0
+  m_Name: CookingAgent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3129935000305174085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5612974362769774258}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5805672213246953848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5612974362769774258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd771deaae075b45b1f06c00026911e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cookSessionController: {fileID: 1535753350758390216}
+  speechModule: {fileID: 8754848213950973262}
+  listenerModule: {fileID: 3097176336805704310}
+  thinkerModule: {fileID: 14062612684765218}
+  thinkerEvents: []
+  agentState: 0
+--- !u!114 &1535753350758390216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5612974362769774258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e2909f204bbdca4db78db0e3aac000d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipe:
+    currentStepIndex: 0
+  recipeStepUIPrefab: {fileID: 8121697904051867522, guid: aa08c3e4aba576c4ba549a8eb0822913, type: 3}
+  recipeMediumUIPrefab: {fileID: 8179606109955081864, guid: fb60f9ee9410bc64986bb70b4b99e080, type: 3}
+  recipeFullUIPrefab: {fileID: 9130093154248787626, guid: c5c49372c6a98ed4680d48a7e5977399, type: 3}
+  uiParent: {fileID: 0}
+--- !u!114 &8754848213950973262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5612974362769774258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5e8130f6d4e87408372325ad5c8713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3097176336805704310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5612974362769774258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e736da70e78912b468b24a41cbd5bc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  witDictation: {fileID: 0}
+--- !u!114 &14062612684765218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5612974362769774258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9fa6483e250bd4b9297aefb9a3e6b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputImage: {fileID: 0}
+  preprompt: 0
+  Personality:
+    Name: 
+    Description: 
+--- !u!114 &6354909809246583487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5612974362769774258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6122449e1fd18e42916ea9798afa2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userInput: {fileID: 0}
+  agent: {fileID: 5805672213246953848}
+  contentArea: {fileID: 0}
+  scrollView: {fileID: 0}
