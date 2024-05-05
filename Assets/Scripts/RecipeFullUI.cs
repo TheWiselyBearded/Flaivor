@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,9 +13,19 @@ public class RecipeFullUI : MonoBehaviour
     public TextMeshProUGUI ingredientDescription;
     public List<InstructionUI> instructionUIs;
 
+    public event Action<string> OnChooseDishFullReceived;
+
     private void Start()
     {
         instructionUIs = new List<InstructionUI>();
+    }
+
+    /// <summary>
+    /// wired via unity gui
+    /// </summary>
+    public void ChooseDishButtonPress()
+    {
+        OnChooseDishFullReceived?.Invoke(recipeName.text);
     }
 
     public void SetRecipeUI(string _recipeName, string _recipeDescription, string _ingredientDescription)
