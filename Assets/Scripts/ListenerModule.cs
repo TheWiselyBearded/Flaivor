@@ -67,7 +67,7 @@ public class ListenerModule : MonoBehaviour
 
     public void ToggleDictation(bool state)
     {
-        dicatationActivation.ToggleActivation();
+        dicatationActivation.ToggleActivation(state);
         Debug.Log($"Desired state {state}, Wit dicatation state {witDictation.IsRequestActive}");
     }
 

@@ -128,4 +128,12 @@ public class ScreenshotLoader : MonoBehaviour
             yield return new WaitForSeconds(checkPermissionInterval);
         }
     }
+
+    /// <summary>
+    /// invoked via gui button for debugging purposes
+    /// </summary>
+    public void DebugLoadScreenshot()
+    {
+        OnScreenShotLoadedEvent?.Invoke();
+    }
 }

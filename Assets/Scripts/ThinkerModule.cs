@@ -3,6 +3,7 @@ using OpenAI;
 using OpenAI.Chat;
 using OpenAI.Models;
 using OVR.OpenVR;
+using OVRSimpleJSON;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities.WebRequestRest;
 
 public class ThinkerModule : MonoBehaviour
 {
@@ -241,18 +243,46 @@ public class ThinkerModule : MonoBehaviour
 
         var messages = new List<Message>
         {
-            new Message(Role.System, "You are a helpful chef assistant."),
+            new Message(Role.System, "I will give you a photo or list of ingredients and you will ALWAYS generate 3 recipes based on the given ingredients. For each recipe please include a Title, a short description of the dish, list of all ingredients, and a detailed list of instructions for making the dish. The instructions for the dish should be separated into numbered sections with smaller detailed steps for the section underneath. All of this should be formatted as a JSON file. make sure the code is complete and ALWAYS includes 3 recipes. Only respond with the json always.\n\nExample output:\n[\n{\n  \"recipe_name\": \"Spaghetti and Meatballs\",\n  \"ingredients\": {\n    \"ground_beef\": \"1 pound\",\n    \"breadcrumbs\": \"1/2 cup\",\n    \"grated_Parmesan_cheese\": \"1/4 cup\",\n    \"fresh_parsley\": \"1/4 cup\",\n    \"garlic_cloves\": \"6\",\n    \"large_egg\": \"1\",\n    \"salt\": \"1 teaspoon\",\n    \"black_pepper\": \"1/2 teaspoon\",\n    \"dried_oregano\": \"1 1/4 teaspoons\",\n    \"dried_basil\": \"3/4 teaspoon\",\n    \"olive_oil\": \"1 tablespoon + for frying\",\n    \"small_onion\": \"1\",\n    \"crushed_tomatoes\": \"1 (28-ounce) can\",\n    \"sugar\": \"pinch (optional)\",\n    \"spaghetti\": \"12 ounces\",\n    \"grated_Parmesan_cheese_garnish\": \"for garnish\",\n    \"chopped_fresh_basil_or_parsley_garnish\": \"for garnish\"\n  },\n  \"instructions\": [\n    {\n      \"step_number\": 1,\n      \"description\": \"Prepare the Meatballs:\",\n      \"sub_steps\": [\n        \"In a large mixing bowl, combine the ground beef, breadcrumbs, grated Parmesan cheese, minced parsley, minced garlic, egg, salt, black pepper, dried oregano, and dried basil. Mix until well combined.\",\n        \"Shape the mixture into meatballs, about 1 to 1.5 inches in diameter.\",\n        \"Heat olive oil in a large skillet over medium heat. Cook the meatballs in batches until browned on all sides and cooked through, about 8-10 minutes. Transfer cooked meatballs to a plate and set aside.\"\n      ]\n    },\n    ...\n  ]\n},\n...\n]"),
             new Message(Role.User, new List<Content>
             {
                 "From all the food you see in this picture, what kind of foods can I make?",
                 ConvertRawImageToTexture2D()
             })
         };
+        Debug.Log("about to submit chat image request");
         var chatRequest = new ChatRequest(messages, model: Model.GPT4_Turbo);
-        var result = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
-
+        var result = await api.ChatEndpoint.GetCompletionAsync(chatRequest);        
         Debug.Log($"{result.FirstChoice.Message.Role}: {result.FirstChoice} | Finish Reason: {result.FirstChoice.FinishDetails}");
+        var response = RemoveEmbeddedCharacters(result.ToString());
+        string formattedResponse = EnsureThreeRecipes(response);
+        Debug.Log(formattedResponse);
+        OnChatGPTInputReceived?.Invoke(formattedResponse);
     }
+
+
+    public string RemoveEmbeddedCharacters(string input)
+    {
+        if (string.IsNullOrEmpty(input))
+        {
+            return input;
+        }
+
+        // Remove newline characters
+        input = input.Replace("\n", "");
+
+        // Remove carriage return characters
+        input = input.Replace("\r", "");
+
+        // Remove tab characters
+        input = input.Replace("\t", "");
+
+        input = input.Replace("```json", "");
+
+        return input;
+    }
+
+
 }
 
 

@@ -8,6 +8,8 @@ using static AgentController;
 
 public class Debugger : MonoBehaviour
 {
+    public RawImage rawImage;
+    public Texture2D debugFridgeTexture;
     public TMP_InputField userInput;
     public AgentController agent;
 
@@ -19,7 +21,17 @@ public class Debugger : MonoBehaviour
 
     private void Start()
     {
-        agent.thinkerModule.OnChatGPTInputReceived += ThinkerModule_OnChatGPTInputReceived;
+        //agent.thinkerModule.OnChatGPTInputReceived += ThinkerModule_OnChatGPTInputReceived;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            AssignTextureToRawImage();
+            agent.SetAgentMode(1);
+            agent.SubmitChatImageRequest();
+        }
     }
 
     private void ThinkerModule_OnChatGPTInputReceived(string obj)
@@ -28,6 +40,20 @@ public class Debugger : MonoBehaviour
         assistantMessageContent.text = "Assistant:\n";
         assistantMessageContent.text += obj;
     }
+
+    // Method to assign a Texture2D to the RawImage
+    public void AssignTextureToRawImage()
+    {
+        if (rawImage != null && debugFridgeTexture != null)
+        {
+            rawImage.texture = debugFridgeTexture;
+        }
+        else
+        {
+            Debug.LogError("RawImage or debugFridgeTexture is not assigned!");
+        }
+    }
+
 
     public void SetAgentThinkingMode() => agent.SetMode(AgentState.Thinking);
 
