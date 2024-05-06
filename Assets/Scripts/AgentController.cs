@@ -101,6 +101,7 @@ public class AgentController : MonoBehaviour
 
     void ApplyListeningModeSettings()
     {
+        Debug.Log("Listen mode settings");
         listenerModule.ToggleDictation(true);
     }
 

@@ -28,5 +28,17 @@ namespace Meta.Voice.Samples.Dictation
                 _dictation.Activate();
             }
         }
+
+        public void ToggleActivation(bool status)
+        {
+            if (!_dictation.MicActive && status)
+            {
+                _dictation.Activate();
+            }
+            else
+            {
+                _dictation.Deactivate();
+            }
+        }
     }
 }
