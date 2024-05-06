@@ -2,6 +2,7 @@ using Meta.WitAi.Dictation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -12,7 +13,7 @@ public class ListenerModule : MonoBehaviour
     [FormerlySerializedAs("dictation")]
     [SerializeField] private DictationService witDictation;
     protected Animator mAnimator;
-
+    public TextMeshProUGUI inputText;
 
     public void Start()
     {
@@ -40,6 +41,17 @@ public class ListenerModule : MonoBehaviour
     private void OnDestroy()
     {
         StopListening();
+    }
+
+    /// <summary>
+    /// invoked via external ui
+    /// </summary>
+    public void SubmitVoiceTranscription()
+    {
+        string text = inputText.text;
+        Debug.Log($"Full transcripiton {text}");
+        OnUserInputReceived?.Invoke(text);
+        ToggleDictation(false);
     }
 
     private void OnFullTranscription(string text)
