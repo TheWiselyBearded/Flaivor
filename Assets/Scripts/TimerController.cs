@@ -1,14 +1,26 @@
+using Oculus.Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TimerController : MonoBehaviour
 {
+    public UnityEvent leftHandSelectEvent;
+    public UnityEvent leftHandUnselectEvent;
+    public UnityEvent rightHandSelectEvent;
+    public UnityEvent rightHandUnselectEvent;
+
+    public ActiveStateSelector leftPose;
+    public ActiveStateSelector rightPose;
+
+
     public TextMeshProUGUI textMesh;
 
     public int minutes = 5;
     public int seconds = 0;
+    public bool timeSet;
 
     private float countdown;
 
@@ -16,7 +28,33 @@ public class TimerController : MonoBehaviour
     {
         if (textMesh  == null) textMesh = GetComponent<TextMeshProUGUI>();
         countdown = minutes * 60 + seconds;
+
+        leftPose.WhenSelected += LeftPose_WhenSelected;
+        leftPose.WhenUnselected += LeftPose_WhenUnselected;
+        rightPose.WhenSelected += RightPose_WhenSelected;
+        rightPose.WhenUnselected += RightPose_WhenUnselected;
     }
+
+    private void RightPose_WhenUnselected()
+    {
+        rightHandUnselectEvent?.Invoke();
+    }
+
+    private void RightPose_WhenSelected()
+    {
+        rightHandSelectEvent?.Invoke();
+    }
+
+    private void LeftPose_WhenUnselected()
+    {
+        leftHandUnselectEvent?.Invoke(); 
+    }
+
+    private void LeftPose_WhenSelected()
+    {
+        leftHandSelectEvent?.Invoke();
+    }
+
     public void SetTimer(float targetTime)
     {
         textMesh.text = targetTime.ToString();
@@ -27,6 +65,7 @@ public class TimerController : MonoBehaviour
 
     void Update()
     {
+        if (!timeSet) return;
         // Decrease countdown by deltaTime
         countdown -= Time.deltaTime;
 
