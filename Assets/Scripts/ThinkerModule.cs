@@ -102,7 +102,7 @@ public class ThinkerModule : MonoBehaviour
             var response = result.ToString();
 
             Debug.Log(response);
-            string formattedResponse = EnsureThreeRecipes(response);
+            string formattedResponse = EnsureThreeRecipes(CookSessionController.EnsureJsonWrappedWithRecipesKey(response));
             OnChatGPTInputReceived?.Invoke(formattedResponse);
         }
         catch (Exception e)
@@ -255,7 +255,7 @@ public class ThinkerModule : MonoBehaviour
         var result = await api.ChatEndpoint.GetCompletionAsync(chatRequest);        
         Debug.Log($"{result.FirstChoice.Message.Role}: {result.FirstChoice} | Finish Reason: {result.FirstChoice.FinishDetails}");
         var response = RemoveEmbeddedCharacters(result.ToString());
-        string formattedResponse = EnsureThreeRecipes(response);
+        string formattedResponse = CookSessionController.EnsureJsonWrappedWithRecipesKey(response);
         Debug.Log(formattedResponse);
         OnChatGPTInputReceived?.Invoke(formattedResponse);
     }

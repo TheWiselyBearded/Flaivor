@@ -42,8 +42,8 @@ public class CookSessionController : MonoBehaviour
 
         try
         {
-            jsonRecipes = EnsureJsonWrappedWithRecipesKey(jsonRecipes);
-            Debug.Log(jsonRecipes);
+            //jsonRecipes = EnsureJsonWrappedWithRecipesKey(jsonRecipes);
+            //Debug.Log(jsonRecipes);
             recipeBook = JsonConvert.DeserializeObject<RecipeBook>(jsonRecipes);
             if (debug)
             {
@@ -175,13 +175,14 @@ public class CookSessionController : MonoBehaviour
         return ingredientsText.TrimEnd(); // Remove the last newline character for cleaner formatting
     }
 
-    public string EnsureJsonWrappedWithRecipesKey(string jsonString)
+    public static string EnsureJsonWrappedWithRecipesKey(string jsonString)
     {
         // Trim any whitespace that might affect the check
         //jsonString = jsonString.Trim();
 
         // Check if the JSON string starts with an array indicator '['
-        if (!jsonString.StartsWith("[") || !jsonString.Contains("recipes"))
+        if (!jsonString.Contains("{\"recipes\":") || 
+            !jsonString.StartsWith("["))
         {
             // The JSON is not wrapped with "recipes" key, wrap it
             jsonString = "{\"recipes\":" + jsonString + "}";
