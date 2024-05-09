@@ -32,10 +32,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 484924674748904341}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -30.75}
+  m_SizeDelta: {x: 168, y: 37.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3540551566630999687
 CanvasRenderer:
@@ -1176,7 +1176,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &484924674748904341
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1196,7 +1196,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 0}
+  m_SizeDelta: {x: 200, y: 61.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7720191819501239611
 Canvas:
@@ -1519,10 +1519,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699ab2f9e2e3e3f4e990d1e6e142a7f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 5201671717919664675}
-  timerDebug: 0
-  minutes: 5
-  seconds: 0
+  leftHandSelectEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  leftHandUnselectEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  rightHandSelectEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  rightHandUnselectEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  leftPose: {fileID: 0}
+  rightPose: {fileID: 0}
+  PFB_Timer: {fileID: 5314662663079344495, guid: 2f920984dae0a4d439186ae5b903a2bf, type: 3}
+  leftHandWatchAnchor: {fileID: 0}
+  rightHandWatchAnchor: {fileID: 0}
 --- !u!1 &7145005200872067354
 GameObject:
   m_ObjectHideFlags: 0
@@ -2051,7 +2064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &172412679044620191
 RectTransform:
   m_ObjectHideFlags: 0
