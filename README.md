@@ -8,7 +8,7 @@ ChefGPT is a spatial AI-based chef that helps users create food based on availab
 - [ ] Image generator recipe + API usage
 - [ ] end-to-end testing
 - [ ] Port over to passthrough scene
-- [ ] Timer start/stop/alarm
+- [x] Timer start/stop/alarm
 - [ ] Full recipe ui should be fully interactable
 - [ ] Help menu UI
 - [ ] positioning of recipe prefab instantiation
