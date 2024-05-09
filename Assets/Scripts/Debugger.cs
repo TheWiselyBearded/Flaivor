@@ -32,6 +32,11 @@ public class Debugger : MonoBehaviour
             agent.SetAgentMode(1);
             agent.SubmitChatImageRequest();
         }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            agent.SetAgentMode(1);
+            agent.thinkerModule.SubmitChatJSON("I have the following ingredients with me, Eggs, spices, green onions, steak, potatoes, tortilla, bread, sugar, and milk");
+        }
     }
 
     private void ThinkerModule_OnChatGPTInputReceived(string obj)

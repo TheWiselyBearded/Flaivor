@@ -12075,21 +12075,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 372775974953669016, guid: 2f920984dae0a4d439186ae5b903a2bf, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2857606512606162720, guid: 2f920984dae0a4d439186ae5b903a2bf, type: 3}
-      propertyPath: StartButton
-      value: 
-      objectReference: {fileID: 224666226}
-    - target: {fileID: 2857606512606162720, guid: 2f920984dae0a4d439186ae5b903a2bf, type: 3}
-      propertyPath: DestroyButton
-      value: 
-      objectReference: {fileID: 128629424}
     - target: {fileID: 5314662663079344495, guid: 2f920984dae0a4d439186ae5b903a2bf, type: 3}
       propertyPath: m_Name
       value: PFB_Timer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5314662663079344495, guid: 2f920984dae0a4d439186ae5b903a2bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7456027933925595748, guid: 2f920984dae0a4d439186ae5b903a2bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12136,11 +12128,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f920984dae0a4d439186ae5b903a2bf, type: 3}
---- !u!1 &128629424 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 372775974953669016, guid: 2f920984dae0a4d439186ae5b903a2bf, type: 3}
-  m_PrefabInstance: {fileID: 128629423}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &130881359
 GameObject:
   m_ObjectHideFlags: 0
@@ -13449,11 +13436,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 308452795}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &224666226 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8191175637898312313, guid: 2f920984dae0a4d439186ae5b903a2bf, type: 3}
-  m_PrefabInstance: {fileID: 128629423}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &228723039
 GameObject:
   m_ObjectHideFlags: 0
@@ -19844,6 +19826,10 @@ PrefabInstance:
       propertyPath: inputImage
       value: 
       objectReference: {fileID: 529235113}
+    - target: {fileID: 1535753350758390216, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: userObject
+      value: 
+      objectReference: {fileID: 908493967}
     - target: {fileID: 2278649882460775208, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
       propertyPath: runtimeConfiguration.maxRecordingTime
       value: 40
@@ -20152,6 +20138,11 @@ MonoBehaviour:
   - {fileID: 106039263}
   - {fileID: 1798562553}
   - {fileID: 230523654}
+--- !u!1 &908493967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2483171112401766340, guid: f54012181eacade4ea242c65f804720f, type: 3}
+  m_PrefabInstance: {fileID: 2483171112249589647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &927088252
 GameObject:
   m_ObjectHideFlags: 0

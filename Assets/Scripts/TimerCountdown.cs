@@ -10,6 +10,7 @@ public class TimerCountdown : MonoBehaviour
     public TextMeshProUGUI timerText;
     public GameObject StartButton;
     public GameObject DestroyButton;
+    public GameObject TimerControlButtons;
 
     //public int minutes = 5;
     //public int seconds = 0;
@@ -79,6 +80,7 @@ public class TimerCountdown : MonoBehaviour
     {
         timeSet = true;
         StartButton.SetActive(false);
+        TimerControlButtons.SetActive(false);
     }
     public void DestroyTimer() => Destroy(this.gameObject);
     

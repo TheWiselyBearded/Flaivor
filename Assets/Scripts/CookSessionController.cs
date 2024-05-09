@@ -14,6 +14,10 @@ public class CookSessionController : MonoBehaviour
     [SerializeField] private GameObject recipeMediumUIPrefab; // Drag your prefab here in the Inspector
     [SerializeField] private GameObject recipeFullUIPrefab; // Drag your prefab here in the Inspector
     [SerializeField] private Transform uiParent; // Assign a parent transform to control the layout
+    public GameObject userObject;
+
+    private Vector3 spawnOffset = new Vector3(0f, 0f, 0.25f); // Adjust the offset as needed
+    private Vector3 spawnDirection;
 
     private void Awake()
     {
@@ -77,20 +81,24 @@ public class CookSessionController : MonoBehaviour
     {
         recipe = _recipe;
         // instantiate prefabs
-        CreateRecipeUI(recipe);
+        CreateRecipeMediumUI(recipe);
         CreateRecipeFullUI(recipe);
         CreateRecipeStepUI(0);
     }
 
     public void CreateRecipeObjects(Recipe _recipe)
     {
+        // Reset spawnDirection for each new set of recipe objects
+        spawnDirection = userObject.transform.forward;
+
         // instantiate prefabs
-        CreateRecipeUI(_recipe);
-        CreateRecipeFullUI(_recipe);
+        CreateRecipeMediumUI(_recipe);
+        //CreateRecipeFullUI(_recipe);
     }
 
     // Example method to create and set up the recipe UI
-    public void CreateRecipeUI(Recipe recipe)
+    int numCalls = 1;
+    public void CreateRecipeMediumUI(Recipe recipe)
     {
         if (recipeMediumUIPrefab == null)
         {
@@ -98,8 +106,12 @@ public class CookSessionController : MonoBehaviour
             return;
         }
 
+        // Calculate the spawn position in front of the user
+        Vector3 spawnPosition = userObject.transform.position + spawnDirection * 1.1f + (spawnOffset * numCalls); // Adjust the distance as needed
         // Instantiate the prefab as a child of uiParent
-        GameObject instance = Instantiate(recipeMediumUIPrefab, uiParent);
+        GameObject instance = Instantiate(recipeMediumUIPrefab, spawnPosition, Quaternion.identity, uiParent);
+
+        numCalls++;
 
         // Get the RecipeMediumUI component and set the recipe details
         RecipeMediumUI recipeUI = instance.GetComponent<RecipeMediumUI>();
