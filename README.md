@@ -11,7 +11,8 @@ ChefGPT is a spatial AI-based chef that helps users create food based on availab
 - [ ] Timer start/stop/alarm
 - [ ] Full recipe ui should be fully interactable
 - [ ] Help menu UI
-- [ ] positioning of recipe prefab instantiation 
+- [ ] positioning of recipe prefab instantiation
+- [ ] Sticky task progression menu
 
 ## Environment
 - Meta Quest Pro/3/2
