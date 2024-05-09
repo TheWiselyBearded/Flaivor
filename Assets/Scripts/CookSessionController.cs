@@ -8,6 +8,7 @@ public class CookSessionController : MonoBehaviour
 {
     [SerializeField] public RecipeBook recipeBook;
     public Recipe recipe;
+    public bool debug;
 
     [SerializeField] private GameObject recipeStepUIPrefab; // Drag your prefab here in the Inspector
     [SerializeField] private GameObject recipeMediumUIPrefab; // Drag your prefab here in the Inspector
@@ -35,27 +36,31 @@ public class CookSessionController : MonoBehaviour
         recipe.currentStepIndex++;
     }
 
-    public void CreateReceipe(string jsonRecipes)
+    public void CreateRecipeBook(string jsonRecipes)
     {
         //recipes = JsonConvert.DeserializeObject<List<Recipe>>(jsonRecipes);
 
         try
         {
+            //jsonRecipes = EnsureJsonWrappedWithRecipesKey(jsonRecipes);
+            //Debug.Log(jsonRecipes);
             recipeBook = JsonConvert.DeserializeObject<RecipeBook>(jsonRecipes);
-
-            foreach (Recipe recipe in recipeBook.Recipes)
+            if (debug)
             {
-                Debug.Log($"Recipe: {recipe.RecipeName}");
-                foreach (var ingredient in recipe.Ingredients)
+                foreach (Recipe recipe in recipeBook.Recipes)
                 {
-                    Debug.Log($"Ingredient: {ingredient.Key}, Quantity: {ingredient.Value}");
-                }
-                foreach (Instruction instruction in recipe.Instructions)
-                {
-                    Debug.Log($"Step {instruction.StepNumber}: {instruction.Description}");
-                    foreach (string subStep in instruction.SubSteps)
+                    Debug.Log($"Recipe: {recipe.RecipeName}");
+                    foreach (var ingredient in recipe.Ingredients)
                     {
-                        Debug.Log($"Sub-step: {subStep}");
+                        Debug.Log($"Ingredient: {ingredient.Key}, Quantity: {ingredient.Value}");
+                    }
+                    foreach (Instruction instruction in recipe.Instructions)
+                    {
+                        Debug.Log($"Step {instruction.StepNumber}: {instruction.Description}");
+                        foreach (string subStep in instruction.SubSteps)
+                        {
+                            Debug.Log($"Sub-step: {subStep}");
+                        }
                     }
                 }
             }
@@ -75,6 +80,13 @@ public class CookSessionController : MonoBehaviour
         CreateRecipeUI(recipe);
         CreateRecipeFullUI(recipe);
         CreateRecipeStepUI(0);
+    }
+
+    public void CreateRecipeObjects(Recipe _recipe)
+    {
+        // instantiate prefabs
+        CreateRecipeUI(_recipe);
+        CreateRecipeFullUI(_recipe);
     }
 
     // Example method to create and set up the recipe UI
@@ -143,7 +155,7 @@ public class CookSessionController : MonoBehaviour
         if (recipeUI != null)
         {
 
-            recipeUI.SetInstructionStepUI(recipe.Instructions[stepIndex].StepNumber.ToString() + " " + recipe.Instructions[stepIndex].Description, 
+            recipeUI.SetInstructionStepUI(recipe.Instructions[stepIndex].StepNumber.ToString() + " " + recipe.Instructions[stepIndex].Description,
                 recipe.Instructions[stepIndex].SubSteps);
         }
         else
@@ -163,6 +175,21 @@ public class CookSessionController : MonoBehaviour
         return ingredientsText.TrimEnd(); // Remove the last newline character for cleaner formatting
     }
 
+    public static string EnsureJsonWrappedWithRecipesKey(string jsonString)
+    {
+        // Trim any whitespace that might affect the check
+        //jsonString = jsonString.Trim();
+
+        // Check if the JSON string starts with an array indicator '['
+        if (!jsonString.Contains("{\"recipes\":") || 
+            !jsonString.StartsWith("["))
+        {
+            // The JSON is not wrapped with "recipes" key, wrap it
+            jsonString = "{\"recipes\":" + jsonString + "}";
+        }
+
+        return jsonString;
+    }
 
 }
 

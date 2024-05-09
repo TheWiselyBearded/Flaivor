@@ -34,6 +34,25 @@ public class AgentController : MonoBehaviour
         thinkerModule.OnChatGPTInputReceived += ThinkerModule_OnChatGPTInputReceived;
     }
 
+    /// <summary>
+    /// invoked via unity button press events
+    /// </summary>
+    /// <param name="state"></param>
+    public void SetAgentMode(int state)
+    {
+        switch (state)
+        {
+            case 0:
+                SetMode(AgentState.Listening);
+                break;
+            case 1:
+                SetMode(AgentState.Thinking);
+                break;
+            case 2:
+                SetMode(AgentState.Speaking);
+                break;
+        }
+    }
     
 
     private void ListenerModule_OnUserInputReceived(string obj)
@@ -52,7 +71,15 @@ public class AgentController : MonoBehaviour
     {
         Debug.Log($"Thinker Mode response fed to chef");
         SetMode(AgentState.Speaking);
-        cookSessionController.CreateReceipe(obj);
+        cookSessionController.CreateRecipeBook(obj);
+        if (cookSessionController.recipeBook.Recipes.Count > 0 )
+        {
+            foreach (Recipe recipe in cookSessionController.recipeBook.Recipes)
+            {
+                // create prefab of recipe
+                cookSessionController.CreateRecipeObjects(recipe);
+            }
+        }
     }
 
     public void SetMode(AgentState newState)
@@ -74,6 +101,7 @@ public class AgentController : MonoBehaviour
 
     void ApplyListeningModeSettings()
     {
+        Debug.Log("Listen mode settings");
         listenerModule.ToggleDictation(true);
     }
 
@@ -83,6 +111,12 @@ public class AgentController : MonoBehaviour
         InvokeEvents(thinkerEvents);
         // generate ui objects and such for response queue?
     }
+
+
+    /// <summary>
+    /// invoked via unity button event
+    /// </summary>
+    public void SubmitChatImageRequest() => thinkerModule.SubmitScreenshotChatRequest();
 
     private void InvokeEvents(UnityEvent[] events)
     {

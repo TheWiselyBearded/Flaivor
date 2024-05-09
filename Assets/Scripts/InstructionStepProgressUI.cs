@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,6 +11,8 @@ public class InstructionStepProgressUI : MonoBehaviour
     public GameObject contentViewParent;
     public GameObject PFB_InstructionSubstepDescription;
     public List<GameObject> instructionStepUIs;
+
+    public event Action<string> OnProgressStepReceived;
 
     public void SetInstructionStepUI(string InstructionStep, List<string> _instructionSteps)
     {
@@ -29,6 +32,11 @@ public class InstructionStepProgressUI : MonoBehaviour
         instructionStepText.text = _instruction;
 
         return instructionStep;
+    }
+
+    public void InstructionStepProgressSubmit()
+    {
+        OnProgressStepReceived?.Invoke("step progress"); // TODO: populate with proper progressor for controllers
     }
 
 }
