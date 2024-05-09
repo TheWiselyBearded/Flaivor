@@ -1,11 +1,29 @@
-# Sample Project for Meta Quest Screenshot Loader
-This is a sample project for the Unity Android plugin [Meta Quest Screenshot Loader](https://github.com/t-34400/MetaQuestScreenshotLoader/), which retrieves the latest screenshot images from Meta Quest.
+# Chef GPT
+ChefGPT is a spatial AI-based chef that helps users create food based on available ingredients. It utilizes Meta SDKs, built on Quest 3, and OpenAI. It works by allowing the user to take an image of their fridge with the headset or voice out the ingredients at their disposal. From there, the AI generates three different recipes to pick from, then progresses through.
+
+## Remaining Tasks
+- [ ] Error handling around recipe generation (async task)
+- [ ] 3D avatar animations + voice
+- [ ] Optimize performance for faster response times
+- [ ] Image generator recipe + API usage
+- [ ] end-to-end testing
+- [ ] Port over to passthrough scene
+- [ ] Timer start/stop/alarm
+- [ ] Full recipe ui should be fully interactable
+- [ ] Help menu UI
+- [ ] positioning of recipe prefab instantiation 
 
 ## Environment
-- Meta Quest Pro
+- Meta Quest Pro/3/2
 - Unity Editor 2022.3.26f
+## Dependencies
+- [Meta Quest Screenshot Loader](https://github.com/t-34400/MetaQuestScreenshotLoader/)
+- [OpenAI API](link-to-API)
+- [Meta Voice SDK](link-to-SDK)
+- [Meta Interaction SDK](link-to-SDK)
+- [Meta Passthrough SDK](link-to-SDK)
 
-## Installation
+<!-- ## Installation
 1. Clone the project using the following command:
 ```bash
 git clone --recurse-submodules https://github.com/t-34400/MetaQuestScreenShotLoaderSample.git
@@ -18,3 +36,4 @@ git clone --recurse-submodules https://github.com/t-34400/MetaQuestScreenShotLoa
 6. From the menu bar, select `File` > `Build Settings`, then choose Android in the  window and press the `Switch Platform` button.
 7. From the menu bar, select `Edit` > `Project Settings`, then open `Meta XR` in the window and select the `Fix All` and `Apply All` buttons if available.
 8. Build the project.
+-->
