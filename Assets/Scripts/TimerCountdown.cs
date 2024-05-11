@@ -8,10 +8,14 @@ public class TimerCountdown : MonoBehaviour
 {
     public GameObject root;
     public TextMeshProUGUI timerText;
+    public GameObject StartButton;
+    public GameObject DestroyButton;
+    public GameObject TimerControlButtons;
 
     //public int minutes = 5;
     //public int seconds = 0;
     public bool timeSet;
+    private bool timeFinished;
     private float countdownTime;
     private int secondsOnesPlace;
     private int secondsTenthsPlace;
@@ -72,6 +76,15 @@ public class TimerCountdown : MonoBehaviour
         UpdateTimerText();
     }
 
+    public void StartTimer()
+    {
+        timeSet = true;
+        StartButton.SetActive(false);
+        TimerControlButtons.SetActive(false);
+    }
+    public void DestroyTimer() => Destroy(this.gameObject);
+    
+
     // Update timer text to display the current countdown time
     void UpdateTimerText()
     {
@@ -84,7 +97,7 @@ public class TimerCountdown : MonoBehaviour
 
     void Update()
     {
-        if (!timeSet) return;
+        if (!timeSet || timeFinished) return;
         // Decrease countdown by deltaTime
         countdownTime -= Time.deltaTime;
 
@@ -100,7 +113,9 @@ public class TimerCountdown : MonoBehaviour
         {
             // Do something when timer reaches 0
             Debug.Log("Timer Finished!");
-            enabled = false; // Disable this script to stop updating the timer
+            DestroyButton.SetActive(true);
+            timeFinished = true;
+            //enabled = false; // Disable this script to stop updating the timer
         }
     }
 }

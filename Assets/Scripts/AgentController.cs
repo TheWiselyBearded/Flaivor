@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -57,7 +56,8 @@ public class AgentController : MonoBehaviour
 
     private void ListenerModule_OnUserInputReceived(string obj)
     {
-        thinkerModule.SubmitChat(obj);
+        thinkerModule.SubmitChatJSON(obj);
+        //thinkerModule.SubmitChat(obj);
         SetMode(AgentState.Thinking);
     }
 
@@ -67,7 +67,7 @@ public class AgentController : MonoBehaviour
         thinkerModule.OnChatGPTInputReceived -= ThinkerModule_OnChatGPTInputReceived;
     }
 
-    private void ThinkerModule_OnChatGPTInputReceived(string obj)
+    public void ThinkerModule_OnChatGPTInputReceived(string obj)
     {
         Debug.Log($"Thinker Mode response fed to chef");
         SetMode(AgentState.Speaking);
