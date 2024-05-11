@@ -1,0 +1,143 @@
+{
+    "recipes": [
+        {
+            "recipe_name": "Stuffed Bell Peppers",
+            "ingredients": {
+                "bell_peppers": "4 large",
+                "onion": "1 medium, chopped",
+                "garlic_cloves": "2, minced",
+                "cheese": "1 cup, grated",
+                "eggs": "2",
+                "salt": "1 teaspoon",
+                "black_pepper": "1/2 teaspoon",
+                "olive_oil": "2 tablespoons",
+                "tomatoes": "1 cup, chopped"
+            },
+            "instructions": [
+                {
+                    "step_number": 1,
+                    "description": "Prepare the ingredients:",
+                    "sub_steps": [
+                        "Preheat the oven to 375 degrees F (190 degrees C).",
+                        "Wash the bell peppers, cut the tops off, and remove the seeds and membranes.",
+                        "Chop the onions and tomatoes, and mince the garlic."
+                    ]
+                },
+                {
+                    "step_number": 2,
+                    "description": "Cook the filling:",
+                    "sub_steps": [
+                        "Heat olive oil in a skillet over medium heat.",
+                        "Add chopped onions and minced garlic, sauté until onions are translucent.",
+                        "Mix in chopped tomatoes and cook for another 5 minutes."
+                    ]
+                },
+                {
+                    "step_number": 3,
+                    "description": "Assemble and bake:",
+                    "sub_steps": [
+                        "In a bowl, whisk together eggs, salt, and pepper.",
+                        "Combine the egg mixture with sautéed vegetables and half the grated cheese.",
+                        "Fill each bell pepper with the mixture and top with the remaining cheese.",
+                        "Place the stuffed peppers in a baking dish and bake for 30-35 minutes until the peppers are tender and the cheese is golden brown."
+                    ]
+                }
+            ]
+        },
+        {
+            "recipe_name": "Cucumber Salad",
+            "ingredients": {
+                "cucumbers": "4 medium",
+                "red_onion": "1 small, thinly sliced",
+                "salt": "1 teaspoon",
+                "white_vinegar": "1/4 cup",
+                "sugar": "1 tablespoon",
+                "fresh_dill": "2 tablespoons, chopped",
+                "black_pepper": "1/2 teaspoon"
+            },
+            "instructions": [
+                {
+                    "step_number": 1,
+                    "description": "Prepare the cucumbers:",
+                    "sub_steps": [
+                        "Wash the cucumbers and slice them thinly.",
+                        "Place cucumber slices in a colander, sprinkle with salt, and let sit for about 30 minutes to draw out water.",
+                        "Pat cucumbers dry with a paper towel."
+                    ]
+                },
+                {
+                    "step_number": 2,
+                    "description": "Make the dressing and combine:",
+                    "sub_steps": [
+                        "In a large bowl, mix together white vinegar, sugar, chopped dill, and black pepper.",
+                        "Add the drained cucumbers and thinly sliced red onion to the bowl.",
+                        "Toss all ingredients well to ensure even coating."
+                    ]
+                },
+                {
+                    "step_number": 3,
+                    "description": "Serve the salad:",
+                    "sub_steps": [
+                        "Refrigerate the salad for at least one hour to allow flavors to meld.",
+                        "Serve chilled as a refreshing side dish."
+                    ]
+                }
+            ]
+        },
+        {
+            "recipe_name": "Vegetable Frittata",
+            "ingredients": {
+                "eggs": "6",
+                "milk": "1/4 cup",
+                "salt": "1 teaspoon",
+                "pepper": "1/2 teaspoon",
+                "olive_oil": "2 tablespoons",
+                "garlic": "2 cloves, minced",
+                "onion": "1 medium, chopped",
+                "bell_peppers": "2, chopped",
+                "tomatoes": "1 cup, chopped",
+                "cheese": "1/2 cup, grated",
+                "lettuce": "to garnish"
+            },
+            "instructions": [
+                {
+                    "step_number": 1,
+                    "description": "Prepare the vegetables:",
+                    "sub_steps": [
+                        "Wash and chop the bell peppers and tomatoes.",
+                        "Peel and chop the onion, mince the garlic."
+                    ]
+                },
+                {
+                    "step_number": 2,
+                    "description": "Cook the vegetables:",
+                    "sub_steps": [
+                        "Heat olive oil in a large, oven-safe skillet over medium heat.",
+                        "Add the chopped onion and minced garlic, cook until onion is translucent.",
+                        "Add the chopped bell peppers and cook for another 5 minutes.",
+                        "Mix in the chopped tomatoes and cook for an additional 2 minutes."
+                    ]
+                },
+                {
+                    "step_number": 3,
+                    "description": "Prepare and cook the frittata:",
+                    "sub_steps": [
+                        "In a bowl, beat the eggs with milk, salt, and pepper.",
+                        "Pour the egg mixture over the vegetables in the skillet. Stir gently to combine.",
+                        "Sprinkle grated cheese on top.",
+                        "Cook over low heat until the eggs are set and the bottom is golden, about 8-10 minutes.",
+                        "Broil in the oven for 2-3 minutes to brown the top."
+                    ]
+                },
+                {
+                    "step_number": 4,
+                    "description": "Serve:",
+                    "sub_steps": [
+                        "Garnish with fresh lettuce.",
+                        "Cut into wedges and serve hot."
+                    ]
+                }
+            ]
+        }
+    ]
+}

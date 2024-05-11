@@ -12,7 +12,7 @@ public class RecipeMediumUI : MonoBehaviour
     public TextMeshProUGUI recipeDescription;
     public TextMeshProUGUI ingredientDescription;
     
-    public event Action<string> OnChooseDishMediumReceived;
+    public static event Action<string> OnChooseDishMediumReceived;
 
     public void SetRecipeUI(string _recipeName, string _recipeDescription, string _ingredientDescription)
     {

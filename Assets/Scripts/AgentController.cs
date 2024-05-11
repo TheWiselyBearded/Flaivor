@@ -66,7 +66,7 @@ public class AgentController : MonoBehaviour
         thinkerModule.OnChatGPTInputReceived -= ThinkerModule_OnChatGPTInputReceived;
     }
 
-    private void ThinkerModule_OnChatGPTInputReceived(string obj)
+    public void ThinkerModule_OnChatGPTInputReceived(string obj)
     {
         Debug.Log($"Thinker Mode response fed to chef");
         SetMode(AgentState.Speaking);

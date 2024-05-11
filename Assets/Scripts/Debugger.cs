@@ -12,6 +12,7 @@ public class Debugger : MonoBehaviour
     public Texture2D debugFridgeTexture;
     public TMP_InputField userInput;
     public AgentController agent;
+    public string recipeBookJSON;
 
     [SerializeField]
     private RectTransform contentArea;
@@ -26,7 +27,7 @@ public class Debugger : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             AssignTextureToRawImage();
             agent.SetAgentMode(1);
@@ -36,6 +37,20 @@ public class Debugger : MonoBehaviour
         {
             agent.SetAgentMode(1);
             agent.thinkerModule.SubmitChatJSON("I have the following ingredients with me, Eggs, spices, green onions, steak, potatoes, tortilla, bread, sugar, and milk");
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadRecipeBookJSON();
+        }
+    }
+
+    public void LoadRecipeBookJSON()
+    {
+        string recipeJSON = agent.cookSessionController.LoadJsonFromFile(recipeBookJSON);
+        if (recipeJSON != null)
+        {
+            agent.ThinkerModule_OnChatGPTInputReceived(recipeJSON);
         }
     }
 
