@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -90,15 +91,19 @@ public class AgentController : MonoBehaviour
 
     public void ThinkerModule_OnChatGPTInputReceived(string obj)
     {
+        ThinkerModule_OnChatGPTInputReceivedTask(obj);
+        //Task.Run(async () => await ThinkerModule_OnChatGPTInputReceivedTask(obj));
+    }
+
+    private async void ThinkerModule_OnChatGPTInputReceivedTask(string obj) {
         Debug.Log($"Thinker Mode response fed to chef");
         SetMode(AgentState.Speaking);
         cookSessionController.CreateRecipeBook(obj);
-        if (cookSessionController.recipeBook.Recipes.Count > 0 )
-        {
-            foreach (Recipe recipe in cookSessionController.recipeBook.Recipes)
-            {
+        if (cookSessionController.recipeBook.Recipes.Count > 0) {
+            foreach (Recipe recipe in cookSessionController.recipeBook.Recipes) {
                 // create prefab of recipe
-                cookSessionController.CreateRecipeObjects(recipe);
+                Texture generatedTexture = await thinkerModule.SubmitChatImageGenerator(recipe.RecipeName +"\n Description: " + recipe.Description);
+                cookSessionController.CreateRecipeObjects(recipe, generatedTexture);
             }
         }
     }

@@ -245,18 +245,18 @@ public class CookSessionController : MonoBehaviour
         CreateRecipeStepUI(0);        
     }
 
-    public void CreateRecipeObjects(Recipe _recipe)
+    public void CreateRecipeObjects(Recipe _recipe, Texture t)
     {
         // Reset spawnDirection for each new set of recipe objects
         spawnDirection = userObject.transform.forward;
 
         // instantiate prefabs
-        CreateRecipeMediumUI(_recipe);
+        CreateRecipeMediumUI(_recipe, t);
         //CreateRecipeFullUI(_recipe);
     }
 
     
-    public void CreateRecipeMediumUI(Recipe recipe)
+    public void CreateRecipeMediumUI(Recipe recipe, Texture t)
     {
         if (recipeMediumUIPrefab == null)
         {
@@ -276,7 +276,7 @@ public class CookSessionController : MonoBehaviour
         if (recipeUI != null)
         {
             string ingredientsText = FormatIngredients(recipe.Ingredients);
-            recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText);
+            recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText, t);
         }
         else
         {
