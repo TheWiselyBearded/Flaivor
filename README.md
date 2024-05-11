@@ -13,7 +13,7 @@ ChefGPT is a spatial AI-based chef that helps users create food based on availab
 - [ ] Help menu UI
 - [x] positioning of recipe prefab instantiation
 - [ ] Sticky task progression menu
-- [ ] Increase size of all button colliders and grabbable panels
+- [x] Increase size of all button colliders and grabbable panels
 - [ ] watch stack
 - [ ] manual invoke screenshot
 - [ ] helper menu response window
