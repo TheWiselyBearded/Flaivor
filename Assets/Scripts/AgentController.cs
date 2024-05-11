@@ -56,7 +56,8 @@ public class AgentController : MonoBehaviour
 
     private void ListenerModule_OnUserInputReceived(string obj)
     {
-        thinkerModule.SubmitChat(obj);
+        thinkerModule.SubmitChatJSON(obj);
+        //thinkerModule.SubmitChat(obj);
         SetMode(AgentState.Thinking);
     }
 

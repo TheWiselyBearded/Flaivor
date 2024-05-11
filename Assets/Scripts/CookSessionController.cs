@@ -352,15 +352,12 @@ public class CookSessionController : MonoBehaviour
         return ingredientsText.TrimEnd(); // Remove the last newline character for cleaner formatting
     }
 
-    public static string EnsureJsonWrappedWithRecipesKey(string jsonString)
-    {
+    public static string EnsureJsonWrappedWithRecipesKey(string jsonString) {
         // Trim any whitespace that might affect the check
-        //jsonString = jsonString.Trim();
+        jsonString = jsonString.Trim();
 
         // Check if the JSON string starts with an array indicator '['
-        if (!jsonString.Contains("{\"recipes\":") || 
-            !jsonString.StartsWith("["))
-        {
+        if (!jsonString.Contains("recipes")) {
             // The JSON is not wrapped with "recipes" key, wrap it
             jsonString = "{\"recipes\":" + jsonString + "}";
         }
