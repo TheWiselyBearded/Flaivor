@@ -7,10 +7,6 @@ using UnityEngine.UI;
 
 public class ResponseWindow : MonoBehaviour
 {
-    public TextMeshProUGUI responseText;
-
-    [SerializeField]
-    private TMP_InputField inputField;
 
     [SerializeField]
     private RectTransform contentArea;

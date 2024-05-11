@@ -26,6 +26,7 @@ public class ThinkerModule : MonoBehaviour
 
 
     public event Action<string> OnChatGPTInputReceived;
+    public event Action<string> OnChatGPTHelpInputReceived;
 
 
     private void Start()
@@ -111,6 +112,35 @@ public class ThinkerModule : MonoBehaviour
         }
         finally
         {
+            //if (lifetimeCancellationTokenSource != null) {}
+            isChatPending = false;
+        }
+    }
+
+    public async void SubmitChatHelpJSON(string userInput) {
+        if (isChatPending || string.IsNullOrWhiteSpace(userInput)) { return; }
+        isChatPending = true;
+
+        var messages = new List<Message>
+        {
+            new Message(Role.System, "I will ask you for help regarding something I'm cooking. Please swiftly and concisely answer inquiries related to cooking."),
+            new Message(Role.User, userInput),
+        };
+
+        foreach (var message in messages) chatMessages.Add(message);
+        Debug.Log("Added all messages");
+
+        try {
+            //var chatRequest = new ChatRequest(chatMessages, Model.GPT4_Turbo, responseFormat: ChatResponseFormat.Json, temperature: 1, maxTokens: 14421, topP: 1, frequencyPenalty: 0, presencePenalty: 0);
+            var chatRequest = new ChatRequest(chatMessages, Model.GPT3_5_Turbo, temperature: 1, topP: 1, frequencyPenalty: 0, presencePenalty: 0);
+            var result = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
+
+            var response = result.ToString();
+            Debug.Log($"Help request response {response}");
+            OnChatGPTHelpInputReceived?.Invoke(response);
+        } catch (Exception e) {
+            Debug.LogError(e);
+        } finally {
             //if (lifetimeCancellationTokenSource != null) {}
             isChatPending = false;
         }
