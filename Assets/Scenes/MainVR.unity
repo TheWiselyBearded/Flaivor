@@ -41703,7 +41703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2931874973220938518, guid: 0ed8849ad3fe5f44c827778a84562c0b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4503813096630701094, guid: 0ed8849ad3fe5f44c827778a84562c0b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -41747,35 +41747,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5465299180760039316, guid: 0ed8849ad3fe5f44c827778a84562c0b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5465299180760039316, guid: 0ed8849ad3fe5f44c827778a84562c0b, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5465299180760039316, guid: 0ed8849ad3fe5f44c827778a84562c0b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 5465299180760039316, guid: 0ed8849ad3fe5f44c827778a84562c0b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 5465299182164425825, guid: 0ed8849ad3fe5f44c827778a84562c0b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5465299182164425825, guid: 0ed8849ad3fe5f44c827778a84562c0b, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5465299182164425825, guid: 0ed8849ad3fe5f44c827778a84562c0b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5465299182164425825, guid: 0ed8849ad3fe5f44c827778a84562c0b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 5465299182540242127, guid: 0ed8849ad3fe5f44c827778a84562c0b, type: 3}
       propertyPath: m_Sprite

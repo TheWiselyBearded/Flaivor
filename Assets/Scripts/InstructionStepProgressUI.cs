@@ -13,7 +13,8 @@ public class InstructionStepProgressUI : MonoBehaviour
     public List<GameObject> instructionStepUIs;
 
 
-    public static event Action<string> OnProgressStepReceived;
+    public static event Action OnProgressNextStepReceived;
+    public static event Action OnProgressPrevStepReceived;
 
     /// <summary>
     /// Creates all substeps that are part of the main ui canvas
@@ -61,9 +62,9 @@ public class InstructionStepProgressUI : MonoBehaviour
         return instructionStep;
     }
 
-    public void InstructionStepProgressSubmit()
-    {
-        OnProgressStepReceived?.Invoke("step progress"); // TODO: populate with proper progressor for controllers
-    }
+    public void InstructionNextStepProgressSubmit() => OnProgressNextStepReceived?.Invoke(); 
+    
+
+    public void InstructionPrevStepProgressSubmit() => OnProgressPrevStepReceived?.Invoke(); 
 
 }

@@ -39,20 +39,41 @@ public class CookSessionController : MonoBehaviour
     private void Start()
     {
         RecipeMediumUI.OnChooseDishMediumReceived += RecipeMediumUI_OnChooseDishMediumReceived;
-        InstructionStepProgressUI.OnProgressStepReceived += InstructionStepProgressUI_OnProgressStepReceived;
+        InstructionStepProgressUI.OnProgressNextStepReceived += InstructionStepProgressUI_OnProgressStepReceived;
+        InstructionStepProgressUI.OnProgressPrevStepReceived += InstructionStepProgressUI_OnProgressPrevStepReceived;
     }
+
+    
 
     private void OnDestroy() {
         RecipeMediumUI.OnChooseDishMediumReceived -= RecipeMediumUI_OnChooseDishMediumReceived;
-        InstructionStepProgressUI.OnProgressStepReceived -= InstructionStepProgressUI_OnProgressStepReceived;
+        InstructionStepProgressUI.OnProgressNextStepReceived -= InstructionStepProgressUI_OnProgressStepReceived;
+        InstructionStepProgressUI.OnProgressPrevStepReceived -= InstructionStepProgressUI_OnProgressPrevStepReceived;
     }
 
-    /// <summary>
-    /// TODO: Add functionality for going backward
-    /// </summary>
-    /// <param name="obj"></param>
-    private void InstructionStepProgressUI_OnProgressStepReceived(string obj) {
-        if (StepIndex >= recipe.Instructions.Count) {
+    private void InstructionStepProgressUI_OnProgressPrevStepReceived() {
+        Debug.Log($"Step index {StepIndex}, substep index {SubStepIndex}");
+        if (StepIndex <= 0 && SubStepIndex <= 0) {
+            Debug.Log("Reached min steps");
+            return;
+        }
+
+        SubStepIndex--;
+        if (SubStepIndex < 0) {
+            StepIndex--;
+            if (StepIndex < 0) {
+                StepIndex = 0;
+                SubStepIndex = 0;
+            } else {
+                SubStepIndex = recipe.Instructions[StepIndex].SubSteps.Count - 1;
+            }
+            Debug.Log($"Step index now {StepIndex} and substep now {SubStepIndex}");
+        }
+        recipeProgressUI.GetComponent<InstructionStepProgressUI>().SetInstructionSubstep(recipe.Instructions[StepIndex].Description, recipe.Instructions[StepIndex].SubSteps[SubStepIndex]);
+    }
+
+    private void InstructionStepProgressUI_OnProgressStepReceived() {
+        if (StepIndex > recipe.Instructions.Count - 1) {
             Debug.Log("Reached max steps");
             return;
         }
@@ -60,7 +81,6 @@ public class CookSessionController : MonoBehaviour
         SubStepIndex++;
         if (SubStepIndex >= recipe.Instructions[StepIndex].SubSteps.Count) {
             StepIndex++;
-            //Debug.Log($"Finished set of substeps, step index now {StepIndex}");
             SubStepIndex = 0;
         }
         if (StepIndex >= recipe.Instructions.Count) {
@@ -69,6 +89,7 @@ public class CookSessionController : MonoBehaviour
         }
         recipeProgressUI.GetComponent<InstructionStepProgressUI>().SetInstructionSubstep(recipe.Instructions[StepIndex].Description, recipe.Instructions[StepIndex].SubSteps[SubStepIndex]);
     }
+
 
 
     public void GoBackStep() {
@@ -302,7 +323,7 @@ public class CookSessionController : MonoBehaviour
             Debug.LogError("RecipeMediumUIPrefab is not assigned in the inspector!");
             return;
         }
-        Vector3 spawnPosition = userObject.transform.position + spawnDirection * 1.1f + (spawnOffset); // Adjust the distance as needed
+        Vector3 spawnPosition = userObject.transform.position + spawnDirection * 0.2f + (spawnOffset); // Adjust the distance as needed
         // Instantiate the prefab as a child of uiParent
         GameObject instance = Instantiate(recipeStepUIPrefab, spawnPosition, Quaternion.identity, uiParent);
         recipeProgressUI = instance;

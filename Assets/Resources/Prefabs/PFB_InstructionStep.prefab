@@ -532,7 +532,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8660954646641920120}
         m_TargetAssemblyTypeName: InstructionStepProgressUI, Assembly-CSharp
-        m_MethodName: InstructionStepProgressSubmit
+        m_MethodName: InstructionPrevStepProgressSubmit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1969,7 +1969,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8660954646641920120}
         m_TargetAssemblyTypeName: InstructionStepProgressUI, Assembly-CSharp
-        m_MethodName: InstructionStepProgressSubmit
+        m_MethodName: InstructionNextStepProgressSubmit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2239,7 +2239,7 @@ Transform:
   m_GameObject: {fileID: 3579042930374899579}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.481, y: 0, z: 0}
+  m_LocalPosition: {x: -0.54, y: 0, z: 0}
   m_LocalScale: {x: 0.08, y: 0.33354002, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2264,7 +2264,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &193442178670206319
 MonoBehaviour:
@@ -2290,8 +2290,8 @@ PositionConstraint:
   m_Enabled: 1
   serializedVersion: 2
   m_Weight: 1
-  m_TranslationAtRest: {x: -0.481, y: 0, z: 0}
-  m_TranslationOffset: {x: -0.22299999, y: 0, z: 0}
+  m_TranslationAtRest: {x: -0.54, y: 0, z: 0}
+  m_TranslationOffset: {x: -0.282, y: 0, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -3858,7 +3858,7 @@ Transform:
   m_GameObject: {fileID: 5993831183144710603}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.484, y: 0, z: 0}
+  m_LocalPosition: {x: 0.51, y: 0, z: 0}
   m_LocalScale: {x: 0.08, y: 0.33354002, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3883,7 +3883,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5202131827840301768
 MonoBehaviour:
@@ -3909,8 +3909,8 @@ PositionConstraint:
   m_Enabled: 1
   serializedVersion: 2
   m_Weight: 1
-  m_TranslationAtRest: {x: 0.484, y: 0, z: 0}
-  m_TranslationOffset: {x: 0.22599998, y: 0, z: 0}
+  m_TranslationAtRest: {x: 0.51, y: 0, z: 0}
+  m_TranslationOffset: {x: 0.25199997, y: 0, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -12515,6 +12515,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1573022652239777612}
     m_Modifications:
+    - target: {fileID: 1976467498943193022, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976467498943193022, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976467498943193022, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976467498943193022, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976467498943193022, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976467498943193022, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3265206111856060018, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12593,6 +12617,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3265206111856060018, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009186365302366677, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009186365302366677, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009186365302366677, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009186365302366677, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009186365302366677, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009186365302366677, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8704245281717283390, guid: 9b5887a4b6a0243468449c5f6be409a4, type: 3}
