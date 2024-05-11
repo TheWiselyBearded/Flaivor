@@ -95,7 +95,7 @@ public class ThinkerModule : MonoBehaviour
         Debug.Log("Added all messages");
 
         try
-        {            
+        {
             //var chatRequest = new ChatRequest(chatMessages, Model.GPT4_Turbo, responseFormat: ChatResponseFormat.Json, temperature: 1, maxTokens: 14421, topP: 1, frequencyPenalty: 0, presencePenalty: 0);
             var chatRequest = new ChatRequest(chatMessages, Model.GPT3_5_Turbo_16K, temperature: 1, topP: 1, frequencyPenalty: 0, presencePenalty: 0);
             var result = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
