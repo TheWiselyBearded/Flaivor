@@ -10,8 +10,9 @@ public class CookSessionController : MonoBehaviour
 {
     [SerializeField] public RecipeBook recipeBook;
     public Recipe recipe;
-    
-    
+    public int StepIndex;
+    public int SubStepIndex;
+
 
     [SerializeField] private GameObject recipeStepUIPrefab; // Drag your prefab here in the Inspector
     [SerializeField] private GameObject recipeMediumUIPrefab; // Drag your prefab here in the Inspector
@@ -24,6 +25,7 @@ public class CookSessionController : MonoBehaviour
 
     public GameObject[] fullMenuUIs = new GameObject[3];
     public GameObject[] mediumMenuUIs = new GameObject[3];
+    public GameObject recipeProgressUI;
     protected int numCallsMedium = 1;
     protected int numCallsFull = 1;
     public bool debugMode;
@@ -36,13 +38,47 @@ public class CookSessionController : MonoBehaviour
 
     private void Start()
     {
-        RecipeMediumUI.OnChooseDishMediumReceived += RecipeMediumUI_OnChooseDishMediumReceived;   
+        RecipeMediumUI.OnChooseDishMediumReceived += RecipeMediumUI_OnChooseDishMediumReceived;
+        InstructionStepProgressUI.OnProgressStepReceived += InstructionStepProgressUI_OnProgressStepReceived;
     }
 
-    private void OnDestroy()
-    {
+    private void OnDestroy() {
         RecipeMediumUI.OnChooseDishMediumReceived -= RecipeMediumUI_OnChooseDishMediumReceived;
+        InstructionStepProgressUI.OnProgressStepReceived -= InstructionStepProgressUI_OnProgressStepReceived;
     }
+
+    /// <summary>
+    /// TODO: Add functionality for going backward
+    /// </summary>
+    /// <param name="obj"></param>
+    private void InstructionStepProgressUI_OnProgressStepReceived(string obj) {
+        if (StepIndex >= recipe.Instructions.Count) {
+            Debug.Log("Reached max steps");
+            return;
+        }
+
+        SubStepIndex++;
+        if (SubStepIndex >= recipe.Instructions[StepIndex].SubSteps.Count) {
+            StepIndex++;
+            //Debug.Log($"Finished set of substeps, step index now {StepIndex}");
+            SubStepIndex = 0;
+        }
+        if (StepIndex >= recipe.Instructions.Count) {
+            Debug.Log("Reached max steps");
+            return;
+        }
+        recipeProgressUI.GetComponent<InstructionStepProgressUI>().SetInstructionSubstep(recipe.Instructions[StepIndex].Description, recipe.Instructions[StepIndex].SubSteps[SubStepIndex]);
+    }
+
+
+    public void GoBackStep() {
+        recipe.currentStepIndex--;
+    }
+
+    public void GoNextStep() {
+        recipe.currentStepIndex++;
+    }
+    
 
     /// <summary>
     /// match string of recipe name to index of recipe in recipe book list
@@ -94,20 +130,6 @@ public class CookSessionController : MonoBehaviour
         return result >= sequence.Length / 2;
     }
 
-    public void SequenceSteps()
-    {
-        recipe.currentStepIndex++;
-    }
-
-    public void GoBackStep()
-    {
-        recipe.currentStepIndex--;
-    }
-
-    public void GoNextStep()
-    {
-        recipe.currentStepIndex++;
-    }
 
     public void CreateRecipeBook(string jsonRecipes)
     {
@@ -280,10 +302,10 @@ public class CookSessionController : MonoBehaviour
             Debug.LogError("RecipeMediumUIPrefab is not assigned in the inspector!");
             return;
         }
-
+        Vector3 spawnPosition = userObject.transform.position + spawnDirection * 1.1f + (spawnOffset); // Adjust the distance as needed
         // Instantiate the prefab as a child of uiParent
-        GameObject instance = Instantiate(recipeStepUIPrefab, uiParent);
-
+        GameObject instance = Instantiate(recipeStepUIPrefab, spawnPosition, Quaternion.identity, uiParent);
+        recipeProgressUI = instance;
         // Get the RecipeMediumUI component and set the recipe details
         InstructionStepProgressUI recipeUI = instance.GetComponent<InstructionStepProgressUI>();
         if (recipeUI != null)
