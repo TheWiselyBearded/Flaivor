@@ -741,7 +741,24 @@ PlayerSettings:
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: READY_PLAYER_ME
+    EmbeddedLinux: READY_PLAYER_ME
+    GameCoreScarlett: READY_PLAYER_ME
+    GameCoreXboxOne: READY_PLAYER_ME
+    LinuxHeadlessSimulation: READY_PLAYER_ME
+    Nintendo Switch: READY_PLAYER_ME
+    PS4: READY_PLAYER_ME
+    PS5: READY_PLAYER_ME
+    QNX: READY_PLAYER_ME
+    Stadia: READY_PLAYER_ME
+    Standalone: READY_PLAYER_ME
+    VisionOS: READY_PLAYER_ME
+    WebGL: READY_PLAYER_ME
+    Windows Store Apps: READY_PLAYER_ME
+    XboxOne: READY_PLAYER_ME
+    iPhone: READY_PLAYER_ME
+    tvOS: READY_PLAYER_ME
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

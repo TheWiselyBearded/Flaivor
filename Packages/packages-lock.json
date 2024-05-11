@@ -73,6 +73,16 @@
       },
       "url": "https://package.openupm.com"
     },
+    "com.readyplayerme.core": {
+      "version": "https://github.com/readyplayerme/rpm-unity-sdk-core.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.cloud.gltfast": "6.0.1",
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      },
+      "hash": "aaebf807bfc23a8257678cb0d232a684016e513c"
+    },
     "com.unity.burst": {
       "version": "1.8.13",
       "depth": 1,
@@ -171,7 +181,7 @@
     },
     "com.unity.nuget.newtonsoft-json": {
       "version": "3.2.1",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"

@@ -21,6 +21,7 @@ public class AgentController : MonoBehaviour
         Speaking
     }
     public AgentState agentState;
+    public UnityEvent<AgentState> OnAgentStateChanged;
 
     private void Awake()
     {
@@ -52,7 +53,7 @@ public class AgentController : MonoBehaviour
                 break;
         }
     }
-    
+
 
     private void ListenerModule_OnUserInputReceived(string obj)
     {
@@ -72,7 +73,7 @@ public class AgentController : MonoBehaviour
         Debug.Log($"Thinker Mode response fed to chef");
         SetMode(AgentState.Speaking);
         cookSessionController.CreateRecipeBook(obj);
-        if (cookSessionController.recipeBook.Recipes.Count > 0 )
+        if (cookSessionController.recipeBook.Recipes.Count > 0)
         {
             foreach (Recipe recipe in cookSessionController.recipeBook.Recipes)
             {
@@ -97,6 +98,7 @@ public class AgentController : MonoBehaviour
                 ApplySpeakingModeSettings();
                 break;
         }
+        OnAgentStateChanged.Invoke(agentState);
     }
 
     void ApplyListeningModeSettings()
