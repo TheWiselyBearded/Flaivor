@@ -20,6 +20,7 @@ public class Debugger : MonoBehaviour
     [SerializeField]
     private ScrollRect scrollView;
 
+
     private void Start()
     {
         //agent.thinkerModule.OnChatGPTInputReceived += ThinkerModule_OnChatGPTInputReceived;
@@ -49,6 +50,16 @@ public class Debugger : MonoBehaviour
             agent.SetAgentMode(1);
             agent.thinkerModule.SubmitChatHelpJSON("How long are avocados good for? I bought these like a week ago");
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftBracket))
+        {
+            agent.cookSessionController.SwipeRecipesLeft();
+        }
+        if (Input.GetKeyDown(KeyCode.RightBracket))
+        {
+            agent.cookSessionController.SwipeRecipesRight();
+        }
+
     }
 
     public void LoadRecipeBookJSON()

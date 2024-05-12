@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
+using Unity.VisualScripting;
 
 public class CookSessionController : MonoBehaviour
 {
@@ -32,6 +34,10 @@ public class CookSessionController : MonoBehaviour
     protected int numCallsFull = 1;
     public bool debugMode;
 
+    [SerializeField] private Transform[] recipeLocations;
+    int currentRecipeIndex = 0;
+    [SerializeField] private float swipeDuration = 1f;
+
     private void Awake()
     {
         //recipes = new List<Recipe>();
@@ -45,28 +51,35 @@ public class CookSessionController : MonoBehaviour
         InstructionStepProgressUI.OnProgressPrevStepReceived += InstructionStepProgressUI_OnProgressPrevStepReceived;
     }
 
-    
 
-    private void OnDestroy() {
+
+    private void OnDestroy()
+    {
         RecipeMediumUI.OnChooseDishMediumReceived -= RecipeMediumUI_OnChooseDishMediumReceived;
         InstructionStepProgressUI.OnProgressNextStepReceived -= InstructionStepProgressUI_OnProgressStepReceived;
         InstructionStepProgressUI.OnProgressPrevStepReceived -= InstructionStepProgressUI_OnProgressPrevStepReceived;
     }
 
-    private void InstructionStepProgressUI_OnProgressPrevStepReceived() {
+    private void InstructionStepProgressUI_OnProgressPrevStepReceived()
+    {
         Debug.Log($"Step index {StepIndex}, substep index {SubStepIndex}");
-        if (StepIndex <= 0 && SubStepIndex <= 0) {
+        if (StepIndex <= 0 && SubStepIndex <= 0)
+        {
             Debug.Log("Reached min steps");
             return;
         }
 
         SubStepIndex--;
-        if (SubStepIndex < 0) {
+        if (SubStepIndex < 0)
+        {
             StepIndex--;
-            if (StepIndex < 0) {
+            if (StepIndex < 0)
+            {
                 StepIndex = 0;
                 SubStepIndex = 0;
-            } else {
+            }
+            else
+            {
                 SubStepIndex = recipe.Instructions[StepIndex].SubSteps.Count - 1;
             }
             Debug.Log($"Step index now {StepIndex} and substep now {SubStepIndex}");
@@ -74,18 +87,22 @@ public class CookSessionController : MonoBehaviour
         recipeProgressUI.GetComponent<InstructionStepProgressUI>().SetInstructionSubstep(recipe.Instructions[StepIndex].Description, recipe.Instructions[StepIndex].SubSteps[SubStepIndex]);
     }
 
-    private void InstructionStepProgressUI_OnProgressStepReceived() {
-        if (StepIndex > recipe.Instructions.Count - 1) {
+    private void InstructionStepProgressUI_OnProgressStepReceived()
+    {
+        if (StepIndex > recipe.Instructions.Count - 1)
+        {
             Debug.Log("Reached max steps");
             return;
         }
 
         SubStepIndex++;
-        if (SubStepIndex >= recipe.Instructions[StepIndex].SubSteps.Count) {
+        if (SubStepIndex >= recipe.Instructions[StepIndex].SubSteps.Count)
+        {
             StepIndex++;
             SubStepIndex = 0;
         }
-        if (StepIndex >= recipe.Instructions.Count) {
+        if (StepIndex >= recipe.Instructions.Count)
+        {
             Debug.Log("Reached max steps");
             return;
         }
@@ -94,14 +111,16 @@ public class CookSessionController : MonoBehaviour
 
 
 
-    public void GoBackStep() {
+    public void GoBackStep()
+    {
         recipe.currentStepIndex--;
     }
 
-    public void GoNextStep() {
+    public void GoNextStep()
+    {
         recipe.currentStepIndex++;
     }
-    
+
 
     /// <summary>
     /// match string of recipe name to index of recipe in recipe book list
@@ -110,8 +129,10 @@ public class CookSessionController : MonoBehaviour
     /// <exception cref="System.NotImplementedException"></exception>
     private void RecipeMediumUI_OnChooseDishMediumReceived(string obj)
     {
-        for (int i = 0; i < recipeBook.Recipes.Count; i++) {
-            if (ContainsMostOfSequence(recipeBook.Recipes[i].RecipeName, obj)) {
+        for (int i = 0; i < recipeBook.Recipes.Count; i++)
+        {
+            if (ContainsMostOfSequence(recipeBook.Recipes[i].RecipeName, obj))
+            {
                 SetRecipe(i);
             }
         }
@@ -227,13 +248,16 @@ public class CookSessionController : MonoBehaviour
     }
 
 
-    public void SetRecipe(int _recipeIndex) {
+    public void SetRecipe(int _recipeIndex)
+    {
         RecipeSelectionIndex = _recipeIndex;
-        for (int i = 0; i < mediumMenuUIs.Length; i++) {
+        for (int i = 0; i < mediumMenuUIs.Length; i++)
+        {
             GameObject gRef = mediumMenuUIs[i];
             // delete if not selected
-            if (i == _recipeIndex) {
-                SetRecipe(recipeBook.Recipes[_recipeIndex], mediumMenuUIs[0].GetComponent<RecipeMediumUI>().dishImage);                
+            if (i == _recipeIndex)
+            {
+                SetRecipe(recipeBook.Recipes[_recipeIndex], mediumMenuUIs[0].GetComponent<RecipeMediumUI>().dishImage);
             }
             //Destroy(gRef);
             gRef.SetActive(false);
@@ -245,7 +269,7 @@ public class CookSessionController : MonoBehaviour
     {
         recipe = _recipe;
         CreateRecipeFullUI(recipe, recipeImg);
-        CreateRecipeStepUI(0);        
+        CreateRecipeStepUI(0);
     }
 
     public void CreateRecipeObjects(Recipe _recipe, Texture t)
@@ -258,7 +282,7 @@ public class CookSessionController : MonoBehaviour
         //CreateRecipeFullUI(_recipe);
     }
 
-    
+
     public void CreateRecipeMediumUI(Recipe recipe, Texture t)
     {
         if (recipeMediumUIPrefab == null)
@@ -288,8 +312,120 @@ public class CookSessionController : MonoBehaviour
 
         mediumMenuUIs[numCallsMedium - 2] = instance;
         instance.SetActive(false);
-        if (numCallsMedium > 3) {
+        if (numCallsMedium > 3)
+        {
             foreach (GameObject go in mediumMenuUIs) { go.SetActive(true); }
+
+            // align recipes
+            if (recipeLocations != null)
+            {
+                for (int i = 0; i < mediumMenuUIs.Length; i++)
+                {
+                    mediumMenuUIs[i].transform.position = recipeLocations[i].position;
+                }
+                // recipe at index 1 is the 'current', center recipe
+                currentRecipeIndex = 1;
+
+                SetRecipeAlphas();
+            }
+
+        }
+    }
+
+    public void SwipeRecipesLeft()
+    {
+        // move all recipes to the left
+        // the first index is the 'current' recipe, sitting in front
+        // index 0 is left most, index 2 is right most
+        // move index 1 to index 0, index 2 to index 1, and index 0 to index 2
+        // using recipe locations
+        // so if the currentrecipeindex is 1, that means recipe 1 is in the center
+        // so we move recipe 1 to the left, recipe 2 to the center, and recipe 0 to the right
+        // if the currentrecipeindex is 2, that means recipe 2 is in the center
+        // so we move recipe 2 to the left, recipe 0 to the center, and recipe 1 to the right
+
+        if (currentRecipeIndex == 1)
+        {
+            Debug.Log("Swiping left, current index 1");
+            mediumMenuUIs[1].transform.DOMove(recipeLocations[0].position, swipeDuration);
+            mediumMenuUIs[2].transform.DOMove(recipeLocations[1].position, swipeDuration);
+            mediumMenuUIs[0].transform.DOMove(recipeLocations[2].position, swipeDuration);
+            currentRecipeIndex = 2;
+        }
+        else if (currentRecipeIndex == 2)
+        {
+            Debug.Log("Swiping left, current index 2");
+            mediumMenuUIs[2].transform.DOMove(recipeLocations[0].position, swipeDuration);
+            mediumMenuUIs[0].transform.DOMove(recipeLocations[1].position, swipeDuration);
+            mediumMenuUIs[1].transform.DOMove(recipeLocations[2].position, swipeDuration);
+            currentRecipeIndex = 0;
+        }
+        else
+        {
+            Debug.Log("Swiping left, current index 0");
+            mediumMenuUIs[0].transform.DOMove(recipeLocations[0].position, swipeDuration);
+            mediumMenuUIs[1].transform.DOMove(recipeLocations[1].position, swipeDuration);
+            mediumMenuUIs[2].transform.DOMove(recipeLocations[2].position, swipeDuration);
+            currentRecipeIndex = 1;
+        }
+
+        SetRecipeAlphas();
+    }
+
+    public void SwipeRecipesRight()
+    {
+        // move all recipes to the right
+        // the first index is the 'current' recipe, sitting in front
+        // index 0 is left most, index 2 is right most
+        // move index 1 to index 2, index 2 to index 0, and index 0 to index 1
+        // using recipe locations
+        // so if the currentrecipeindex is 1, that means recipe 1 is in the center
+        // so we move recipe 1 to the right, recipe 0 to the center, and recipe 2 to the left
+        // if the currentrecipeindex is 2, that means recipe 2 is in the center
+        // so we move recipe 2 to the right, recipe 1 to the center, and recipe 0 to the left
+
+
+        if (currentRecipeIndex == 1)
+        {
+            Debug.Log("Swiping right, current index 1");
+            mediumMenuUIs[1].transform.DOMove(recipeLocations[2].position, swipeDuration);
+            mediumMenuUIs[0].transform.DOMove(recipeLocations[1].position, swipeDuration);
+            mediumMenuUIs[2].transform.DOMove(recipeLocations[0].position, swipeDuration);
+            currentRecipeIndex = 0;
+        }
+        else if (currentRecipeIndex == 2)
+        {
+            Debug.Log("Swiping right, current index 2");
+            mediumMenuUIs[2].transform.DOMove(recipeLocations[2].position, swipeDuration);
+            mediumMenuUIs[1].transform.DOMove(recipeLocations[1].position, swipeDuration);
+            mediumMenuUIs[0].transform.DOMove(recipeLocations[0].position, swipeDuration);
+            currentRecipeIndex = 1;
+        }
+        else
+        {
+            Debug.Log("Swiping right, current index 0");
+            mediumMenuUIs[0].transform.DOMove(recipeLocations[2].position, swipeDuration);
+            mediumMenuUIs[2].transform.DOMove(recipeLocations[1].position, swipeDuration);
+            mediumMenuUIs[1].transform.DOMove(recipeLocations[0].position, swipeDuration);
+            currentRecipeIndex = 2;
+        }
+
+        SetRecipeAlphas();
+    }
+
+    private void SetRecipeAlphas()
+    {
+        for (int i = 0; i < mediumMenuUIs.Length; i++)
+        {
+            // using getcomponent here is gross but too bad
+            if (i == currentRecipeIndex)
+            {
+                mediumMenuUIs[i].GetComponent<RecipeMediumUI>().canvasGroup.DOFade(1, swipeDuration);
+            }
+            else
+            {
+                mediumMenuUIs[i].GetComponent<RecipeMediumUI>().canvasGroup.DOFade(0.55f, swipeDuration);
+            }
         }
     }
 
@@ -360,12 +496,14 @@ public class CookSessionController : MonoBehaviour
         return ingredientsText.TrimEnd(); // Remove the last newline character for cleaner formatting
     }
 
-    public static string EnsureJsonWrappedWithRecipesKey(string jsonString) {
+    public static string EnsureJsonWrappedWithRecipesKey(string jsonString)
+    {
         // Trim any whitespace that might affect the check
         jsonString = jsonString.Trim();
 
         // Check if the JSON string starts with an array indicator '['
-        if (!jsonString.Contains("recipes")) {
+        if (!jsonString.Contains("recipes"))
+        {
             // The JSON is not wrapped with "recipes" key, wrap it
             jsonString = "{\"recipes\":" + jsonString + "}";
         }
