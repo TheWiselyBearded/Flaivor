@@ -12,6 +12,7 @@ public class Debugger : MonoBehaviour
     public Texture2D debugFridgeTexture;
     public TMP_InputField userInput;
     public AgentController agent;
+    public TimerController timerController;
     public string recipeBookJSON;
 
     [SerializeField]
@@ -59,7 +60,9 @@ public class Debugger : MonoBehaviour
         {
             agent.cookSessionController.SwipeRecipesRight();
         }
-
+        if (Input.GetKeyDown(KeyCode.T)) {
+            timerController.SwipeTimerLeft();
+        }
     }
 
     public void LoadRecipeBookJSON()
