@@ -28276,7 +28276,7 @@ MonoBehaviour:
   enableAcceleration: 1
   enableKeyboardInput: 0
   enableTouchInput: 0
-  audioLoopback: 0
+  audioLoopback: 1
   loopbackKey: 108
   showVisemes: 0
   debugVisemesKey: 100
