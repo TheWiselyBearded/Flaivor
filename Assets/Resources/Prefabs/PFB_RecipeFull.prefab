@@ -4082,6 +4082,7 @@ MonoBehaviour:
   instructionUIs:
   - instructionName: {fileID: 4898765590223749912}
     instructionDescription: {fileID: 376162098361530824}
+  recipeImg: {fileID: 8991421909788852987}
 --- !u!1 &4858295549108945980
 GameObject:
   m_ObjectHideFlags: 0

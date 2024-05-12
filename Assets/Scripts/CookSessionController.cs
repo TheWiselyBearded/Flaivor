@@ -13,6 +13,7 @@ public class CookSessionController : MonoBehaviour
     public Recipe recipe;
     public int StepIndex;
     public int SubStepIndex;
+    public int RecipeSelectionIndex;
 
 
     [SerializeField] private GameObject recipeStepUIPrefab; // Drag your prefab here in the Inspector
@@ -227,22 +228,23 @@ public class CookSessionController : MonoBehaviour
 
 
     public void SetRecipe(int _recipeIndex) {
-
+        RecipeSelectionIndex = _recipeIndex;
         for (int i = 0; i < mediumMenuUIs.Length; i++) {
             GameObject gRef = mediumMenuUIs[i];
             // delete if not selected
             if (i == _recipeIndex) {
                 SetRecipe(recipeBook.Recipes[_recipeIndex], mediumMenuUIs[0].GetComponent<RecipeMediumUI>().dishImage);                
             }
-            Destroy(gRef);
-            mediumMenuUIs[i] = null;
+            //Destroy(gRef);
+            gRef.SetActive(false);
+            //mediumMenuUIs[i] = null;
         }
 
     }
     public void SetRecipe(Recipe _recipe, RawImage recipeImg)
     {
         recipe = _recipe;
-        //CreateRecipeFullUI(recipe);
+        CreateRecipeFullUI(recipe, recipeImg);
         CreateRecipeStepUI(0);        
     }
 
@@ -310,7 +312,7 @@ public class CookSessionController : MonoBehaviour
         if (recipeUI != null)
         {
             string ingredientsText = FormatIngredients(recipe.Ingredients);
-            recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText);
+            recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText, rawImage);
             recipeUI.SetInstructionsUI(recipe.Instructions);
         }
         else
@@ -334,6 +336,7 @@ public class CookSessionController : MonoBehaviour
         recipeProgressUI = instance;
         // Get the RecipeMediumUI component and set the recipe details
         InstructionStepProgressUI recipeUI = instance.GetComponent<InstructionStepProgressUI>();
+        recipeUI.SetRecipeImg(mediumMenuUIs[RecipeSelectionIndex].GetComponent<RecipeMediumUI>().dishImage);
         if (recipeUI != null)
         {
 

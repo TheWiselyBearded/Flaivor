@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InstructionStepProgressUI : MonoBehaviour
 {
@@ -12,9 +13,13 @@ public class InstructionStepProgressUI : MonoBehaviour
     public GameObject PFB_InstructionSubstepDescription;
     public List<GameObject> instructionStepUIs;
 
+    public RawImage recipeImg;
+
 
     public static event Action OnProgressNextStepReceived;
     public static event Action OnProgressPrevStepReceived;
+
+    public void SetRecipeImg(RawImage rawImg) { recipeImg.texture = rawImg.texture; }
 
     /// <summary>
     /// Creates all substeps that are part of the main ui canvas
