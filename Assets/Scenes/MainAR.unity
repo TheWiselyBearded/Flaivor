@@ -20293,6 +20293,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2800000, guid: ea85bd49b69519b4eacd75a4e767e01e, type: 3}
     - target: {fileID: 8754848213950973262, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: voice.id
+      value: N2lVS1w4EtoT3dr4eOWO
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754848213950973262, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: voice.name
+      value: Callum
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754848213950973262, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
       propertyPath: thinkerModule
       value: 
       objectReference: {fileID: 1267338430}
