@@ -102,14 +102,13 @@ public class ThinkerModule : MonoBehaviour
         try
         {
             //var chatRequest = new ChatRequest(chatMessages, Model.GPT4_Turbo, responseFormat: ChatResponseFormat.Json, temperature: 1, maxTokens: 14421, topP: 1, frequencyPenalty: 0, presencePenalty: 0);
-            var chatRequest = new ChatRequest(chatMessages, Model.GPT3_5_Turbo_16K, temperature: 1, maxTokens: 13226, topP: 1, frequencyPenalty: 0, presencePenalty: 0);
+            var chatRequest = new ChatRequest(chatMessages, Model.GPT3_5_Turbo_16K, temperature: 1, topP: 1, frequencyPenalty: 0, presencePenalty: 0);
             var result = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
             
             var response = RemoveEmbeddedCharacters(result.ToString());
             string formattedResponse = CookSessionController.EnsureJsonWrappedWithRecipesKey(response);
             Debug.Log(formattedResponse);
             OnChatGPTInputReceived?.Invoke(formattedResponse);
-            SubmitChatImageGenerator(formattedResponse);
         }
         catch (Exception e)
         {

@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CookSessionController : MonoBehaviour
 {
@@ -231,17 +232,17 @@ public class CookSessionController : MonoBehaviour
             GameObject gRef = mediumMenuUIs[i];
             // delete if not selected
             if (i == _recipeIndex) {
-                SetRecipe(recipeBook.Recipes[_recipeIndex]);
+                SetRecipe(recipeBook.Recipes[_recipeIndex], mediumMenuUIs[0].GetComponent<RecipeMediumUI>().dishImage);                
             }
             Destroy(gRef);
             mediumMenuUIs[i] = null;
         }
 
     }
-    public void SetRecipe(Recipe _recipe)
+    public void SetRecipe(Recipe _recipe, RawImage recipeImg)
     {
         recipe = _recipe;
-        CreateRecipeFullUI(recipe);
+        //CreateRecipeFullUI(recipe);
         CreateRecipeStepUI(0);        
     }
 
@@ -284,9 +285,13 @@ public class CookSessionController : MonoBehaviour
         }
 
         mediumMenuUIs[numCallsMedium - 2] = instance;
+        instance.SetActive(false);
+        if (numCallsMedium > 3) {
+            foreach (GameObject go in mediumMenuUIs) { go.SetActive(true); }
+        }
     }
 
-    public void CreateRecipeFullUI(Recipe recipe)
+    public void CreateRecipeFullUI(Recipe recipe, RawImage rawImage)
     {
         if (recipeFullUIPrefab == null)
         {

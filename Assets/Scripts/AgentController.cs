@@ -13,6 +13,9 @@ public class AgentController : MonoBehaviour
     public ListenerModule listenerModule;
     public ThinkerModule thinkerModule;
 
+    private bool requestRecipes = false;
+    private string requestString = "";
+
     public UnityEvent[] thinkerEvents;
 
     [System.Serializable]
@@ -53,6 +56,13 @@ public class AgentController : MonoBehaviour
         SetMode(AgentState.Thinking);
     }
 
+    private void Update() {
+        if (requestRecipes) {
+            requestRecipes = false;
+            RecipeChatRequest();
+        }
+    }
+
     /// <summary>
     /// invoked via unity button press events
     /// </summary>
@@ -89,10 +99,15 @@ public class AgentController : MonoBehaviour
         thinkerModule.OnChatGPTHelpInputReceived -= ThinkerModule_OnChatGPTHelpInputReceived;
     }
 
+    public void RecipeChatRequest() {
+        //Task.Run(async () => await ThinkerModule_OnChatGPTInputReceivedTask(obj));
+        ThinkerModule_OnChatGPTInputReceivedTask(requestString);
+    }
+
     public void ThinkerModule_OnChatGPTInputReceived(string obj)
     {
-        ThinkerModule_OnChatGPTInputReceivedTask(obj);
-        //Task.Run(async () => await ThinkerModule_OnChatGPTInputReceivedTask(obj));
+        requestString = obj;
+        requestRecipes = true;
     }
 
     private async void ThinkerModule_OnChatGPTInputReceivedTask(string obj) {
