@@ -73,6 +73,26 @@
       },
       "url": "https://package.openupm.com"
     },
+    "com.readyplayerme.core": {
+      "version": "https://github.com/readyplayerme/rpm-unity-sdk-core.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.cloud.gltfast": "6.0.1",
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      },
+      "hash": "aaebf807bfc23a8257678cb0d232a684016e513c"
+    },
+    "com.rest.elevenlabs": {
+      "version": "3.2.9",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.utilities.rest": "2.5.3",
+        "com.utilities.encoder.ogg": "3.1.4"
+      },
+      "url": "https://package.openupm.com"
+    },
     "com.unity.burst": {
       "version": "1.8.13",
       "depth": 1,
@@ -171,7 +191,7 @@
     },
     "com.unity.nuget.newtonsoft-json": {
       "version": "3.2.1",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -183,12 +203,59 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.render-pipelines.core": {
+      "version": "14.0.11",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.terrain": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      }
+    },
+    "com.unity.render-pipelines.universal": {
+      "version": "14.0.11",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.mathematics": "1.2.1",
+        "com.unity.burst": "1.8.9",
+        "com.unity.render-pipelines.core": "14.0.11",
+        "com.unity.shadergraph": "14.0.11",
+        "com.unity.render-pipelines.universal-config": "14.0.9"
+      }
+    },
+    "com.unity.render-pipelines.universal-config": {
+      "version": "14.0.10",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.render-pipelines.core": "14.0.10"
+      }
+    },
+    "com.unity.searcher": {
+      "version": "4.9.2",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.settings-manager": {
       "version": "2.0.1",
       "depth": 2,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
+    },
+    "com.unity.shadergraph": {
+      "version": "14.0.11",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.render-pipelines.core": "14.0.11",
+        "com.unity.searcher": "4.9.2"
+      }
     },
     "com.unity.test-framework": {
       "version": "1.3.5",
@@ -301,6 +368,15 @@
         "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.unitywebrequestaudio": "1.0.0",
         "com.utilities.async": "2.1.3"
+      },
+      "url": "https://package.openupm.com"
+    },
+    "com.utilities.encoder.ogg": {
+      "version": "3.1.4",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.utilities.audio": "1.1.3"
       },
       "url": "https://package.openupm.com"
     },

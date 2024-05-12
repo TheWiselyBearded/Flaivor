@@ -43,6 +43,12 @@ public class Debugger : MonoBehaviour
         {
             LoadRecipeBookJSON();
         }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            agent.SetAgentMode(1);
+            agent.thinkerModule.SubmitChatHelpJSON("How long are avocados good for? I bought these like a week ago");
+        }
     }
 
     public void LoadRecipeBookJSON()
@@ -80,7 +86,7 @@ public class Debugger : MonoBehaviour
     // example query: I have the following ingredients with me, Eggs, spices, green onions, steak, potatoes, tortilla, bread, sugar, and milk
     public void SubmitChatRequest()
     {
-        agent.thinkerModule.SubmitChatJSON(userInput.text); 
+        agent.thinkerModule.SubmitChatJSON(userInput.text);
     }
 
     private TextMeshProUGUI AddNewTextMessageContent()
