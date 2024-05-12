@@ -28110,6 +28110,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2251574647155060194, guid: ffecfa19406ba0843b5f6b954ccecdc4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1558508367}
+    - targetCorrespondingSourceObject: {fileID: -2251574647155060194, guid: ffecfa19406ba0843b5f6b954ccecdc4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1558508371}
+    - targetCorrespondingSourceObject: {fileID: -2251574647155060194, guid: ffecfa19406ba0843b5f6b954ccecdc4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1558508370}
   m_SourcePrefab: {fileID: 100100000, guid: ffecfa19406ba0843b5f6b954ccecdc4, type: 3}
 --- !u!4 &1558508362 stripped
 Transform:
@@ -28232,6 +28238,53 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1558508370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558508365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b97b38f2f1fd24185315141a6c6a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinnedMeshRenderer: {fileID: 1558508364}
+  visemeToBlendTargets: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
+  enableVisemeTestKeys: 0
+  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
+  laughterKey: 301
+  laughterBlendTarget: 15
+  laughterThreshold: 0.5
+  laughterMultiplier: 1.5
+  smoothAmount: 70
+--- !u!114 &1558508371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558508365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f43c520a9bad8a3489109c869f454576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1558508367}
+  provider: 1
+  enableAcceleration: 1
+  enableKeyboardInput: 0
+  enableTouchInput: 0
+  audioLoopback: 0
+  loopbackKey: 108
+  showVisemes: 0
+  debugVisemesKey: 100
+  skipAudioSource: 0
+  gain: 1
+  debugLaughterKey: 104
+  showLaughter: 0
+  laughterScore: 0
 --- !u!1001 &1573296646
 PrefabInstance:
   m_ObjectHideFlags: 0
