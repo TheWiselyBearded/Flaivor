@@ -5,6 +5,8 @@ using UnityEngine;
 using ElevenLabs;
 using System.Linq;
 using ElevenLabs.Voices;
+using TMPro;
+using Newtonsoft.Json.Linq;
 
 public class SpeechModule : MonoBehaviour
 {
@@ -19,8 +21,25 @@ public class SpeechModule : MonoBehaviour
 
     private async void OnHelpCompletionReceived(string completion)
     {
+        string response = "";
+        // parse response from json
+        try
+        {
+            var json = JObject.Parse(completion);
+            response = json["response"].ToString();
+        }
+        catch (Exception e)
+        {
+            // unable to get response from json, so let's just use the completion
+            response = completion;
+
+            Debug.LogError(e);
+
+        }
+
+
         var api = new ElevenLabsClient();
-        var text = completion;
+        var text = response;
         // var voice = (await api.VoicesEndpoint.GetAllVoicesAsync()).FirstOrDefault();
         var defaultVoiceSettings = await api.VoicesEndpoint.GetDefaultVoiceSettingsAsync();
         var voiceClip = await api.TextToSpeechEndpoint.TextToSpeechAsync(text, voice, defaultVoiceSettings);
