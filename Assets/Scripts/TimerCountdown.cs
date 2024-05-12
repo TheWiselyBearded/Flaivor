@@ -9,9 +9,13 @@ public class TimerCountdown : MonoBehaviour
 {
     public GameObject root;
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI timerTitle;
     public GameObject StartButton;
     public GameObject DestroyButton;
     public GameObject TimerControlButtons;
+
+    public GameObject anchorReference;
+    public TimerCountdown anchorReferenceTC;
 
     //public int minutes = 5;
     //public int seconds = 0;
@@ -21,6 +25,9 @@ public class TimerCountdown : MonoBehaviour
     private int secondsOnesPlace;
     private int secondsTenthsPlace;
 
+    private float lastDisabledTime; // Store the time when the script was last disabled
+
+    protected bool isFloater = false;
     private bool firstGrab = false;
 
     public static event Action<TimerCountdown> OnTimerCountdownDuplicate;
@@ -32,19 +39,41 @@ public class TimerCountdown : MonoBehaviour
     }
 
     public void SetParent() {
-        if (!firstGrab) OnTimerCountdownDuplicate?.Invoke(this);
+        if (!firstGrab) {
+            OnTimerCountdownDuplicate?.Invoke(this);
+            isFloater = true;
+        }
         firstGrab = true;
         //root.transform.parent = null;
     }
-    
+
+    private void OnDisable() {
+        // Save the current time when the script is disabled
+        lastDisabledTime = Time.time;
+    }
+
+    private void OnEnable() {
+        if (!isFloater) {
+            // Subtract the time difference from countdownTime
+            float timeDifference = Time.time - lastDisabledTime;
+            countdownTime -= timeDifference;
+        }
+    }
+
+
     public void SetTimer(int min, int sec) {
         countdownTime = min * 60 + sec;
     }
 
 
-    public void SetTimer(float targetTime)
+    public void SetTimer(int targetTime)
     {
+        countdownTime = targetTime;
         timerText.text = targetTime.ToString();
+    }
+
+    public void SetTimerTitle(string title) {
+        timerTitle.text = title;
     }
 
     // Method to increase minutes
@@ -120,7 +149,10 @@ public class TimerCountdown : MonoBehaviour
 
         // Update text
         timerText.text = string.Format("{0:00}:{1:00}", remainingMinutes, remainingSeconds);
-
+        if (anchorReference != null && anchorReference.activeInHierarchy) {
+            if (anchorReferenceTC == null) anchorReferenceTC  = anchorReference.GetComponent<TimerCountdown>();
+            if (anchorReferenceTC != null) anchorReferenceTC.timerText.text = timerText.text;
+        }
         // Check if countdown is finished
         if (countdownTime <= 0)
         {

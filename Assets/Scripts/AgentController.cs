@@ -38,7 +38,7 @@ public class AgentController : MonoBehaviour
         listenerModule.OnUserInputReceived += ListenerModule_OnUserInputReceived;
         listenerModule.OnUserHelpInputReceived += ListenerModule_OnUserHelpInputReceived;
         thinkerModule.OnChatGPTInputReceived += ThinkerModule_OnChatGPTInputReceived;
-        thinkerModule.OnChatGPTHelpInputReceived += ThinkerModule_OnChatGPTHelpInputReceived;
+        ThinkerModule.OnChatGPTHelpInputReceived += ThinkerModule_OnChatGPTHelpInputReceived;
     }
 
     /// <summary>
@@ -124,7 +124,7 @@ public class AgentController : MonoBehaviour
         listenerModule.OnUserInputReceived -= ListenerModule_OnUserInputReceived;
         listenerModule.OnUserHelpInputReceived -= ListenerModule_OnUserHelpInputReceived;
         thinkerModule.OnChatGPTInputReceived -= ThinkerModule_OnChatGPTInputReceived;
-        thinkerModule.OnChatGPTHelpInputReceived -= ThinkerModule_OnChatGPTHelpInputReceived;
+        ThinkerModule.OnChatGPTHelpInputReceived -= ThinkerModule_OnChatGPTHelpInputReceived;
     }
 
     public void RecipeChatRequest()

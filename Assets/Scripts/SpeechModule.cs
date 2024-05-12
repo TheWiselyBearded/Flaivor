@@ -16,7 +16,7 @@ public class SpeechModule : MonoBehaviour
 
     private void Awake()
     {
-        thinkerModule.OnChatGPTHelpInputReceived += OnHelpCompletionReceived;
+        ThinkerModule.OnChatGPTHelpInputReceived += OnHelpCompletionReceived;
     }
 
     private async void OnHelpCompletionReceived(string completion)
@@ -43,11 +43,11 @@ public class SpeechModule : MonoBehaviour
         // var voice = (await api.VoicesEndpoint.GetAllVoicesAsync()).FirstOrDefault();
         var defaultVoiceSettings = await api.VoicesEndpoint.GetDefaultVoiceSettingsAsync();
         var voiceClip = await api.TextToSpeechEndpoint.TextToSpeechAsync(text, voice, defaultVoiceSettings);
-        audioSource.PlayOneShot(voiceClip.AudioClip);
+        if (audioSource != null) audioSource.PlayOneShot(voiceClip.AudioClip);
     }
 
     private void OnDestroy()
     {
-        thinkerModule.OnChatGPTHelpInputReceived -= OnHelpCompletionReceived;
+        ThinkerModule.OnChatGPTHelpInputReceived -= OnHelpCompletionReceived;
     }
 }

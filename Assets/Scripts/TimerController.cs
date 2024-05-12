@@ -1,5 +1,7 @@
 using GLTFast.Schema;
+using Newtonsoft.Json.Linq;
 using Oculus.Interaction;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -45,6 +47,26 @@ public class TimerController : MonoBehaviour
         rightPose.WhenSelected += RightPose_WhenSelected;
         rightPose.WhenUnselected += RightPose_WhenUnselected;
         TimerCountdown.OnTimerCountdownDuplicate += TimerCountdown_OnTimerCountdownDuplicate;
+        ThinkerModule.OnChatGPTHelpInputReceived += ThinkerModule_OnChatGPTHelpInputReceived;
+    }
+
+    private void ThinkerModule_OnChatGPTHelpInputReceived(string completion) {
+        string responseText = "";
+        // parse response from json
+        try {
+            var response = JObject.Parse(completion);
+            Debug.Log($"Respnse in timer controller {response}");
+            if (completion.Contains("true") || completion.Contains("timer_needed\": true")) {
+                Debug.Log($"registered timer response {response.ToString()}");
+                string timerRequest = response["timer_length"].ToString();
+                CreateTimerInSet(0, Int32.Parse(timerRequest), response["timer_name"].ToString());
+            }
+        } catch (Exception e) {
+            // unable to get response from json, so let's just use the completion
+            responseText = completion;
+
+            Debug.LogError(e);
+        }
     }
 
     private void TimerCountdown_OnTimerCountdownDuplicate(TimerCountdown obj) {
@@ -64,7 +86,6 @@ public class TimerController : MonoBehaviour
         clone.transform.parent = obj.root.transform.parent;
         obj.root.transform.parent = null;
 
-        int removalIndex = 0;
         // Iterate over timerSet to find and replace the original object with the clone
         for (int i = 0; i < timerSet.Count; i++) {
             if (timerSet[i] == obj.root) {
@@ -72,6 +93,8 @@ public class TimerController : MonoBehaviour
                 timerSet.RemoveAt(i);
                 // Add the clone to the list
                 timerSet.Add(clone);
+                obj.anchorReference = clone;
+                obj.timeSet = true;
                 break; // Exit loop since the original object is found and replaced
             }
         }
@@ -85,6 +108,7 @@ public class TimerController : MonoBehaviour
         rightPose.WhenSelected -= RightPose_WhenSelected;
         rightPose.WhenUnselected -= RightPose_WhenUnselected;
         TimerCountdown.OnTimerCountdownDuplicate -= TimerCountdown_OnTimerCountdownDuplicate;
+        ThinkerModule.OnChatGPTHelpInputReceived -= ThinkerModule_OnChatGPTHelpInputReceived;
     }
 
     private void RightPose_WhenUnselected()
@@ -98,7 +122,7 @@ public class TimerController : MonoBehaviour
     {
         ToggleTimers(1, true);
         rightHandSelectEvent?.Invoke();
-        CreateTimer(1);
+        //CreateTimer(1);
     }
 
 
@@ -113,7 +137,7 @@ public class TimerController : MonoBehaviour
     {
         ToggleTimers(1, true);
         leftHandSelectEvent?.Invoke();
-        CreateTimer(0);
+        //CreateTimer(0);
     }
     
 
@@ -142,16 +166,30 @@ public class TimerController : MonoBehaviour
         timerIndex++;
     }
 
-    public void CreateTimerInSet(int handSign, int min, int sec) {
-        GameObject timer = Instantiate(PFB_Timer, handSign == 0 ? leftTimerSetAnchor.transform : rightTimerSetAnchor.transform);
+    public void CreateTimerInSet(int handSign, int totalSeconds, string title) {
+        if (horizontalIndex >= HORIZONTAL_MAX) {
+            verticalIndex++;
+            horizontalIndex = 0;
+        }
+        horizontalIndex++;
+
+        Vector3 spawnPosition = new Vector3(0, 0, 0);
+        GameObject timer = Instantiate(PFB_Timer,
+            spawnPosition,
+            new Quaternion(0, 0, 0, 0),
+            handSign == 0 ? leftTimerSetAnchor.transform : rightTimerSetAnchor.transform);
+        timer.transform.localPosition = spawnPosition + (horizontalOffset * (horizontalIndex)) + (verticalOffset * verticalIndex);
         timerSet.Add(timer);
         timerSetTimerCountdownComponent.Add(timer.GetComponent<TimerCountdown>());
-        SetTimerTime(timerIndex, min, sec);
+        SetTimerTime(timerIndex, totalSeconds);
+        timerSetTimerCountdownComponent[timerIndex].SetTimerTitle(title);
+        timerSetTimerCountdownComponent[timerIndex].timeSet = true;
+        timer.SetActive(false);  
         timerIndex++;
     }
 
-    public void SetTimerTime(int timerIndex, int min, int sec) {
-        timerSetTimerCountdownComponent[timerIndex].SetTimer(min, sec);
+    public void SetTimerTime(int timerIndex,int totalSeconds) {
+        timerSetTimerCountdownComponent[timerIndex].SetTimer(totalSeconds);
     }
 
     public void DeleteTimer(int handSign)
