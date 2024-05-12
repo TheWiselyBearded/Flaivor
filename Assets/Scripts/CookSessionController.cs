@@ -17,6 +17,7 @@ public class CookSessionController : MonoBehaviour
     public int SubStepIndex;
     public int RecipeSelectionIndex;
 
+    public bool ListenSwipe= false;
 
     [SerializeField] private GameObject recipeStepUIPrefab; // Drag your prefab here in the Inspector
     [SerializeField] private GameObject recipeMediumUIPrefab; // Drag your prefab here in the Inspector
@@ -257,7 +258,7 @@ public class CookSessionController : MonoBehaviour
             // delete if not selected
             if (i == _recipeIndex)
             {
-                SetRecipe(recipeBook.Recipes[_recipeIndex], mediumMenuUIs[0].GetComponent<RecipeMediumUI>().dishImage);
+                SetRecipe(recipeBook.Recipes[_recipeIndex], mediumMenuUIs[_recipeIndex].GetComponent<RecipeMediumUI>().dishImage);
             }
             //Destroy(gRef);
             gRef.SetActive(false);
@@ -327,6 +328,7 @@ public class CookSessionController : MonoBehaviour
                 currentRecipeIndex = 1;
 
                 SetRecipeAlphas();
+                ListenSwipe = true;
             }
 
         }
@@ -334,6 +336,7 @@ public class CookSessionController : MonoBehaviour
 
     public void SwipeRecipesLeft()
     {
+        if (!ListenSwipe) return; 
         // move all recipes to the left
         // the first index is the 'current' recipe, sitting in front
         // index 0 is left most, index 2 is right most
@@ -374,6 +377,7 @@ public class CookSessionController : MonoBehaviour
 
     public void SwipeRecipesRight()
     {
+        if (!ListenSwipe) return;
         // move all recipes to the right
         // the first index is the 'current' recipe, sitting in front
         // index 0 is left most, index 2 is right most
