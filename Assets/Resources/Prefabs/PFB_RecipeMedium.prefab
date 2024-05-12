@@ -687,6 +687,7 @@ MonoBehaviour:
   recipeDescription: {fileID: 3132002442189285641}
   ingredientDescription: {fileID: 8562582510996039538}
   dishImage: {fileID: 1618766813013234206}
+  canvasGroup: {fileID: 4484193204875817376}
 --- !u!1 &1033953097162756379
 GameObject:
   m_ObjectHideFlags: 0
@@ -11703,13 +11704,33 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 386189843, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       insertIndex: 4
       addedObject: {fileID: 2614292813019789627}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 386189842, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4484193204875817376}
   m_SourcePrefab: {fileID: 100100000, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
 --- !u!4 &2327390212797314316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1012149282395270278, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
   m_PrefabInstance: {fileID: 3334754418290006410}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3334754418575004568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 386189842, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
+  m_PrefabInstance: {fileID: 3334754418290006410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &4484193204875817376
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3334754418575004568}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!224 &3334754418575004569 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 386189843, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}

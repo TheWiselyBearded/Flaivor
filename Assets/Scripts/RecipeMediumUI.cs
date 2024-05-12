@@ -12,7 +12,9 @@ public class RecipeMediumUI : MonoBehaviour
     public TextMeshProUGUI recipeDescription;
     public TextMeshProUGUI ingredientDescription;
     public RawImage dishImage;
-    
+
+    public CanvasGroup canvasGroup;
+
     public static event Action<string> OnChooseDishMediumReceived;
 
     public void SetRecipeUI(string _recipeName, string _recipeDescription, string _ingredientDescription, Texture _recipeImage)
