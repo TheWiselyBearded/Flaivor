@@ -26,6 +26,7 @@ public class AgentController : MonoBehaviour
         Speaking
     }
     public AgentState agentState;
+    public UnityEvent<AgentState> OnAgentStateChanged;
 
     private void Awake()
     {
@@ -82,7 +83,7 @@ public class AgentController : MonoBehaviour
                 break;
         }
     }
-    
+
 
     private void ListenerModule_OnUserInputReceived(string obj)
     {
@@ -138,6 +139,7 @@ public class AgentController : MonoBehaviour
                 ApplySpeakingModeSettings();
                 break;
         }
+        OnAgentStateChanged.Invoke(agentState);
     }
 
     void ApplyListeningModeSettings()

@@ -5,9 +5,12 @@
     "com.meta.xr.sdk.interaction.ovr.samples": "64.0.0",
     "com.meta.xr.sdk.voice.dictation": "64.0.0",
     "com.openai.unity": "7.7.7",
+    "com.readyplayerme.core": "https://github.com/readyplayerme/rpm-unity-sdk-core.git",
+    "com.rest.elevenlabs": "3.2.9",
     "com.unity.cloud.gltfast": "6.4.0",
     "com.unity.collab-proxy": "2.3.1",
     "com.unity.feature.development": "1.0.1",
+    "com.unity.render-pipelines.universal": "14.0.11",
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.7.6",
     "com.unity.ugui": "1.0.0",
@@ -51,7 +54,8 @@
       "url": "https://package.openupm.com",
       "scopes": [
         "com.openai",
-        "com.utilities"
+        "com.utilities",
+        "com.rest.elevenlabs"
       ]
     }
   ]

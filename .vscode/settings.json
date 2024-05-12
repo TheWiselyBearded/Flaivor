@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "MetaQuestScreenShotLoaderSample.sln"
+    "dotnet.defaultSolution": "ChefGPT.sln"
 }

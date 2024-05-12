@@ -32,6 +32,7 @@ MonoBehaviour:
     m_Scopes:
     - com.openai
     - com.utilities
+    - com.rest.elevenlabs
     m_IsDefault: 0
     m_Capabilities: 0
     m_ConfigSource: 4
