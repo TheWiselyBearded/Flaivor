@@ -153,7 +153,6 @@ public class AgentController : MonoBehaviour
     private async void ThinkerModule_OnChatGPTInputReceivedTask(string obj)
     {
         Debug.Log($"Thinker Mode response fed to chef");
-        SetMode(AgentState.Speaking);
         cookSessionController.CreateRecipeBook(obj);
         if (cookSessionController.recipeBook.Recipes.Count > 0)
         {
@@ -164,6 +163,7 @@ public class AgentController : MonoBehaviour
                 cookSessionController.CreateRecipeObjects(recipe, generatedTexture);
             }
         }
+        SetMode(AgentState.Speaking);
     }
 
     public void SetMode(AgentState newState)
