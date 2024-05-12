@@ -258,7 +258,7 @@ public class CookSessionController : MonoBehaviour
             // delete if not selected
             if (i == _recipeIndex)
             {
-                SetRecipe(recipeBook.Recipes[_recipeIndex], mediumMenuUIs[_recipeIndex].GetComponent<RecipeMediumUI>().dishImage);
+                SetRecipe(recipeBook.Recipes[_recipeIndex]);
             }
             //Destroy(gRef);
             gRef.SetActive(false);
@@ -266,10 +266,10 @@ public class CookSessionController : MonoBehaviour
         }
 
     }
-    public void SetRecipe(Recipe _recipe, RawImage recipeImg)
+    public void SetRecipe(Recipe _recipe)
     {
         recipe = _recipe;
-        CreateRecipeFullUI(recipe, recipeImg);
+        CreateRecipeFullUI(recipe);
         CreateRecipeStepUI(0);
     }
 
@@ -433,7 +433,7 @@ public class CookSessionController : MonoBehaviour
         }
     }
 
-    public void CreateRecipeFullUI(Recipe recipe, RawImage rawImage)
+    public void CreateRecipeFullUI(Recipe recipe)
     {
         if (recipeFullUIPrefab == null)
         {
