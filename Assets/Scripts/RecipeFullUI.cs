@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RecipeFullUI : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class RecipeFullUI : MonoBehaviour
     public TextMeshProUGUI recipeDescription;
     public TextMeshProUGUI ingredientDescription;
     public List<InstructionUI> instructionUIs;
+
+    public RawImage recipeImg;
 
     public event Action<string> OnChooseDishFullReceived;
 
@@ -28,11 +31,12 @@ public class RecipeFullUI : MonoBehaviour
         OnChooseDishFullReceived?.Invoke(recipeName.text);
     }
 
-    public void SetRecipeUI(string _recipeName, string _recipeDescription, string _ingredientDescription)
+    public void SetRecipeUI(string _recipeName, string _recipeDescription, string _ingredientDescription, RawImage rawImg)
     {
         recipeName.text = _recipeName;
         recipeDescription.text = _recipeDescription;
         ingredientDescription.text = _ingredientDescription;
+        recipeImg.texture = rawImg.texture;
     }
 
     public void SetInstructionsUI(List<Instruction> _instructions)

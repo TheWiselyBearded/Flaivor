@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CookSessionController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class CookSessionController : MonoBehaviour
     public Recipe recipe;
     public int StepIndex;
     public int SubStepIndex;
+    public int RecipeSelectionIndex;
 
 
     [SerializeField] private GameObject recipeStepUIPrefab; // Drag your prefab here in the Inspector
@@ -226,37 +228,38 @@ public class CookSessionController : MonoBehaviour
 
 
     public void SetRecipe(int _recipeIndex) {
-
+        RecipeSelectionIndex = _recipeIndex;
         for (int i = 0; i < mediumMenuUIs.Length; i++) {
             GameObject gRef = mediumMenuUIs[i];
             // delete if not selected
             if (i == _recipeIndex) {
-                SetRecipe(recipeBook.Recipes[_recipeIndex]);
+                SetRecipe(recipeBook.Recipes[_recipeIndex], mediumMenuUIs[0].GetComponent<RecipeMediumUI>().dishImage);                
             }
-            Destroy(gRef);
-            mediumMenuUIs[i] = null;
+            //Destroy(gRef);
+            gRef.SetActive(false);
+            //mediumMenuUIs[i] = null;
         }
 
     }
-    public void SetRecipe(Recipe _recipe)
+    public void SetRecipe(Recipe _recipe, RawImage recipeImg)
     {
         recipe = _recipe;
-        CreateRecipeFullUI(recipe);
+        CreateRecipeFullUI(recipe, recipeImg);
         CreateRecipeStepUI(0);        
     }
 
-    public void CreateRecipeObjects(Recipe _recipe)
+    public void CreateRecipeObjects(Recipe _recipe, Texture t)
     {
         // Reset spawnDirection for each new set of recipe objects
         spawnDirection = userObject.transform.forward;
 
         // instantiate prefabs
-        CreateRecipeMediumUI(_recipe);
+        CreateRecipeMediumUI(_recipe, t);
         //CreateRecipeFullUI(_recipe);
     }
 
     
-    public void CreateRecipeMediumUI(Recipe recipe)
+    public void CreateRecipeMediumUI(Recipe recipe, Texture t)
     {
         if (recipeMediumUIPrefab == null)
         {
@@ -276,7 +279,7 @@ public class CookSessionController : MonoBehaviour
         if (recipeUI != null)
         {
             string ingredientsText = FormatIngredients(recipe.Ingredients);
-            recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText);
+            recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText, t);
         }
         else
         {
@@ -284,9 +287,13 @@ public class CookSessionController : MonoBehaviour
         }
 
         mediumMenuUIs[numCallsMedium - 2] = instance;
+        instance.SetActive(false);
+        if (numCallsMedium > 3) {
+            foreach (GameObject go in mediumMenuUIs) { go.SetActive(true); }
+        }
     }
 
-    public void CreateRecipeFullUI(Recipe recipe)
+    public void CreateRecipeFullUI(Recipe recipe, RawImage rawImage)
     {
         if (recipeFullUIPrefab == null)
         {
@@ -305,7 +312,7 @@ public class CookSessionController : MonoBehaviour
         if (recipeUI != null)
         {
             string ingredientsText = FormatIngredients(recipe.Ingredients);
-            recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText);
+            recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText, rawImage);
             recipeUI.SetInstructionsUI(recipe.Instructions);
         }
         else
@@ -329,6 +336,7 @@ public class CookSessionController : MonoBehaviour
         recipeProgressUI = instance;
         // Get the RecipeMediumUI component and set the recipe details
         InstructionStepProgressUI recipeUI = instance.GetComponent<InstructionStepProgressUI>();
+        recipeUI.SetRecipeImg(mediumMenuUIs[RecipeSelectionIndex].GetComponent<RecipeMediumUI>().dishImage);
         if (recipeUI != null)
         {
 
