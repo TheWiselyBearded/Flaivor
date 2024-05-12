@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEditor.ShortcutManagement;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -27,6 +28,14 @@ public class AgentController : MonoBehaviour
     }
     public AgentState agentState;
     public UnityEvent<AgentState> OnAgentStateChanged;
+
+    [System.Serializable]
+    public enum ThinkingMode
+    {
+        Recipes,
+        Help
+    }
+    public ThinkingMode thinkingMode = ThinkingMode.Recipes;
 
     private void Awake()
     {
@@ -56,6 +65,7 @@ public class AgentController : MonoBehaviour
     {
         thinkerModule.SubmitChatHelpJSON(obj);
         //thinkerModule.SubmitChat(obj);
+        thinkingMode = ThinkingMode.Help;
         SetMode(AgentState.Thinking);
     }
 
@@ -114,6 +124,7 @@ public class AgentController : MonoBehaviour
             return;
         }
         thinkerModule.SubmitChatJSON(listenerModuleInput);
+        thinkingMode = ThinkingMode.Recipes;
         SetMode(AgentState.Thinking);
 
         listenerModuleInputReceived = false;
