@@ -20577,6 +20577,10 @@ PrefabInstance:
       propertyPath: inputImage
       value: 
       objectReference: {fileID: 529235113}
+    - target: {fileID: 14062612684765218, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: ramseyMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1535753350758390216, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
       propertyPath: debugMode
       value: 0
