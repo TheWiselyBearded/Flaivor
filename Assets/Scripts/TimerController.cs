@@ -25,6 +25,7 @@ public class TimerController : MonoBehaviour
     public List<TimerCountdown> timerSetTimerCountdownComponent;
 
     public int timerIndex = 0;
+    public Vector3 offset;
 
     private void Awake() {
         timerSet = new List<GameObject>();
@@ -50,12 +51,13 @@ public class TimerController : MonoBehaviour
     private void RightPose_WhenUnselected()
     {
         rightHandUnselectEvent?.Invoke();
-        //DeleteTimer(1);
+        ToggleTimers(1, false);
     }
 
 
     private void RightPose_WhenSelected()
     {
+        ToggleTimers(1, true);
         rightHandSelectEvent?.Invoke();
         CreateTimer(1);
     }
@@ -64,12 +66,13 @@ public class TimerController : MonoBehaviour
     private void LeftPose_WhenUnselected()
     {
         leftHandUnselectEvent?.Invoke();
-        //DeleteTimer(0);
+        ToggleTimers(0, false);
     }
 
 
     private void LeftPose_WhenSelected()
     {
+        ToggleTimers(1, true);
         leftHandSelectEvent?.Invoke();
         CreateTimer(0);
     }
@@ -82,7 +85,13 @@ public class TimerController : MonoBehaviour
     }
 
     public void CreateTimerInSet(int handSign) {
-        GameObject timer = Instantiate(PFB_Timer, handSign == 0 ? leftTimerSetAnchor.transform : rightTimerSetAnchor.transform);
+        Transform anchor = handSign == 0 ? leftTimerSetAnchor.transform : rightTimerSetAnchor.transform;
+
+        Vector3 spawnPosition = anchor.position + (offset * (timerIndex + 1));
+        GameObject timer = Instantiate(PFB_Timer,
+            spawnPosition,
+            Quaternion.identity,
+            handSign == 0 ? leftTimerSetAnchor.transform : rightTimerSetAnchor.transform);
         timerSet.Add(timer);
         timerSetTimerCountdownComponent.Add(timer.GetComponent<TimerCountdown>());
         timerIndex++;
@@ -108,5 +117,12 @@ public class TimerController : MonoBehaviour
         }
     }
 
-    
+    public void ToggleTimers(int handSign, bool status) {
+        //foreach (Transform child in handSign == 0 ? leftTimerSetAnchor.transform : rightTimerSetAnchor.transform) {
+        //    child.gameObject.SetActive(status);
+        //}
+        foreach (GameObject timer in timerSet) {
+            timer.SetActive(status);
+        }
+    }
 }
