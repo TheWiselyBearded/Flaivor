@@ -20694,6 +20694,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2800000, guid: ea85bd49b69519b4eacd75a4e767e01e, type: 3}
     - target: {fileID: 8754848213950973262, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: voice.id
+      value: N2lVS1w4EtoT3dr4eOWO
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754848213950973262, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: voice.name
+      value: Callum
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754848213950973262, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1558508367}
@@ -28078,6 +28086,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffecfa19406ba0843b5f6b954ccecdc4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8091050541298203680, guid: ffecfa19406ba0843b5f6b954ccecdc4, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[3]
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ffecfa19406ba0843b5f6b954ccecdc4, type: 3}
