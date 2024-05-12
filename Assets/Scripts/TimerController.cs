@@ -17,7 +17,19 @@ public class TimerController : MonoBehaviour
 
     public GameObject PFB_Timer;
     public GameObject leftHandWatchAnchor;
+    public GameObject leftTimerSetAnchor;
     public GameObject rightHandWatchAnchor;
+    public GameObject rightTimerSetAnchor;
+
+    public List<GameObject> timerSet;
+    public List<TimerCountdown> timerSetTimerCountdownComponent;
+
+    public int timerIndex = 0;
+
+    private void Awake() {
+        timerSet = new List<GameObject>();
+        timerSetTimerCountdownComponent = new List<TimerCountdown>();
+    }
 
     void Start()
     {
@@ -38,7 +50,7 @@ public class TimerController : MonoBehaviour
     private void RightPose_WhenUnselected()
     {
         rightHandUnselectEvent?.Invoke();
-        DeleteTimer(1);
+        //DeleteTimer(1);
     }
 
 
@@ -52,7 +64,7 @@ public class TimerController : MonoBehaviour
     private void LeftPose_WhenUnselected()
     {
         leftHandUnselectEvent?.Invoke();
-        DeleteTimer(0);
+        //DeleteTimer(0);
     }
 
 
@@ -65,7 +77,27 @@ public class TimerController : MonoBehaviour
 
     public void CreateTimer(int handSign)
     {
-        _ = Instantiate(PFB_Timer, handSign == 0 ? leftHandWatchAnchor.transform : rightHandWatchAnchor.transform);
+        //_ = Instantiate(PFB_Timer, handSign == 0 ? leftHandWatchAnchor.transform : rightHandWatchAnchor.transform);
+        CreateTimerInSet(handSign);
+    }
+
+    public void CreateTimerInSet(int handSign) {
+        GameObject timer = Instantiate(PFB_Timer, handSign == 0 ? leftTimerSetAnchor.transform : rightTimerSetAnchor.transform);
+        timerSet.Add(timer);
+        timerSetTimerCountdownComponent.Add(timer.GetComponent<TimerCountdown>());
+        timerIndex++;
+    }
+
+    public void CreateTimerInSet(int handSign, int min, int sec) {
+        GameObject timer = Instantiate(PFB_Timer, handSign == 0 ? leftTimerSetAnchor.transform : rightTimerSetAnchor.transform);
+        timerSet.Add(timer);
+        timerSetTimerCountdownComponent.Add(timer.GetComponent<TimerCountdown>());
+        SetTimerTime(timerIndex, min, sec);
+        timerIndex++;
+    }
+
+    public void SetTimerTime(int timerIndex, int min, int sec) {
+        timerSetTimerCountdownComponent[timerIndex].SetTimer(min, sec);
     }
 
     public void DeleteTimer(int handSign)

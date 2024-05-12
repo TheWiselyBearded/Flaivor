@@ -28,6 +28,10 @@ public class TimerCountdown : MonoBehaviour
 
     public void SetParent() => root.transform.parent = null;
     
+    public void SetTimer(int min, int sec) {
+        countdownTime = min * 60 + sec;
+    }
+
 
     public void SetTimer(float targetTime)
     {
