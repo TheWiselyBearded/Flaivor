@@ -30,10 +30,11 @@ public class ListenerModule : MonoBehaviour
         witDictation.DictationEvents.OnComplete.AddListener(OnDictationComplete);
     }
 
-    private void OnDictationComplete(VoiceServiceRequest dictationResult) {
+    private void OnDictationComplete(VoiceServiceRequest dictationResult)
+    {
         Debug.Log($"end dictation {dictationResult.Results.Transcription.ToString()}");
-    }
 
+    }
 
     private void StopListening()
     {
@@ -68,7 +69,8 @@ public class ListenerModule : MonoBehaviour
     }
 
 
-    public void SubmitHelpTranscription() {
+    public void SubmitHelpTranscription()
+    {
         string text = helpInputText.text;
         Debug.Log($"Full transcripiton {text}");
         OnUserHelpInputReceived?.Invoke(text);

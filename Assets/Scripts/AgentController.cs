@@ -45,20 +45,24 @@ public class AgentController : MonoBehaviour
     /// instantiate help prefab window with text
     /// </summary>
     /// <param name="obj"></param>
-    private void ThinkerModule_OnChatGPTHelpInputReceived(string obj) {
+    private void ThinkerModule_OnChatGPTHelpInputReceived(string obj)
+    {
         GameObject instance = Instantiate(PFB_HelpResponse, null);
         ResponseWindow window = instance.GetComponent<ResponseWindow>();
         window.SetResponseText(obj);
     }
 
-    private void ListenerModule_OnUserHelpInputReceived(string obj) {
+    private void ListenerModule_OnUserHelpInputReceived(string obj)
+    {
         thinkerModule.SubmitChatHelpJSON(obj);
         //thinkerModule.SubmitChat(obj);
         SetMode(AgentState.Thinking);
     }
 
-    private void Update() {
-        if (requestRecipes) {
+    private void Update()
+    {
+        if (requestRecipes)
+        {
             requestRecipes = false;
             RecipeChatRequest();
         }
@@ -84,12 +88,35 @@ public class AgentController : MonoBehaviour
         }
     }
 
+    private string listenerModuleInput;
+    private bool listenerModuleInputReceived = false;
+    public UnityEvent<string> OnListenerModuleInputReceived;
 
     private void ListenerModule_OnUserInputReceived(string obj)
     {
-        thinkerModule.SubmitChatJSON(obj);
+        // with new UX, we will need to not immediately switch to thinking mode
+        listenerModuleInput = obj;
+        listenerModuleInputReceived = true;
+        OnListenerModuleInputReceived.Invoke(obj);
+
+        Debug.Log("Listener input received: " + obj);
+
+        // thinkerModule.SubmitChatJSON(obj);
         //thinkerModule.SubmitChat(obj);
+        // SetMode(AgentState.Thinking);
+    }
+
+    public void SubmitChatRequest()
+    {
+        if (!listenerModuleInputReceived)
+        {
+            Debug.LogError("No listener input received");
+            return;
+        }
+        thinkerModule.SubmitChatJSON(listenerModuleInput);
         SetMode(AgentState.Thinking);
+
+        listenerModuleInputReceived = false;
     }
 
     private void OnDestroy()
@@ -100,7 +127,8 @@ public class AgentController : MonoBehaviour
         ThinkerModule.OnChatGPTHelpInputReceived -= ThinkerModule_OnChatGPTHelpInputReceived;
     }
 
-    public void RecipeChatRequest() {
+    public void RecipeChatRequest()
+    {
         //Task.Run(async () => await ThinkerModule_OnChatGPTInputReceivedTask(obj));
         ThinkerModule_OnChatGPTInputReceivedTask(requestString);
     }
@@ -111,14 +139,17 @@ public class AgentController : MonoBehaviour
         requestRecipes = true;
     }
 
-    private async void ThinkerModule_OnChatGPTInputReceivedTask(string obj) {
+    private async void ThinkerModule_OnChatGPTInputReceivedTask(string obj)
+    {
         Debug.Log($"Thinker Mode response fed to chef");
         SetMode(AgentState.Speaking);
         cookSessionController.CreateRecipeBook(obj);
-        if (cookSessionController.recipeBook.Recipes.Count > 0) {
-            foreach (Recipe recipe in cookSessionController.recipeBook.Recipes) {
+        if (cookSessionController.recipeBook.Recipes.Count > 0)
+        {
+            foreach (Recipe recipe in cookSessionController.recipeBook.Recipes)
+            {
                 // create prefab of recipe
-                Texture generatedTexture = await thinkerModule.SubmitChatImageGenerator(recipe.RecipeName +"\n Description: " + recipe.Description);
+                Texture generatedTexture = await thinkerModule.SubmitChatImageGenerator(recipe.RecipeName + "\n Description: " + recipe.Description);
                 cookSessionController.CreateRecipeObjects(recipe, generatedTexture);
             }
         }
