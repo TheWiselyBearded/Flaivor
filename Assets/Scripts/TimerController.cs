@@ -87,11 +87,12 @@ public class TimerController : MonoBehaviour
     public void CreateTimerInSet(int handSign) {
         Transform anchor = handSign == 0 ? leftTimerSetAnchor.transform : rightTimerSetAnchor.transform;
 
-        Vector3 spawnPosition = anchor.position + (offset * (timerIndex + 1));
+        Vector3 spawnPosition = new Vector3(0, 0, 0);
         GameObject timer = Instantiate(PFB_Timer,
             spawnPosition,
-            Quaternion.identity,
+            new Quaternion(0,0,0,0),
             handSign == 0 ? leftTimerSetAnchor.transform : rightTimerSetAnchor.transform);
+        timer.transform.localPosition = spawnPosition +(offset * (timerIndex + 1));
         timerSet.Add(timer);
         timerSetTimerCountdownComponent.Add(timer.GetComponent<TimerCountdown>());
         timerIndex++;
