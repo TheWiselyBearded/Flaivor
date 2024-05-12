@@ -1,4 +1,5 @@
 using Oculus.Interaction.Samples;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,13 +21,21 @@ public class TimerCountdown : MonoBehaviour
     private int secondsOnesPlace;
     private int secondsTenthsPlace;
 
+    private bool firstGrab = false;
+
+    public static event Action<TimerCountdown> OnTimerCountdownDuplicate;
+
     private void Start()
     {
         if (timerText == null) timerText = GetComponent<TextMeshProUGUI>();
         //countdownTime = minutes * 60 + seconds;
     }
 
-    public void SetParent() => root.transform.parent = null;
+    public void SetParent() {
+        if (!firstGrab) OnTimerCountdownDuplicate?.Invoke(this);
+        firstGrab = true;
+        //root.transform.parent = null;
+    }
     
     public void SetTimer(int min, int sec) {
         countdownTime = min * 60 + sec;
