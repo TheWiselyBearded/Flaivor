@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class AgentController : MonoBehaviour
 {
     public CookSessionController cookSessionController;
+    public GameObject PFB_HelpResponse;
 
     public SpeechModule speechModule;
     public ListenerModule listenerModule;
@@ -31,7 +33,25 @@ public class AgentController : MonoBehaviour
     private void Start()
     {
         listenerModule.OnUserInputReceived += ListenerModule_OnUserInputReceived;
+        listenerModule.OnUserHelpInputReceived += ListenerModule_OnUserHelpInputReceived;
         thinkerModule.OnChatGPTInputReceived += ThinkerModule_OnChatGPTInputReceived;
+        thinkerModule.OnChatGPTHelpInputReceived += ThinkerModule_OnChatGPTHelpInputReceived;
+    }
+
+    /// <summary>
+    /// instantiate help prefab window with text
+    /// </summary>
+    /// <param name="obj"></param>
+    private void ThinkerModule_OnChatGPTHelpInputReceived(string obj) {
+        GameObject instance = Instantiate(PFB_HelpResponse, null);
+        ResponseWindow window = instance.GetComponent<ResponseWindow>();
+        window.SetResponseText(obj);
+    }
+
+    private void ListenerModule_OnUserHelpInputReceived(string obj) {
+        thinkerModule.SubmitChatHelpJSON(obj);
+        //thinkerModule.SubmitChat(obj);
+        SetMode(AgentState.Thinking);
     }
 
     /// <summary>
@@ -65,20 +85,26 @@ public class AgentController : MonoBehaviour
     private void OnDestroy()
     {
         listenerModule.OnUserInputReceived -= ListenerModule_OnUserInputReceived;
+        listenerModule.OnUserHelpInputReceived -= ListenerModule_OnUserHelpInputReceived;
         thinkerModule.OnChatGPTInputReceived -= ThinkerModule_OnChatGPTInputReceived;
+        thinkerModule.OnChatGPTHelpInputReceived -= ThinkerModule_OnChatGPTHelpInputReceived;
     }
 
     public void ThinkerModule_OnChatGPTInputReceived(string obj)
     {
+        ThinkerModule_OnChatGPTInputReceivedTask(obj);
+        //Task.Run(async () => await ThinkerModule_OnChatGPTInputReceivedTask(obj));
+    }
+
+    private async void ThinkerModule_OnChatGPTInputReceivedTask(string obj) {
         Debug.Log($"Thinker Mode response fed to chef");
         SetMode(AgentState.Speaking);
         cookSessionController.CreateRecipeBook(obj);
-        if (cookSessionController.recipeBook.Recipes.Count > 0)
-        {
-            foreach (Recipe recipe in cookSessionController.recipeBook.Recipes)
-            {
+        if (cookSessionController.recipeBook.Recipes.Count > 0) {
+            foreach (Recipe recipe in cookSessionController.recipeBook.Recipes) {
                 // create prefab of recipe
-                cookSessionController.CreateRecipeObjects(recipe);
+                Texture generatedTexture = await thinkerModule.SubmitChatImageGenerator(recipe.RecipeName +"\n Description: " + recipe.Description);
+                cookSessionController.CreateRecipeObjects(recipe, generatedTexture);
             }
         }
     }
