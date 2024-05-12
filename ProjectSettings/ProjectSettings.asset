@@ -740,23 +740,23 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: READY_PLAYER_ME
-    EmbeddedLinux: READY_PLAYER_ME
-    GameCoreScarlett: READY_PLAYER_ME
-    GameCoreXboxOne: READY_PLAYER_ME
-    LinuxHeadlessSimulation: READY_PLAYER_ME
-    Nintendo Switch: READY_PLAYER_ME
-    PS4: READY_PLAYER_ME
-    PS5: READY_PLAYER_ME
-    QNX: READY_PLAYER_ME
-    Stadia: READY_PLAYER_ME
-    Standalone: READY_PLAYER_ME
-    VisionOS: READY_PLAYER_ME
-    WebGL: READY_PLAYER_ME
-    Windows Store Apps: READY_PLAYER_ME
-    XboxOne: READY_PLAYER_ME
-    iPhone: READY_PLAYER_ME
-    tvOS: READY_PLAYER_ME
+    Android: READY_PLAYER_ME;DOTWEEN
+    EmbeddedLinux: READY_PLAYER_ME;DOTWEEN
+    GameCoreScarlett: READY_PLAYER_ME;DOTWEEN
+    GameCoreXboxOne: READY_PLAYER_ME;DOTWEEN
+    LinuxHeadlessSimulation: READY_PLAYER_ME;DOTWEEN
+    Nintendo Switch: READY_PLAYER_ME;DOTWEEN
+    PS4: READY_PLAYER_ME;DOTWEEN
+    PS5: READY_PLAYER_ME;DOTWEEN
+    QNX: READY_PLAYER_ME;DOTWEEN
+    Stadia: READY_PLAYER_ME;DOTWEEN
+    Standalone: READY_PLAYER_ME;DOTWEEN
+    VisionOS: READY_PLAYER_ME;DOTWEEN
+    WebGL: READY_PLAYER_ME;DOTWEEN
+    Windows Store Apps: READY_PLAYER_ME;DOTWEEN
+    XboxOne: READY_PLAYER_ME;DOTWEEN
+    iPhone: READY_PLAYER_ME;DOTWEEN
+    tvOS: READY_PLAYER_ME;DOTWEEN
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

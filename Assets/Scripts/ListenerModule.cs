@@ -1,5 +1,6 @@
 using Meta.Voice.Samples.Dictation;
 using Meta.WitAi.Dictation;
+using Meta.WitAi.Requests;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,6 +27,13 @@ public class ListenerModule : MonoBehaviour
         Debug.Log($"Wit status {witDictation.Active}");
         //if (!witDictation.Active) witDictation.Activate();
         //Debug.Log($"Wit status {witDictation.Active}");
+        witDictation.DictationEvents.OnComplete.AddListener(OnDictationComplete);
+    }
+
+    private void OnDictationComplete(VoiceServiceRequest dictationResult)
+    {
+        Debug.Log($"end dictation {dictationResult.Results.Transcription.ToString()}");
+
     }
 
     private void StopListening()
@@ -35,7 +43,7 @@ public class ListenerModule : MonoBehaviour
 
     private void OnEnable()
     {
-        //witDictation.DictationEvents.OnFullTranscription.AddListener(OnFullTranscription);
+        witDictation.DictationEvents.OnFullTranscription.AddListener(OnFullTranscription);
     }
 
     private void OnDisable()
@@ -61,7 +69,8 @@ public class ListenerModule : MonoBehaviour
     }
 
 
-    public void SubmitHelpTranscription() {
+    public void SubmitHelpTranscription()
+    {
         string text = helpInputText.text;
         Debug.Log($"Full transcripiton {text}");
         OnUserHelpInputReceived?.Invoke(text);
