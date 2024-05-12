@@ -23,6 +23,8 @@ public class RecipeFullUI : MonoBehaviour
         instructionUIs = new List<InstructionUI>();
     }
 
+    public void SetRecipeImg(RawImage rawImg) { recipeImg.texture = rawImg.texture; }
+
     /// <summary>
     /// wired via unity gui
     /// </summary>
@@ -31,12 +33,11 @@ public class RecipeFullUI : MonoBehaviour
         OnChooseDishFullReceived?.Invoke(recipeName.text);
     }
 
-    public void SetRecipeUI(string _recipeName, string _recipeDescription, string _ingredientDescription, RawImage rawImg)
+    public void SetRecipeUI(string _recipeName, string _recipeDescription, string _ingredientDescription)
     {
         recipeName.text = _recipeName;
         recipeDescription.text = _recipeDescription;
         ingredientDescription.text = _ingredientDescription;
-        recipeImg.texture = rawImg.texture;
     }
 
     public void SetInstructionsUI(List<Instruction> _instructions)

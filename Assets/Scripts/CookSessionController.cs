@@ -452,7 +452,8 @@ public class CookSessionController : MonoBehaviour
         if (recipeUI != null)
         {
             string ingredientsText = FormatIngredients(recipe.Ingredients);
-            recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText, rawImage);
+            recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText);
+            recipeUI.SetRecipeImg(mediumMenuUIs[RecipeSelectionIndex].GetComponent<RecipeMediumUI>().dishImage);
             recipeUI.SetInstructionsUI(recipe.Instructions);
         }
         else
