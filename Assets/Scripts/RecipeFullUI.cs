@@ -54,7 +54,7 @@ public class RecipeFullUI : MonoBehaviour
         // Instantiate the prefab as a child of uiParent
         GameObject instructionStep = Instantiate(PFB_InstructionStep, contentViewParent.transform);
         InstructionStepUI instructionStepUI = instructionStep.GetComponent<InstructionStepUI>();
-        InstructionUI instructionUI = new InstructionUI(_instruction.StepNumber.ToString() + _instruction.Description,  instructionStepUI.instructionName, _instruction.SubSteps, instructionStepUI.instructionDescription);
+        InstructionUI instructionUI = new InstructionUI(_instruction.StepNumber.ToString() + " " + _instruction.Description,  instructionStepUI.instructionName, _instruction.SubSteps, instructionStepUI.instructionDescription);
 
         return instructionUI;
     }

@@ -38,7 +38,7 @@ public class ScreenshotLoader : MonoBehaviour
         //loadScreenShotButton.gameObject.SetActive(false);
 
         texture = new Texture2D(1, 1);
-        //rawImage.texture = texture;
+        rawImage.texture = texture;
         
         RequestCheckPermission();
     }
