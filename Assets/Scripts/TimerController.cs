@@ -1,3 +1,4 @@
+using DG.Tweening;
 using GLTFast.Schema;
 using Newtonsoft.Json.Linq;
 using Oculus.Interaction;
@@ -207,5 +208,24 @@ public class TimerController : MonoBehaviour
         foreach (GameObject timer in timerSet) {
             timer.SetActive(status);
         }
+    }
+
+    [SerializeField] private float swipeDuration = 1f;
+    public int timerSwipeCurrentIndex = 0, timerSwipePrevIndex=0;
+    public void SwipeTimerLeft() {
+        // move all recipes to the right
+        // the first index is the 'current' recipe, sitting in front
+        // index 0 is left most, index 2 is right most
+        // move index 1 to index 2, index 2 to index 0, and index 0 to index 1
+        // using recipe locations
+        // so if the currentrecipeindex is 1, that means recipe 1 is in the center
+        // so we move recipe 1 to the right, recipe 0 to the center, and recipe 2 to the left
+        // if the currentrecipeindex is 2, that means recipe 2 is in the center
+        // so we move recipe 2 to the right, recipe 1 to the center, and recipe 0 to the left
+        timerSwipeCurrentIndex++;
+        timerSwipeCurrentIndex %= timerSet.Count;
+        timerSet[timerSwipeCurrentIndex].transform.DOMove(timerSet[timerSwipePrevIndex].transform.position, swipeDuration);
+        timerSet[timerSwipePrevIndex].transform.DOMove(timerSet[timerSwipeCurrentIndex].transform.position, swipeDuration);
+        timerSwipePrevIndex = timerSwipeCurrentIndex;
     }
 }

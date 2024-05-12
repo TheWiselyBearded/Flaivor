@@ -219,6 +219,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InstructionSubstepText
       objectReference: {fileID: 0}
+    - target: {fileID: 2245890263100792402, guid: c415892d14470d342ac241d31d39d5b0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9026568224835889053, guid: c415892d14470d342ac241d31d39d5b0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

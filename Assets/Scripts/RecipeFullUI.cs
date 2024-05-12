@@ -23,6 +23,8 @@ public class RecipeFullUI : MonoBehaviour
         instructionUIs = new List<InstructionUI>();
     }
 
+    public void SetRecipeImg(RawImage rawImg) { recipeImg.texture = rawImg.texture; }
+
     /// <summary>
     /// wired via unity gui
     /// </summary>
@@ -31,12 +33,11 @@ public class RecipeFullUI : MonoBehaviour
         OnChooseDishFullReceived?.Invoke(recipeName.text);
     }
 
-    public void SetRecipeUI(string _recipeName, string _recipeDescription, string _ingredientDescription, RawImage rawImg)
+    public void SetRecipeUI(string _recipeName, string _recipeDescription, string _ingredientDescription)
     {
         recipeName.text = _recipeName;
         recipeDescription.text = _recipeDescription;
         ingredientDescription.text = _ingredientDescription;
-        recipeImg.texture = rawImg.texture;
     }
 
     public void SetInstructionsUI(List<Instruction> _instructions)
@@ -53,7 +54,7 @@ public class RecipeFullUI : MonoBehaviour
         // Instantiate the prefab as a child of uiParent
         GameObject instructionStep = Instantiate(PFB_InstructionStep, contentViewParent.transform);
         InstructionStepUI instructionStepUI = instructionStep.GetComponent<InstructionStepUI>();
-        InstructionUI instructionUI = new InstructionUI(_instruction.StepNumber.ToString() + _instruction.Description,  instructionStepUI.instructionName, _instruction.SubSteps, instructionStepUI.instructionDescription);
+        InstructionUI instructionUI = new InstructionUI(_instruction.StepNumber.ToString() + " " + _instruction.Description,  instructionStepUI.instructionName, _instruction.SubSteps, instructionStepUI.instructionDescription);
 
         return instructionUI;
     }

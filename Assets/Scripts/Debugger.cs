@@ -12,6 +12,7 @@ public class Debugger : MonoBehaviour
     public Texture2D debugFridgeTexture;
     public TMP_InputField userInput;
     public AgentController agent;
+    public TimerController timerController;
     public string recipeBookJSON;
 
     [SerializeField]
@@ -36,8 +37,9 @@ public class Debugger : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            agent.SetAgentMode(1);
-            agent.thinkerModule.SubmitChatJSON("I have the following ingredients with me, Eggs, spices, green onions, steak, potatoes, tortilla, bread, sugar, and milk");
+            //agent.SetAgentMode(1);
+            //agent.thinkerModule.SubmitChatJSON("I have the following ingredients with me, Eggs, spices, green onions, steak, potatoes, tortilla, bread, sugar, and milk");
+            agent.cookSessionController.SetRecipe(0);
         }
 
         if (Input.GetKeyDown(KeyCode.L))
@@ -59,7 +61,9 @@ public class Debugger : MonoBehaviour
         {
             agent.cookSessionController.SwipeRecipesRight();
         }
-
+        if (Input.GetKeyDown(KeyCode.T)) {
+            timerController.SwipeTimerLeft();
+        }
     }
 
     public void LoadRecipeBookJSON()
@@ -68,6 +72,7 @@ public class Debugger : MonoBehaviour
         if (recipeJSON != null)
         {
             agent.ThinkerModule_OnChatGPTInputReceived(recipeJSON);
+            agent.RecipeChatRequest();
         }
     }
 

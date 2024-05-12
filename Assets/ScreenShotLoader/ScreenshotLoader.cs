@@ -25,8 +25,8 @@ public class ScreenshotLoader : MonoBehaviour
         if (message.Equals("true"))
         {
             permissionGranted = true;
-            requestPermissionButton.gameObject.SetActive(false);
-            loadScreenShotButton.gameObject.SetActive(true);
+            //requestPermissionButton.gameObject.SetActive(false);
+            //loadScreenShotButton.gameObject.SetActive(true);
         }
     }
 
@@ -35,7 +35,7 @@ public class ScreenshotLoader : MonoBehaviour
         requestPermissionButton.onClick.AddListener(RequestPermission);
         loadScreenShotButton.onClick.AddListener(loadScreenShot);
 
-        loadScreenShotButton.gameObject.SetActive(false);
+        //loadScreenShotButton.gameObject.SetActive(false);
 
         texture = new Texture2D(1, 1);
         rawImage.texture = texture;

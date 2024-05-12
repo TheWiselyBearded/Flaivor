@@ -26,17 +26,21 @@ public class InstructionStepProgressUI : MonoBehaviour
     /// </summary>
     /// <param name="InstructionStep"></param>
     /// <param name="_instructionSteps"></param>
-    public void SetInstructionStepUI(string InstructionStep, List<string> _instructionSteps)
+    public void SetInstructionStepUI(string recipeName, string InstructionStep, List<string> _instructionSteps)
     {
         // clear out existing substep info if present
         ClearOutPreviousStep();
-
+        RecipeName.text = recipeName;
         InstructionStepTitle.text = InstructionStep;
+        int index = 0;
         foreach (string _instruction in _instructionSteps)
         {
             Debug.Log($"Creating instruction {_instruction}");
             instructionStepUIs.Add(CreateInstructionStepUI(_instruction)); // append to ui element
+            instructionStepUIs[index].SetActive(false);
+            index++;
         }
+        instructionStepUIs[0].SetActive(true);
     }
 
     public void SetInstructionSubstep(string stepDescription, string substepDescription) {

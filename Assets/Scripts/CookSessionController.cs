@@ -19,13 +19,14 @@ public class CookSessionController : MonoBehaviour
 
     public bool ListenSwipe= false;
 
+    [SerializeField] private GameObject recipeStepUITruncate; // Drag your prefab here in the Inspector
     [SerializeField] private GameObject recipeStepUIPrefab; // Drag your prefab here in the Inspector
     [SerializeField] private GameObject recipeMediumUIPrefab; // Drag your prefab here in the Inspector
     [SerializeField] private GameObject recipeFullUIPrefab; // Drag your prefab here in the Inspector
     [SerializeField] private Transform uiParent; // Assign a parent transform to control the layout
     public GameObject userObject;
 
-    private Vector3 spawnOffset = new Vector3(0f, 0f, 0.25f); // Adjust the offset as needed
+    public Vector3 spawnOffset = new Vector3(0f, 0f, 0.25f); // Adjust the offset as needed
     private Vector3 spawnDirection;
 
     public GameObject[] fullMenuUIs = new GameObject[3];
@@ -258,7 +259,7 @@ public class CookSessionController : MonoBehaviour
             // delete if not selected
             if (i == _recipeIndex)
             {
-                SetRecipe(recipeBook.Recipes[_recipeIndex], mediumMenuUIs[_recipeIndex].GetComponent<RecipeMediumUI>().dishImage);
+                SetRecipe(recipeBook.Recipes[_recipeIndex]);
             }
             //Destroy(gRef);
             gRef.SetActive(false);
@@ -266,10 +267,11 @@ public class CookSessionController : MonoBehaviour
         }
 
     }
-    public void SetRecipe(Recipe _recipe, RawImage recipeImg)
+    public void SetRecipe(Recipe _recipe)
     {
         recipe = _recipe;
-        CreateRecipeFullUI(recipe, recipeImg);
+        //CreateRecipeFullUI(recipe);
+        CreateFullRecipeInstructionUI(recipe);
         CreateRecipeStepUI(0);
     }
 
@@ -293,7 +295,7 @@ public class CookSessionController : MonoBehaviour
         }
 
         // Calculate the spawn position in front of the user
-        Vector3 spawnPosition = userObject.transform.position + spawnDirection * 1.1f + (spawnOffset * numCallsMedium); // Adjust the distance as needed
+        Vector3 spawnPosition = userObject.transform.position + spawnDirection * 0.5f + (spawnOffset * numCallsMedium); // Adjust the distance as needed
         // Instantiate the prefab as a child of uiParent
         GameObject instance = Instantiate(recipeMediumUIPrefab, spawnPosition, Quaternion.identity, uiParent);
 
@@ -433,7 +435,7 @@ public class CookSessionController : MonoBehaviour
         }
     }
 
-    public void CreateRecipeFullUI(Recipe recipe, RawImage rawImage)
+    public void CreateRecipeFullUI(Recipe recipe)
     {
         if (recipeFullUIPrefab == null)
         {
@@ -452,7 +454,8 @@ public class CookSessionController : MonoBehaviour
         if (recipeUI != null)
         {
             string ingredientsText = FormatIngredients(recipe.Ingredients);
-            recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText, rawImage);
+            recipeUI.SetRecipeUI(recipe.RecipeName, recipe.Description, ingredientsText);
+            recipeUI.SetRecipeImg(mediumMenuUIs[RecipeSelectionIndex].GetComponent<RecipeMediumUI>().dishImage);
             recipeUI.SetInstructionsUI(recipe.Instructions);
         }
         else
@@ -463,6 +466,32 @@ public class CookSessionController : MonoBehaviour
         fullMenuUIs[numCallsFull - 2] = instance;
     }
 
+    public void CreateFullRecipeInstructionUI(Recipe recipe) {
+        if (recipeFullUIPrefab == null) {
+            Debug.LogError("RecipeMediumUIPrefab is not assigned in the inspector!");
+            return;
+        }
+
+        Vector3 spawnPosition = userObject.transform.position + spawnDirection * 1.1f + (spawnOffset * numCallsFull); // Adjust the distance as needed
+
+        GameObject instance = Instantiate(recipeStepUITruncate, spawnPosition, Quaternion.identity, uiParent);
+
+        numCallsFull++;
+
+        // Get the RecipeMediumUI component and set the recipe details
+        RecipeFullInstructionUI recipeUI = instance.GetComponent<RecipeFullInstructionUI>();
+        if (recipeUI != null) {
+            string ingredientsText = FormatIngredients(recipe.Ingredients);
+            recipeUI.SetInstructionsUI(recipe.Instructions);
+        } else {
+            Debug.LogError("RecipeMediumUI component not found on the instantiated prefab!");
+        }
+
+        fullMenuUIs[numCallsFull - 2] = instance;
+    }
+
+    
+
     public void CreateRecipeStepUI(int stepIndex)
     {
         if (recipeStepUIPrefab == null)
@@ -470,7 +499,9 @@ public class CookSessionController : MonoBehaviour
             Debug.LogError("RecipeMediumUIPrefab is not assigned in the inspector!");
             return;
         }
-        Vector3 spawnPosition = userObject.transform.position + spawnDirection * 0.2f + (spawnOffset); // Adjust the distance as needed
+        //Vector3 spawnPosition = userObject.transform.position + spawnDirection * 0.2f; // Adjust the distance as needed
+        //Vector3 spawnPosition = userObject.transform.position + spawnDirection * 1.1f + (spawnOffset * (numCallsFull-1)); // Adjust the distance as needed
+        Vector3 spawnPosition = userObject.transform.position + spawnDirection * 0.5f;
         // Instantiate the prefab as a child of uiParent
         GameObject instance = Instantiate(recipeStepUIPrefab, spawnPosition, Quaternion.identity, uiParent);
         recipeProgressUI = instance;
@@ -480,7 +511,7 @@ public class CookSessionController : MonoBehaviour
         if (recipeUI != null)
         {
 
-            recipeUI.SetInstructionStepUI(recipe.Instructions[stepIndex].StepNumber.ToString() + " " + recipe.Instructions[stepIndex].Description,
+            recipeUI.SetInstructionStepUI(recipe.RecipeName, recipe.Instructions[stepIndex].StepNumber.ToString() + " " + recipe.Instructions[stepIndex].Description,
                 recipe.Instructions[stepIndex].SubSteps);
         }
         else
