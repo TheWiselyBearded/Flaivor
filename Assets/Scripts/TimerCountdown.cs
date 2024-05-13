@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class TimerCountdown : MonoBehaviour
 {
+    public GameObject vrPanel;
+
     public GameObject root;
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI timerTitle;
@@ -41,6 +43,7 @@ public class TimerCountdown : MonoBehaviour
 
     private void Start()
     {
+        if (vrPanel == null) vrPanel = transform.GetChild(0).gameObject;
         if (timerText == null) timerText = GetComponent<TextMeshProUGUI>();
         //countdownTime = minutes * 60 + seconds;
     }
@@ -132,7 +135,11 @@ public class TimerCountdown : MonoBehaviour
         StartButton.SetActive(false);
         TimerControlButtons.SetActive(false);
     }
-    public void DestroyTimer() => Destroy(this.gameObject);
+    public void DestroyTimer() {
+        if (timeFinished) {
+            Destroy(this.gameObject);
+        }
+    }
     
 
     // Update timer text to display the current countdown time
@@ -183,7 +190,7 @@ public class TimerCountdown : MonoBehaviour
             float rightRotationAngle = -leftRotationAngle;
 
             // Rotate the object
-            transform.rotation = Quaternion.Euler(0f, 0f, leftRotationAngle);
+            vrPanel.transform.rotation = Quaternion.Euler(0f, 0f, leftRotationAngle);
 
             // Uncomment below line if you want the object to rotate back and forth
             //transform.rotation = Quaternion.Euler(0f, leftRotationAngle, 0f);
