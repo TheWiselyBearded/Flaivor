@@ -54,7 +54,16 @@ public class CookSessionController : MonoBehaviour
         InstructionStepProgressUI.OnProgressPrevStepReceived += InstructionStepProgressUI_OnProgressPrevStepReceived;
     }
 
-
+    public void ClearOutAllUIItems() {
+        for (int i = 0; i < mediumMenuUIs.Length; i++) {
+            if (mediumMenuUIs[i] != null) {
+                GameObject goRef = mediumMenuUIs[i];
+                mediumMenuUIs[i] = null;
+                Destroy(goRef);
+            }
+        }
+        Destroy(recipeProgressUI);
+    }
 
     private void OnDestroy()
     {
