@@ -62,6 +62,13 @@ public class CookSessionController : MonoBehaviour
                 Destroy(goRef);
             }
         }
+        for (int i = 0; i < fullMenuUIs.Length; i++) {
+            if (fullMenuUIs[i] != null) {
+                GameObject goRef = fullMenuUIs[i];
+                fullMenuUIs[i] = null;
+                Destroy(goRef);
+            }
+        }
         Destroy(recipeProgressUI);
     }
 
