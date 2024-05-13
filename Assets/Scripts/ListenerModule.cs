@@ -6,10 +6,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class ListenerModule : MonoBehaviour
 {
+    public UnityEvent onDictationComplete;
     // Event for user input received
     public event Action<string> OnUserInputReceived;
     public event Action<string> OnUserHelpInputReceived;
@@ -33,6 +35,7 @@ public class ListenerModule : MonoBehaviour
     private void OnDictationComplete(VoiceServiceRequest dictationResult)
     {
         Debug.Log($"end dictation {dictationResult.Results.Transcription.ToString()}");
+        onDictationComplete?.Invoke();
 
     }
 
@@ -79,9 +82,10 @@ public class ListenerModule : MonoBehaviour
 
     private void OnFullTranscription(string text)
     {
+        onDictationComplete?.Invoke();
         //Debug.Log($"Full transcripiton {text}");
         //OnUserInputReceived?.Invoke(text);
-        //ToggleDictation(false);
+        ToggleDictation(false);
     }
 
     public void ToggleDictation(bool state)
