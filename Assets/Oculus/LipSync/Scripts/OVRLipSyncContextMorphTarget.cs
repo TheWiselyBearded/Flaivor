@@ -33,7 +33,7 @@ public class OVRLipSyncContextMorphTarget : MonoBehaviour
 
     // Set the blendshape index to go to (-1 means there is not one assigned)
     [Tooltip("Blendshape index to trigger for each viseme.")]
-    public int [] visemeToBlendTargets = Enumerable.Range(0, OVRLipSync.VisemeCount).ToArray();
+    public int[] visemeToBlendTargets = Enumerable.Range(0, OVRLipSync.VisemeCount).ToArray();
 
     // enable/disable sending signals to viseme engine
     [Tooltip("Enable using the test keys defined below to manually trigger each viseme.")]
@@ -78,6 +78,8 @@ public class OVRLipSyncContextMorphTarget : MonoBehaviour
     [Tooltip("Smoothing of 1 will yield only the current predicted viseme, 100 will yield an extremely smooth viseme response.")]
     public int smoothAmount = 70;
 
+    public float visemeMultiplier = 1f;
+
     // PRIVATE
 
     // Look for a lip-sync Context (should be set at the same level as this component)
@@ -87,10 +89,10 @@ public class OVRLipSyncContextMorphTarget : MonoBehaviour
     /// <summary>
     /// Start this instance.
     /// </summary>
-    void Start ()
+    void Start()
     {
         // morph target needs to be set manually; possibly other components will need the same
-        if(skinnedMeshRenderer == null)
+        if (skinnedMeshRenderer == null)
         {
             Debug.LogError("LipSyncContextMorphTarget.Start Error: " +
                 "Please set the target Skinned Mesh Renderer to be controlled!");
@@ -99,7 +101,7 @@ public class OVRLipSyncContextMorphTarget : MonoBehaviour
 
         // make sure there is a phoneme context assigned to this object
         lipsyncContext = GetComponent<OVRLipSyncContextBase>();
-        if(lipsyncContext == null)
+        if (lipsyncContext == null)
         {
             Debug.LogError("LipSyncContextMorphTarget.Start Error: " +
                 "No OVRLipSyncContext component on this object!");
@@ -114,9 +116,9 @@ public class OVRLipSyncContextMorphTarget : MonoBehaviour
     /// <summary>
     /// Update this instance.
     /// </summary>
-    void Update ()
+    void Update()
     {
-        if((lipsyncContext != null) && (skinnedMeshRenderer != null))
+        if ((lipsyncContext != null) && (skinnedMeshRenderer != null))
         {
             // get the current viseme frame
             OVRLipSync.Frame frame = lipsyncContext.GetCurrentPhonemeFrame();
@@ -166,7 +168,7 @@ public class OVRLipSyncContextMorphTarget : MonoBehaviour
                 // Viseme blend weights are in range of 0->1.0, we need to make range 100
                 skinnedMeshRenderer.SetBlendShapeWeight(
                     visemeToBlendTargets[i],
-                    frame.Visemes[i] * 100.0f);
+                    frame.Visemes[i] * visemeMultiplier);
             }
         }
     }
@@ -188,7 +190,7 @@ public class OVRLipSyncContextMorphTarget : MonoBehaviour
 
             skinnedMeshRenderer.SetBlendShapeWeight(
                 laughterBlendTarget,
-                laughterScore * 100.0f);
+                laughterScore * visemeMultiplier);
         }
     }
 

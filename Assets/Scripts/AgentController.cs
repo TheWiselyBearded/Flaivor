@@ -8,10 +8,12 @@ public class AgentController : MonoBehaviour
 {
     public CookSessionController cookSessionController;
     public GameObject PFB_HelpResponse;
+    public GameObject avatar;
 
     public SpeechModule speechModule;
     public ListenerModule listenerModule;
     public ThinkerModule thinkerModule;
+
 
     private bool requestRecipes = false;
     private string requestString = "";
@@ -28,9 +30,18 @@ public class AgentController : MonoBehaviour
     public AgentState agentState;
     public UnityEvent<AgentState> OnAgentStateChanged;
 
+    [System.Serializable]
+    public enum ThinkingMode
+    {
+        Recipes,
+        Help
+    }
+    public ThinkingMode thinkingMode = ThinkingMode.Recipes;
+
     private void Awake()
     {
         agentState = AgentState.Listening;
+        //avatar.SetActive(false);
     }
 
     private void Start()
@@ -47,15 +58,17 @@ public class AgentController : MonoBehaviour
     /// <param name="obj"></param>
     private void ThinkerModule_OnChatGPTHelpInputReceived(string obj)
     {
-        GameObject instance = Instantiate(PFB_HelpResponse, null);
-        ResponseWindow window = instance.GetComponent<ResponseWindow>();
-        window.SetResponseText(obj);
+        //GameObject instance = Instantiate(PFB_HelpResponse, null);
+        //ResponseWindow window = instance.GetComponent<ResponseWindow>();
+        //window.SetResponseText(obj);
     }
 
     private void ListenerModule_OnUserHelpInputReceived(string obj)
     {
+        Debug.Log($"Would submit help text {obj}");
         thinkerModule.SubmitChatHelpJSON(obj);
-        //thinkerModule.SubmitChat(obj);
+        
+        thinkingMode = ThinkingMode.Help;
         SetMode(AgentState.Thinking);
     }
 
@@ -114,6 +127,7 @@ public class AgentController : MonoBehaviour
             return;
         }
         thinkerModule.SubmitChatJSON(listenerModuleInput);
+        thinkingMode = ThinkingMode.Recipes;
         SetMode(AgentState.Thinking);
 
         listenerModuleInputReceived = false;
@@ -142,7 +156,6 @@ public class AgentController : MonoBehaviour
     private async void ThinkerModule_OnChatGPTInputReceivedTask(string obj)
     {
         Debug.Log($"Thinker Mode response fed to chef");
-        SetMode(AgentState.Speaking);
         cookSessionController.CreateRecipeBook(obj);
         if (cookSessionController.recipeBook.Recipes.Count > 0)
         {
@@ -153,6 +166,8 @@ public class AgentController : MonoBehaviour
                 cookSessionController.CreateRecipeObjects(recipe, generatedTexture);
             }
         }
+        avatar.SetActive(true);
+        SetMode(AgentState.Speaking);
     }
 
     public void SetMode(AgentState newState)

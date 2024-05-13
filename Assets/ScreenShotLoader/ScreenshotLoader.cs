@@ -1,5 +1,6 @@
 #nullable enable
 
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class ScreenshotLoader : MonoBehaviour
 {
     public UnityEvent OnScreenShotLoadedEvent;
 
+    public byte[] imgBytes;
     private const int MAX_CHECK_PERMISSION_COUNT = 100;
 
     [SerializeField] private Button requestPermissionButton = default!;
@@ -104,6 +106,8 @@ public class ScreenshotLoader : MonoBehaviour
                         {
                             var screenshotBytes = loader.Call<byte[]>("getLatestScreenshotBytes");
                             Debug.Log($"Load latest screenshot: size={screenshotBytes.Length}");
+                            imgBytes = new byte[screenshotBytes.Length];
+                            Buffer.BlockCopy(screenshotBytes, 0, imgBytes, 0, screenshotBytes.Length);
                             texture.LoadImage(screenshotBytes);
                             texture.Apply();
                             rawImage.texture = texture;
@@ -113,6 +117,12 @@ public class ScreenshotLoader : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void LoadImageBytesToTexture() {
+        texture.LoadImage(imgBytes);
+        texture.Apply();
+        rawImage.texture = texture;
     }
 
     private IEnumerator CheckPermissionCoroutine()
