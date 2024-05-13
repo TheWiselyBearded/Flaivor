@@ -23,7 +23,10 @@ public class IntroUI : MonoBehaviour
         // If the main camera is found
         if (mainCamera != null) {
             // Calculate the position based on the camera's forward direction and the specified distance
-            Vector3 newPosition = mainCamera.transform.position + mainCamera.transform.forward * distance + (new Vector3(0, 0.5f, 0)); ;
+            Vector3 newPosition = mainCamera.transform.position + mainCamera.transform.forward * distance;
+
+            // Adjust y-coordinate to be at head level
+            newPosition.y = -1* mainCamera.transform.position.y;
 
             // Set the position of the GameObject to the calculated position
             transform.position = newPosition;
