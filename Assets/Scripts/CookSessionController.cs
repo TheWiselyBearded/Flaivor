@@ -44,7 +44,7 @@ public class CookSessionController : MonoBehaviour
     private void Awake()
     {
         //recipes = new List<Recipe>();
-        uiParent = null;
+        // uiParent = null;
     }
 
     private void Start()
@@ -54,9 +54,12 @@ public class CookSessionController : MonoBehaviour
         InstructionStepProgressUI.OnProgressPrevStepReceived += InstructionStepProgressUI_OnProgressPrevStepReceived;
     }
 
-    public void ClearOutAllUIItems() {
-        for (int i = 0; i < mediumMenuUIs.Length; i++) {
-            if (mediumMenuUIs[i] != null) {
+    public void ClearOutAllUIItems()
+    {
+        for (int i = 0; i < mediumMenuUIs.Length; i++)
+        {
+            if (mediumMenuUIs[i] != null)
+            {
                 GameObject goRef = mediumMenuUIs[i];
                 mediumMenuUIs[i] = null;
                 Destroy(goRef);
@@ -311,10 +314,22 @@ public class CookSessionController : MonoBehaviour
             return;
         }
 
+        // if (numCallsMedium > 3)
+        // {
+        //     Debug.LogError("for some reason we got too many recipes!");
+        //     return;
+        // }
+
         // Calculate the spawn position in front of the user
         Vector3 spawnPosition = userObject.transform.position + spawnDirection * 0.5f + (spawnOffset * numCallsMedium); // Adjust the distance as needed
         // Instantiate the prefab as a child of uiParent
         GameObject instance = Instantiate(recipeMediumUIPrefab, spawnPosition, Quaternion.identity, uiParent);
+        Debug.Log("medium menu ui created: " + numCallsMedium);
+        if (numCallsMedium <= 3)
+        {
+            mediumMenuUIs[numCallsMedium - 1] = instance;
+        }
+
 
         numCallsMedium++;
 
@@ -330,10 +345,15 @@ public class CookSessionController : MonoBehaviour
             Debug.LogError("RecipeMediumUI component not found on the instantiated prefab!");
         }
 
-        mediumMenuUIs[numCallsMedium - 2] = instance;
+        // mediumMenuUIs[numCallsMedium - 2] = instance;
         instance.SetActive(false);
         if (numCallsMedium > 3)
         {
+            uiParent.position = userObject.transform.position + (userObject.transform.forward * 1f);
+            uiParent.LookAt(userObject.transform);
+            uiParent.Rotate(0, 180, 0);
+            uiParent.eulerAngles = new Vector3(0, uiParent.eulerAngles.y, 0);
+
             foreach (GameObject go in mediumMenuUIs) { go.SetActive(true); }
 
             // align recipes
