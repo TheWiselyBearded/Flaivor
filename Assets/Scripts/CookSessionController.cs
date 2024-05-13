@@ -17,7 +17,7 @@ public class CookSessionController : MonoBehaviour
     public int SubStepIndex;
     public int RecipeSelectionIndex;
 
-    public bool ListenSwipe= false;
+    public bool ListenSwipe = false;
 
     [SerializeField] private GameObject recipeStepUITruncate; // Drag your prefab here in the Inspector
     [SerializeField] private GameObject recipeStepUIPrefab; // Drag your prefab here in the Inspector
@@ -39,6 +39,7 @@ public class CookSessionController : MonoBehaviour
     [SerializeField] private Transform[] recipeLocations;
     int currentRecipeIndex = 0;
     [SerializeField] private float swipeDuration = 1f;
+    private bool swiping = false;
 
     private void Awake()
     {
@@ -338,7 +339,9 @@ public class CookSessionController : MonoBehaviour
 
     public void SwipeRecipesLeft()
     {
-        if (!ListenSwipe) return; 
+        if (!ListenSwipe) return;
+        if (swiping) return;
+        swiping = true;
         // move all recipes to the left
         // the first index is the 'current' recipe, sitting in front
         // index 0 is left most, index 2 is right most
@@ -375,11 +378,21 @@ public class CookSessionController : MonoBehaviour
         }
 
         SetRecipeAlphas();
+
+        StartCoroutine(FinishSwipe());
+    }
+
+    private IEnumerator FinishSwipe()
+    {
+        yield return new WaitForSeconds(swipeDuration);
+        swiping = false;
     }
 
     public void SwipeRecipesRight()
     {
         if (!ListenSwipe) return;
+        if (swiping) return;
+        swiping = true;
         // move all recipes to the right
         // the first index is the 'current' recipe, sitting in front
         // index 0 is left most, index 2 is right most
@@ -417,6 +430,8 @@ public class CookSessionController : MonoBehaviour
         }
 
         SetRecipeAlphas();
+
+        StartCoroutine(FinishSwipe());
     }
 
     private void SetRecipeAlphas()
@@ -466,8 +481,10 @@ public class CookSessionController : MonoBehaviour
         fullMenuUIs[numCallsFull - 2] = instance;
     }
 
-    public void CreateFullRecipeInstructionUI(Recipe recipe) {
-        if (recipeFullUIPrefab == null) {
+    public void CreateFullRecipeInstructionUI(Recipe recipe)
+    {
+        if (recipeFullUIPrefab == null)
+        {
             Debug.LogError("RecipeMediumUIPrefab is not assigned in the inspector!");
             return;
         }
@@ -480,17 +497,20 @@ public class CookSessionController : MonoBehaviour
 
         // Get the RecipeMediumUI component and set the recipe details
         RecipeFullInstructionUI recipeUI = instance.GetComponent<RecipeFullInstructionUI>();
-        if (recipeUI != null) {
+        if (recipeUI != null)
+        {
             string ingredientsText = FormatIngredients(recipe.Ingredients);
             recipeUI.SetInstructionsUI(recipe.Instructions);
-        } else {
+        }
+        else
+        {
             Debug.LogError("RecipeMediumUI component not found on the instantiated prefab!");
         }
 
         fullMenuUIs[numCallsFull - 2] = instance;
     }
 
-    
+
 
     public void CreateRecipeStepUI(int stepIndex)
     {
