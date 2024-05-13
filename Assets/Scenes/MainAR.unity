@@ -21889,16 +21889,16 @@ PrefabInstance:
       objectReference: {fileID: 2800000, guid: ea85bd49b69519b4eacd75a4e767e01e, type: 3}
     - target: {fileID: 8754848213950973262, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
       propertyPath: voice.id
-      value: N2lVS1w4EtoT3dr4eOWO
+      value: Xb7hH8MSUJpSbSDYk0k2
       objectReference: {fileID: 0}
     - target: {fileID: 8754848213950973262, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
       propertyPath: voice.name
-      value: Callum
+      value: Alice
       objectReference: {fileID: 0}
     - target: {fileID: 8754848213950973262, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 2090437589439857434}
+      objectReference: {fileID: 1566669996}
     - target: {fileID: 8754848213950973262, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
       propertyPath: thinkerModule
       value: 
@@ -31974,6 +31974,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5635686429284404188, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5635686429284404190, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_Size.x
       value: 4
@@ -32017,6 +32021,10 @@ PrefabInstance:
     - target: {fileID: 5635686429556525276, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.000000036349103
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635686429556525277, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5635686429556525279, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_Size.x
@@ -39870,6 +39878,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5635686429284404188, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5635686429284404190, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_Size.x
       value: 4
@@ -39913,6 +39925,10 @@ PrefabInstance:
     - target: {fileID: 5635686429556525276, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.000000036349103
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635686429556525277, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5635686429556525279, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_Size.x
@@ -44547,6 +44563,11 @@ MonoBehaviour:
   - {fileID: 938765795}
   - {fileID: 2503394}
   - {fileID: 1966521416}
+--- !u!82 &1566669996 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 151162101764442071, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
+  m_PrefabInstance: {fileID: 2090437589439857428}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1573296646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62019,6 +62040,7 @@ MonoBehaviour:
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
+  visemeMultiplier: 1
 --- !u!114 &2090437589439857433
 MonoBehaviour:
   m_ObjectHideFlags: 0
