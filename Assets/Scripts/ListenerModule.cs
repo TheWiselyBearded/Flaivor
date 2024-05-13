@@ -79,9 +79,9 @@ public class ListenerModule : MonoBehaviour
 
     private void OnFullTranscription(string text)
     {
-        Debug.Log($"Full transcripiton {text}");
-        OnUserInputReceived?.Invoke(text);
-        ToggleDictation(false);
+        //Debug.Log($"Full transcripiton {text}");
+        //OnUserInputReceived?.Invoke(text);
+        //ToggleDictation(false);
     }
 
     public void ToggleDictation(bool state)
