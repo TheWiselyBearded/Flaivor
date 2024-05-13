@@ -20,6 +20,17 @@ public class PalmChefController : MonoBehaviour
     public void SetListening() => palmUI.sprite = listening; /// invoked via init button press on palm
     public void SetAnalyzing() => palmUI.sprite = analyzing;
     public void SetSent() => palmUI.sprite = sent;
+    private void ThinkerModule_OnChatGPTHelpInputReceived(string obj) {
+        StartCoroutine(ProcessThought());
+    }
+
+    private IEnumerator ProcessThought() {
+        SetSent(); // Set the "sent" state immediately
+
+        yield return new WaitForSeconds(2.5f); // Wait for 2.5 seconds
+
+        SetTalkChef(); // Set the "talk to chef" state after 2.5 seconds
+    }
 
     private void OnEnable() {
         SetTalkChef();
@@ -27,9 +38,6 @@ public class PalmChefController : MonoBehaviour
         ThinkerModule.OnChatGPTHelpInputReceived += ThinkerModule_OnChatGPTHelpInputReceived;
     }
 
-    private void ThinkerModule_OnChatGPTHelpInputReceived(string obj) {
-        SetSent();
-    }
 
     private void OnDictationCompletePalm(string arg0) {
         SetAnalyzing();

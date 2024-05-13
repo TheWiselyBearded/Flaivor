@@ -8,6 +8,7 @@ public class AgentController : MonoBehaviour
 {
     public CookSessionController cookSessionController;
     public GameObject PFB_HelpResponse;
+    public GameObject avatar;
 
     public SpeechModule speechModule;
     public ListenerModule listenerModule;
@@ -40,6 +41,7 @@ public class AgentController : MonoBehaviour
     private void Awake()
     {
         agentState = AgentState.Listening;
+        //avatar.SetActive(false);
     }
 
     private void Start()
@@ -164,6 +166,7 @@ public class AgentController : MonoBehaviour
                 cookSessionController.CreateRecipeObjects(recipe, generatedTexture);
             }
         }
+        avatar.SetActive(true);
         SetMode(AgentState.Speaking);
     }
 
