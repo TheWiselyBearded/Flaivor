@@ -13856,6 +13856,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1611830956}
     m_Modifications:
+    - target: {fileID: -1653022013273449393, guid: 554df53d5e174184cb1e009b3d76cffe, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4658904325700070051, guid: 554df53d5e174184cb1e009b3d76cffe, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -45431,7 +45435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3793486090678275284, guid: 9aad0b0f82ec58545815dcc7ec71a058, type: 3}
       propertyPath: _whenSelected.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3793486090678275284, guid: 9aad0b0f82ec58545815dcc7ec71a058, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -56288,7 +56292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8820866526498997791, guid: ce9491a5df028fd4ca0a5130dbaa4fec, type: 3}
       propertyPath: _whenSelected.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8820866526498997791, guid: ce9491a5df028fd4ca0a5130dbaa4fec, type: 3}
       propertyPath: _onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -59299,7 +59303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6346990711117016689, guid: 529b9177757835b42965e902d58a5c57, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
