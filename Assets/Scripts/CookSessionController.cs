@@ -482,6 +482,7 @@ public class CookSessionController : MonoBehaviour
         RecipeFullInstructionUI recipeUI = instance.GetComponent<RecipeFullInstructionUI>();
         if (recipeUI != null) {
             string ingredientsText = FormatIngredients(recipe.Ingredients);
+            recipeUI.SetRecipeInfo(recipe.RecipeName, FormatIngredients(recipe.Ingredients));
             recipeUI.SetInstructionsUI(recipe.Instructions);
         } else {
             Debug.LogError("RecipeMediumUI component not found on the instantiated prefab!");
