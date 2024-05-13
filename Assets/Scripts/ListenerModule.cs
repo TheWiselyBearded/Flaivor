@@ -20,8 +20,14 @@ public class ListenerModule : MonoBehaviour
     public DictationActivation dicatationActivation;
     protected Animator mAnimator;
     public TextMeshProUGUI recipeInputText;
-    public TextMeshProUGUI helpInputText;
     public bool debug;
+
+    public enum ListeningMode {
+        Recipe,
+        Help
+    }
+
+    public ListeningMode listeningMode = ListeningMode.Recipe;
 
     public void Start()
     {
@@ -29,7 +35,7 @@ public class ListenerModule : MonoBehaviour
         Debug.Log($"Wit status {witDictation.Active}");
         //if (!witDictation.Active) witDictation.Activate();
         //Debug.Log($"Wit status {witDictation.Active}");
-        witDictation.DictationEvents.OnComplete.AddListener(OnDictationComplete);
+        //witDictation.DictationEvents.OnComplete.AddListener(OnDictationComplete);
     }
 
     private void OnDictationComplete(VoiceServiceRequest dictationResult)
@@ -37,6 +43,10 @@ public class ListenerModule : MonoBehaviour
         Debug.Log($"end dictation {dictationResult.Results.Transcription.ToString()}");
         onDictationComplete?.Invoke();
 
+    }
+
+    public void SetListeningMode(int mode) {
+        listeningMode = (ListeningMode)mode;
     }
 
     private void StopListening()
@@ -51,7 +61,7 @@ public class ListenerModule : MonoBehaviour
 
     private void OnDisable()
     {
-        //witDictation.DictationEvents.OnFullTranscription.RemoveListener(OnFullTranscription);
+        witDictation.DictationEvents.OnFullTranscription.RemoveListener(OnFullTranscription);
     }
 
     private void OnDestroy()
@@ -72,17 +82,15 @@ public class ListenerModule : MonoBehaviour
     }
 
 
-    public void SubmitHelpTranscription()
-    {
-        string text = helpInputText.text;
-        Debug.Log($"Full transcripiton {text}");
-        OnUserHelpInputReceived?.Invoke(text);
-        ToggleDictation(false);
+    public void SubmitHelpTranscription(string helpText) {
+        Debug.Log($"Help Text {helpText}");
+        OnUserHelpInputReceived?.Invoke(helpText);
     }
 
     private void OnFullTranscription(string text)
     {
-        onDictationComplete?.Invoke();
+        if (listeningMode == ListeningMode.Recipe) onDictationComplete?.Invoke();
+        else if (listeningMode == ListeningMode.Help) SubmitHelpTranscription(text);
         //Debug.Log($"Full transcripiton {text}");
         //OnUserInputReceived?.Invoke(text);
         ToggleDictation(false);

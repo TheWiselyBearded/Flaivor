@@ -8,10 +8,12 @@ public class AgentController : MonoBehaviour
 {
     public CookSessionController cookSessionController;
     public GameObject PFB_HelpResponse;
+    public GameObject avatar;
 
     public SpeechModule speechModule;
     public ListenerModule listenerModule;
     public ThinkerModule thinkerModule;
+
 
     private bool requestRecipes = false;
     private string requestString = "";
@@ -39,6 +41,7 @@ public class AgentController : MonoBehaviour
     private void Awake()
     {
         agentState = AgentState.Listening;
+        //avatar.SetActive(false);
     }
 
     private void Start()
@@ -55,15 +58,16 @@ public class AgentController : MonoBehaviour
     /// <param name="obj"></param>
     private void ThinkerModule_OnChatGPTHelpInputReceived(string obj)
     {
-        GameObject instance = Instantiate(PFB_HelpResponse, null);
-        ResponseWindow window = instance.GetComponent<ResponseWindow>();
-        window.SetResponseText(obj);
+        //GameObject instance = Instantiate(PFB_HelpResponse, null);
+        //ResponseWindow window = instance.GetComponent<ResponseWindow>();
+        //window.SetResponseText(obj);
     }
 
     private void ListenerModule_OnUserHelpInputReceived(string obj)
     {
+        Debug.Log($"Would submit help text {obj}");
         thinkerModule.SubmitChatHelpJSON(obj);
-        //thinkerModule.SubmitChat(obj);
+        
         thinkingMode = ThinkingMode.Help;
         SetMode(AgentState.Thinking);
     }
@@ -162,6 +166,7 @@ public class AgentController : MonoBehaviour
                 cookSessionController.CreateRecipeObjects(recipe, generatedTexture);
             }
         }
+        avatar.SetActive(true);
         SetMode(AgentState.Speaking);
     }
 
