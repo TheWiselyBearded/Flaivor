@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class Temp : MonoBehaviour
 {
-    public GameObject root;
-    public void SetParent()
-    {
-        root.transform.parent = null;
+    public TimerCountdown tc;
+
+    private void Update() {
+        if (Input.GetKey(KeyCode.Space)) SetTimerOff();
+    }
+
+    public void SetTimerOff() {
+        tc.isFloater = true;
+        tc.timeSet = true;
+        tc.timeFinished = true;
+        tc.SetTimerOff();
     }
 }

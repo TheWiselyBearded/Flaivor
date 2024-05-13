@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimerCountdown : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class TimerCountdown : MonoBehaviour
     public GameObject StartButton;
     public GameObject DestroyButton;
     public GameObject TimerControlButtons;
+    public Image background;
+    public Color32 bgColorAlarm;
+
+    public AudioSource alarmSound;
 
     public GameObject anchorReference;
     public TimerCountdown anchorReferenceTC;
@@ -20,15 +25,17 @@ public class TimerCountdown : MonoBehaviour
     //public int minutes = 5;
     //public int seconds = 0;
     public bool timeSet;
-    private bool timeFinished;
-    private float countdownTime;
+    public bool timeFinished;
+    public float countdownTime;
     private int secondsOnesPlace;
     private int secondsTenthsPlace;
 
     private float lastDisabledTime; // Store the time when the script was last disabled
 
-    protected bool isFloater = false;
+    public bool isFloater = false;
     private bool firstGrab = false;
+
+    public float rotationSpeed = 10f;
 
     public static event Action<TimerCountdown> OnTimerCountdownDuplicate;
 
@@ -58,6 +65,7 @@ public class TimerCountdown : MonoBehaviour
             float timeDifference = Time.time - lastDisabledTime;
             countdownTime -= timeDifference;
         }
+        //if (isFloater) isFloater = false;
     }
 
 
@@ -137,30 +145,57 @@ public class TimerCountdown : MonoBehaviour
     //public void SetMinutes(int min) => minutes = min;
     //public void SetSeconds(int sec) => seconds = sec;
 
-    void Update()
-    {
-        if (!timeSet || timeFinished) return;
-        // Decrease countdown by deltaTime
-        countdownTime -= Time.deltaTime;
+    void Update() {
+        if (!timeSet) return;
 
-        // Calculate remaining minutes and seconds
-        int remainingMinutes = Mathf.FloorToInt(countdownTime / 60);
-        int remainingSeconds = Mathf.FloorToInt(countdownTime % 60);
+        if (!timeFinished) {
+            // Decrease countdown by deltaTime
+            countdownTime -= Time.deltaTime;
 
-        // Update text
-        timerText.text = string.Format("{0:00}:{1:00}", remainingMinutes, remainingSeconds);
-        if (anchorReference != null && anchorReference.activeInHierarchy) {
-            if (anchorReferenceTC == null) anchorReferenceTC  = anchorReference.GetComponent<TimerCountdown>();
-            if (anchorReferenceTC != null) anchorReferenceTC.timerText.text = timerText.text;
+            // Calculate remaining minutes and seconds
+            int remainingMinutes = Mathf.FloorToInt(countdownTime / 60);
+            int remainingSeconds = Mathf.FloorToInt(countdownTime % 60);
+
+            // Update text
+            timerText.text = string.Format("{0:00}:{1:00}", remainingMinutes, remainingSeconds);
+            if (anchorReference != null && anchorReference.activeInHierarchy) {
+                if (anchorReferenceTC == null) anchorReferenceTC = anchorReference.GetComponent<TimerCountdown>();
+                if (anchorReferenceTC != null) anchorReferenceTC.timerText.text = timerText.text;
+            }
+            // Check if countdown is finished
+            if (countdownTime <= 0 && firstGrab) {
+                // Do something when timer reaches 0
+                Debug.Log("Timer Finished!");
+                DestroyButton.SetActive(true);
+                timeFinished = true;
+                SetTimerOff();
+                //enabled = false; // Disable this script to stop updating the timer
+            } 
         }
-        // Check if countdown is finished
-        if (countdownTime <= 0)
-        {
-            // Do something when timer reaches 0
-            Debug.Log("Timer Finished!");
+        if (countdownTime <=0 && !isFloater) {
+            Destroy(this.gameObject);
+        }
+
+        // Check if rotation is enabled
+        if (timeFinished) {
+            // Calculate rotation angles
+            float leftRotationAngle = Mathf.Sin(Time.time * rotationSpeed) * 2f;
+            float rightRotationAngle = -leftRotationAngle;
+
+            // Rotate the object
+            transform.rotation = Quaternion.Euler(0f, 0f, leftRotationAngle);
+
+            // Uncomment below line if you want the object to rotate back and forth
+            //transform.rotation = Quaternion.Euler(0f, leftRotationAngle, 0f);
+        }
+    }
+
+    public void SetTimerOff() {
+        if (isFloater) {
+            background.color = bgColorAlarm;
             DestroyButton.SetActive(true);
-            timeFinished = true;
-            //enabled = false; // Disable this script to stop updating the timer
+            alarmSound.Play();
         }
+        // else play audio
     }
 }

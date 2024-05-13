@@ -86,6 +86,8 @@ public class TimerController : MonoBehaviour
         // Set the parent of the clone to be the same as the original
         clone.transform.parent = obj.root.transform.parent;
         obj.root.transform.parent = null;
+        clone.GetComponent<TimerCountdown>().countdownTime = obj.countdownTime;
+        clone.GetComponent<TimerCountdown>().isFloater = false;
 
         // Iterate over timerSet to find and replace the original object with the clone
         for (int i = 0; i < timerSet.Count; i++) {
