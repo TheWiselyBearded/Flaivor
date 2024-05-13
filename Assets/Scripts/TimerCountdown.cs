@@ -190,7 +190,7 @@ public class TimerCountdown : MonoBehaviour
             float rightRotationAngle = -leftRotationAngle;
 
             // Rotate the object
-            vrPanel.transform.rotation = Quaternion.Euler(0f, 0f, leftRotationAngle);
+            vrPanel.transform.rotation = Quaternion.Euler(vrPanel.transform.rotation.x, vrPanel.transform.rotation.y, leftRotationAngle);
 
             // Uncomment below line if you want the object to rotate back and forth
             //transform.rotation = Quaternion.Euler(0f, leftRotationAngle, 0f);
