@@ -70081,7 +70081,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1267338433}
         m_TargetAssemblyTypeName: CookSessionController, Assembly-CSharp
-        m_MethodName: SwipeRecipesRight
+        m_MethodName: SwipeRecipesLeft
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -70479,7 +70479,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1267338433}
         m_TargetAssemblyTypeName: CookSessionController, Assembly-CSharp
-        m_MethodName: SwipeRecipesLeft
+        m_MethodName: SwipeRecipesRight
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
