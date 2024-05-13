@@ -41,6 +41,8 @@ public class CookSessionController : MonoBehaviour
     [SerializeField] private float swipeDuration = 1f;
     private bool swiping = false;
 
+    public static event Action<Recipe> OnRecipeSet;
+
     private void Awake()
     {
         //recipes = new List<Recipe>();
@@ -290,6 +292,7 @@ public class CookSessionController : MonoBehaviour
     public void SetRecipe(Recipe _recipe)
     {
         recipe = _recipe;
+        OnRecipeSet?.Invoke(recipe);
         //CreateRecipeFullUI(recipe);
         CreateFullRecipeInstructionUI(recipe);
         CreateRecipeStepUI(0);

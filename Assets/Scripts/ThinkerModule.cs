@@ -70,10 +70,73 @@ public class ThinkerModule : MonoBehaviour
 
     }
 
+    public void UpdateChatHistory(Recipe r) {
+        helpHistory.Clear();
+        string formattedRecipe = FormatRecipeToString(r);
+        string systemPrompt = "You are a world-renowned chef whose goal is to help me in the kitchen as I work through a recipe. Your name is Martha. You are a funny friendly grandma who knows how to have a little fun and even crack jokes every now and then.  Use the information provided to answer my question with a contextual and relevant response\r\n\r\nAnytime you set the timer needed value to true, add \"I have generated a {insert timer name} timer for your convenience.\" to your response within the JSON.\r\n\r\nYou will output valid JSON in the following format:\r\n{\r\n  \"response\": \"\",\r\n  \"timer_needed\": false,\r\n  \"timer_length\": 0, // seconds\r\n  \"timer_name\": \"None\"\r\n}\r\n";
+
+        if (ramseyMode) {
+            systemPrompt = "I will ask you for help regarding something I'm cooking. Please swiftly and concisely answer inquiries related to cooking. You speak like Gordon Ramsey on Hell's Kitchen, being condescending in a way and using curse words and insults. But still give good advice.\nYou will output valid JSON in the following format:\n{\n  \"response\": \"\",\n  \"timer_needed\": false,\n  \"timer_length\": 0, // seconds\n  \"timer_name\": \"None\"\n}\n";
+        }
+
+
+        string exampleUser1 = "How long should I cook the bacon for?" + formattedRecipe;
+        string exampleResponse1 = "{\n  \"response\": \"Cook the bacon until it is crisp, usually for about 6-8 minutes. I have generated a 7 minute bacon timer for your convenience.\",\n  \"timer_needed\": true,\n  \"timer_length\": 420,\n  \"timer_name\": \"bacon\"\n}";
+        string exampleUser2 = "how long to cook the broccoli?";
+        string exampleResponse2 = "{\n  \"response\": \"Cook the broccoli until it is tender and slightly charred, which usually takes about 5-7 minutes. I have generated a 6 minute broccoli timer for your convenience.\",\n  \"timer_needed\": true,\n  \"timer_length\": 360,\n  \"timer_name\": \"broccoli\"\n}";
+        string exampleUser3 = "generate me a timer for 10 min";
+        string exampleResponse3 = "{\n  \"response\": \"Sure, I have generated a 10 minute timer for you.\",\n  \"timer_needed\": true,\n  \"timer_length\": 600,\n  \"timer_name\": \"10-minute\"\n}";
+
+
+        var messages = new List<Message>
+        {
+            new Message(Role.System, systemPrompt),
+            new Message(Role.User, exampleUser1),
+            new Message(Role.Assistant, exampleResponse1),
+            new Message(Role.User, exampleUser2),
+            new Message(Role.Assistant, exampleResponse2),
+            new Message(Role.User, exampleUser3),
+            new Message(Role.Assistant, exampleResponse3),
+        };
+
+        helpHistory = new List<Message>(messages);
+    }
+
+    public string FormatRecipeToString(Recipe recipe) {
+        string formattedRecipe = $"\n\nRecipe Title:\n{recipe.RecipeName}\n\nDescription:\n{recipe.Description}\n\nIngredients:\n\n";
+
+        foreach (var ingredient in recipe.Ingredients) {
+            formattedRecipe += $"{ingredient.Key} ({ingredient.Value})\n";
+        }
+
+        formattedRecipe += "\nInstructions:\n\n";
+
+        foreach (var instruction in recipe.Instructions) {
+            formattedRecipe += $"Step {instruction.StepNumber}: {instruction.Description}\n";
+            if (instruction.SubSteps != null && instruction.SubSteps.Count > 0) {
+                foreach (var subStep in instruction.SubSteps) {
+                    formattedRecipe += $"- {subStep}\n";
+                }
+            }
+            formattedRecipe += "\n";
+        }
+
+        return formattedRecipe;
+    }
+
 
     private void Start()
     {
         api = new OpenAIClient();
+        CookSessionController.OnRecipeSet += CookSessionController_OnRecipeSet;
+    }
+
+    private void OnDestroy() {
+        CookSessionController.OnRecipeSet -= CookSessionController_OnRecipeSet;
+    }
+
+    private void CookSessionController_OnRecipeSet(Recipe obj) {
+        UpdateChatHistory(obj);
     }
 
     /// <summary>
