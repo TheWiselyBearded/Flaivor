@@ -41,7 +41,7 @@ public class AgentController : MonoBehaviour
     private void Awake()
     {
         agentState = AgentState.Listening;
-        //avatar.SetActive(false);
+        avatar.SetActive(false);
     }
 
     private void Start()
