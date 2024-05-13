@@ -65,3 +65,11 @@ Moving forward, the team behind Flaivor is excited to expand and refine the proj
 During development, we discussed moonshot ideas. One of the core inspirations behind this idea was to create shared mixed reality experiences locally and remotely. We love the idea of long-distance couples cooking together with the Chef. As such, we plan to investigate Spatial Anchors and Photon multiplayer support to realize that vision.
 
 Beyond Meta's SDK capabilities, we're looking to perfect the user experience, enhance Martha's AI capabilities, and fully integrate the mixed reality environment to make cooking more interactive and fun. Our focus will be on making the technology accessible and engaging, ensuring it can be a helpful companion in the kitchen for everyone from cooking novices to seasoned chefs.
+
+## Authors
+
+The contributors to this project are:
+
+- Alireza Bahremand
+- Auryan Ratliff
+- Brayden Jenkins
