@@ -17,7 +17,7 @@ public class CookSessionController : MonoBehaviour
     public int SubStepIndex;
     public int RecipeSelectionIndex;
 
-    public bool ListenSwipe= false;
+    public bool ListenSwipe = false;
 
     [SerializeField] private GameObject recipeStepUITruncate; // Drag your prefab here in the Inspector
     [SerializeField] private GameObject recipeStepUIPrefab; // Drag your prefab here in the Inspector
@@ -39,11 +39,12 @@ public class CookSessionController : MonoBehaviour
     [SerializeField] private Transform[] recipeLocations;
     int currentRecipeIndex = 0;
     [SerializeField] private float swipeDuration = 1f;
+    private bool swiping = false;
 
     private void Awake()
     {
         //recipes = new List<Recipe>();
-        uiParent = null;
+        // uiParent = null;
     }
 
     private void Start()
@@ -53,7 +54,26 @@ public class CookSessionController : MonoBehaviour
         InstructionStepProgressUI.OnProgressPrevStepReceived += InstructionStepProgressUI_OnProgressPrevStepReceived;
     }
 
-
+    public void ClearOutAllUIItems()
+    {
+        for (int i = 0; i < mediumMenuUIs.Length; i++)
+        {
+            if (mediumMenuUIs[i] != null)
+            {
+                GameObject goRef = mediumMenuUIs[i];
+                mediumMenuUIs[i] = null;
+                Destroy(goRef);
+            }
+        }
+        for (int i = 0; i < fullMenuUIs.Length; i++) {
+            if (fullMenuUIs[i] != null) {
+                GameObject goRef = fullMenuUIs[i];
+                fullMenuUIs[i] = null;
+                Destroy(goRef);
+            }
+        }
+        Destroy(recipeProgressUI);
+    }
 
     private void OnDestroy()
     {
@@ -294,10 +314,22 @@ public class CookSessionController : MonoBehaviour
             return;
         }
 
+        // if (numCallsMedium > 3)
+        // {
+        //     Debug.LogError("for some reason we got too many recipes!");
+        //     return;
+        // }
+
         // Calculate the spawn position in front of the user
         Vector3 spawnPosition = userObject.transform.position + spawnDirection * 0.5f + (spawnOffset * numCallsMedium); // Adjust the distance as needed
         // Instantiate the prefab as a child of uiParent
         GameObject instance = Instantiate(recipeMediumUIPrefab, spawnPosition, Quaternion.identity, uiParent);
+        Debug.Log("medium menu ui created: " + numCallsMedium);
+        if (numCallsMedium <= 3)
+        {
+            mediumMenuUIs[numCallsMedium - 1] = instance;
+        }
+
 
         numCallsMedium++;
 
@@ -313,10 +345,15 @@ public class CookSessionController : MonoBehaviour
             Debug.LogError("RecipeMediumUI component not found on the instantiated prefab!");
         }
 
-        mediumMenuUIs[numCallsMedium - 2] = instance;
+        // mediumMenuUIs[numCallsMedium - 2] = instance;
         instance.SetActive(false);
         if (numCallsMedium > 3)
         {
+            uiParent.position = userObject.transform.position + (userObject.transform.forward * 1f);
+            uiParent.LookAt(userObject.transform);
+            uiParent.Rotate(0, 180, 0);
+            uiParent.eulerAngles = new Vector3(0, uiParent.eulerAngles.y, 0);
+
             foreach (GameObject go in mediumMenuUIs) { go.SetActive(true); }
 
             // align recipes
@@ -338,7 +375,9 @@ public class CookSessionController : MonoBehaviour
 
     public void SwipeRecipesLeft()
     {
-        if (!ListenSwipe) return; 
+        if (!ListenSwipe) return;
+        if (swiping) return;
+        swiping = true;
         // move all recipes to the left
         // the first index is the 'current' recipe, sitting in front
         // index 0 is left most, index 2 is right most
@@ -375,11 +414,21 @@ public class CookSessionController : MonoBehaviour
         }
 
         SetRecipeAlphas();
+
+        StartCoroutine(FinishSwipe());
+    }
+
+    private IEnumerator FinishSwipe()
+    {
+        yield return new WaitForSeconds(swipeDuration);
+        swiping = false;
     }
 
     public void SwipeRecipesRight()
     {
         if (!ListenSwipe) return;
+        if (swiping) return;
+        swiping = true;
         // move all recipes to the right
         // the first index is the 'current' recipe, sitting in front
         // index 0 is left most, index 2 is right most
@@ -417,6 +466,8 @@ public class CookSessionController : MonoBehaviour
         }
 
         SetRecipeAlphas();
+
+        StartCoroutine(FinishSwipe());
     }
 
     private void SetRecipeAlphas()
@@ -466,8 +517,10 @@ public class CookSessionController : MonoBehaviour
         fullMenuUIs[numCallsFull - 2] = instance;
     }
 
-    public void CreateFullRecipeInstructionUI(Recipe recipe) {
-        if (recipeFullUIPrefab == null) {
+    public void CreateFullRecipeInstructionUI(Recipe recipe)
+    {
+        if (recipeFullUIPrefab == null)
+        {
             Debug.LogError("RecipeMediumUIPrefab is not assigned in the inspector!");
             return;
         }
@@ -480,17 +533,21 @@ public class CookSessionController : MonoBehaviour
 
         // Get the RecipeMediumUI component and set the recipe details
         RecipeFullInstructionUI recipeUI = instance.GetComponent<RecipeFullInstructionUI>();
-        if (recipeUI != null) {
+        if (recipeUI != null)
+        {
             string ingredientsText = FormatIngredients(recipe.Ingredients);
+            recipeUI.SetRecipeInfo(recipe.RecipeName, FormatIngredients(recipe.Ingredients));
             recipeUI.SetInstructionsUI(recipe.Instructions);
-        } else {
+        }
+        else
+        {
             Debug.LogError("RecipeMediumUI component not found on the instantiated prefab!");
         }
 
         fullMenuUIs[numCallsFull - 2] = instance;
     }
 
-    
+
 
     public void CreateRecipeStepUI(int stepIndex)
     {

@@ -1,15 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RecipeFullInstructionUI : MonoBehaviour
 {
     public GameObject contentViewParent;
     public GameObject PFB_InstructionStep;
+    public TextMeshProUGUI recipeName;
+    public TextMeshProUGUI ingedients;
     public List<InstructionUI> instructionUIs;
 
     private void Start() {
         instructionUIs = new List<InstructionUI>();
+    }
+
+    public void SetRecipeInfo(string _recipeName, string _ingedientDescription) {
+        recipeName.text = _recipeName;
+        ingedients.text = _ingedientDescription;
     }
 
     public void SetInstructionsUI(List<Instruction> _instructions) {

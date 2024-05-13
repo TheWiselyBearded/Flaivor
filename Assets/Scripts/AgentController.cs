@@ -41,7 +41,7 @@ public class AgentController : MonoBehaviour
     private void Awake()
     {
         agentState = AgentState.Listening;
-        //avatar.SetActive(false);
+        avatar.SetActive(false);
     }
 
     private void Start()
@@ -141,6 +141,9 @@ public class AgentController : MonoBehaviour
         ThinkerModule.OnChatGPTHelpInputReceived -= ThinkerModule_OnChatGPTHelpInputReceived;
     }
 
+    /// <summary>
+    /// called from update for now, set from event of chatgpt input received, saves string as global variable
+    /// </summary>
     public void RecipeChatRequest()
     {
         //Task.Run(async () => await ThinkerModule_OnChatGPTInputReceivedTask(obj));

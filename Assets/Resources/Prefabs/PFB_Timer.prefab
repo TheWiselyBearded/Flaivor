@@ -7129,6 +7129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002c3bc456e665140b4e4b366b72d204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vrPanel: {fileID: 0}
   root: {fileID: 5314662663079344495}
   timerText: {fileID: 7650839832646765486}
   timerTitle: {fileID: 8896898435486876231}
@@ -11458,7 +11459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 821504840356960856, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.059
+      value: 0.059000015
       objectReference: {fileID: 0}
     - target: {fileID: 821504840356960856, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13402,7 +13403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3817012725650331696, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.06899999
+      value: -0.069000006
       objectReference: {fileID: 0}
     - target: {fileID: 3817012725650331696, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13618,7 +13619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4338701959144941262, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.06899999
+      value: -0.069000006
       objectReference: {fileID: 0}
     - target: {fileID: 4338701959144941262, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14642,7 +14643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5635686429284404191, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.11399999
+      value: -0.11400001
       objectReference: {fileID: 0}
     - target: {fileID: 5635686429284404191, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14662,7 +14663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5635686429556525276, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.104
+      value: 0.10400001
       objectReference: {fileID: 0}
     - target: {fileID: 5635686429556525276, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14774,7 +14775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5664579480495331147, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.059
+      value: 0.059000015
       objectReference: {fileID: 0}
     - target: {fileID: 5664579480495331147, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17202,10 +17203,14 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c445a32ed5ecf43439655d6f588f7e4a, type: 2}
     - target: {fileID: 8783100098550700998, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8783100098550700998, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783100098550700998, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8783100098550700998, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
@@ -17213,7 +17218,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2857606512606162720}
     - target: {fileID: 8783100098550700998, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2857606512606162720}
+    - target: {fileID: 8783100098550700998, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783100098550700998, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8783100098550700998, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
@@ -17221,11 +17234,23 @@ PrefabInstance:
       value: SetParent
       objectReference: {fileID: 0}
     - target: {fileID: 8783100098550700998, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: DestroyTimer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783100098550700998, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: TimerCountdown, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8783100098550700998, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TimerCountdown, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783100098550700998, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783100098550700998, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8843153113687414881, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
