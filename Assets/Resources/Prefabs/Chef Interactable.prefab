@@ -54,6 +54,9 @@ MonoBehaviour:
   - {fileID: 1136477437063126064}
   - {fileID: 8354371420594527469}
   avatarDisc: {fileID: 615498856499887940}
+  avatarHead: {fileID: 3433176439223197076}
+  lookAtSpeed: 5
+  maxAngle: 45
 --- !u!1 &7149919991623923594
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,6 +883,11 @@ PrefabInstance:
 --- !u!137 &1136477437063126064 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -5582868791511267148, guid: 43cb176e244b9be4dae5e8adcb844977, type: 3}
+  m_PrefabInstance: {fileID: 4413596203929801860}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3433176439223197076 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7861831855079945968, guid: 43cb176e244b9be4dae5e8adcb844977, type: 3}
   m_PrefabInstance: {fileID: 4413596203929801860}
   m_PrefabAsset: {fileID: 0}
 --- !u!137 &3505559863113267000 stripped

@@ -13964,6 +13964,9 @@ MonoBehaviour:
   - {fileID: 659800615}
   - {fileID: 1558508364}
   avatarDisc: {fileID: 1887275838}
+  avatarHead: {fileID: 1733720916}
+  lookAtSpeed: 5
+  maxAngle: 45
 --- !u!1 &208793882
 GameObject:
   m_ObjectHideFlags: 0
@@ -19617,6 +19620,9 @@ MonoBehaviour:
   agentController: {fileID: 885941428}
   cutoffRenderers: []
   avatarDisc: {fileID: 0}
+  avatarHead: {fileID: 0}
+  lookAtSpeed: 5
+  maxAngle: 45
 --- !u!1 &587910629
 GameObject:
   m_ObjectHideFlags: 0
@@ -21775,6 +21781,9 @@ MonoBehaviour:
   agentController: {fileID: 885941428}
   cutoffRenderers: []
   avatarDisc: {fileID: 0}
+  avatarHead: {fileID: 0}
+  lookAtSpeed: 5
+  maxAngle: 45
 --- !u!1 &771277773
 GameObject:
   m_ObjectHideFlags: 0
@@ -23160,6 +23169,9 @@ MonoBehaviour:
   agentController: {fileID: 885941428}
   cutoffRenderers: []
   avatarDisc: {fileID: 0}
+  avatarHead: {fileID: 0}
+  lookAtSpeed: 5
+  maxAngle: 45
 --- !u!4 &858681308 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5635686428753915767, guid: 6d0daa33399ecd14bb5adf1b1ea21830, type: 3}
@@ -29312,6 +29324,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3492845795872823929, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
+      propertyPath: avatarHead
+      value: 
+      objectReference: {fileID: 1353713615}
+    - target: {fileID: 3492845795872823929, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
       propertyPath: agentController
       value: 
       objectReference: {fileID: 885941428}
@@ -29364,6 +29380,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
+--- !u!4 &1353713615 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3433176439223197076, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
+  m_PrefabInstance: {fileID: 1353713614}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1361468562 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 617279256, guid: 25c090698b1b94e4d9a8f6d5494bdf31, type: 3}
@@ -32683,6 +32704,9 @@ MonoBehaviour:
   agentController: {fileID: 885941428}
   cutoffRenderers: []
   avatarDisc: {fileID: 0}
+  avatarHead: {fileID: 0}
+  lookAtSpeed: 5
+  maxAngle: 45
 --- !u!4 &1597479706 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3544720309665416993, guid: ffecfa19406ba0843b5f6b954ccecdc4, type: 3}
@@ -33719,6 +33743,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 403239392}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1733720916 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3332250475167066214, guid: ffecfa19406ba0843b5f6b954ccecdc4, type: 3}
+  m_PrefabInstance: {fileID: 1558508361}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1736497320
 GameObject:
   m_ObjectHideFlags: 0
