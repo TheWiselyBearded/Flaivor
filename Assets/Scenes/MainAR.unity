@@ -21705,15 +21705,15 @@ PrefabInstance:
       objectReference: {fileID: 1101394646}
     - target: {fileID: 2278649882460775208, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
       propertyPath: runtimeConfiguration.maxRecordingTime
-      value: 40
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2278649882460775208, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
       propertyPath: runtimeConfiguration.minKeepAliveTimeInSeconds
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2278649882460775208, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
       propertyPath: runtimeConfiguration.minTranscriptionKeepAliveTimeInSeconds
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3068518034520659938, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
       propertyPath: m_IsActive
@@ -21743,6 +21743,34 @@ PrefabInstance:
       propertyPath: dicatationActivation
       value: 
       objectReference: {fileID: 885941431}
+    - target: {fileID: 3097176336805704310, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: onDictationComplete.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3097176336805704310, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: onDictationComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3097176336805704310, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: onDictationComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 525134483}
+    - target: {fileID: 3097176336805704310, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: onDictationComplete.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3097176336805704310, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: onDictationComplete.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3097176336805704310, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: onDictationComplete.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3097176336805704310, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: onDictationComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3129935000305174085, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
