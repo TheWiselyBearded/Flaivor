@@ -41,6 +41,8 @@ public class CookSessionController : MonoBehaviour
     [SerializeField] private float swipeDuration = 1f;
     private bool swiping = false;
 
+    public static event Action<Recipe> OnRecipeSet;
+
     private void Awake()
     {
         //recipes = new List<Recipe>();
@@ -290,6 +292,7 @@ public class CookSessionController : MonoBehaviour
     public void SetRecipe(Recipe _recipe)
     {
         recipe = _recipe;
+        OnRecipeSet?.Invoke(recipe);
         //CreateRecipeFullUI(recipe);
         CreateFullRecipeInstructionUI(recipe);
         CreateRecipeStepUI(0);
@@ -587,20 +590,39 @@ public class CookSessionController : MonoBehaviour
         }
         return ingredientsText.TrimEnd(); // Remove the last newline character for cleaner formatting
     }
+    
+    public bool ThreeRecipesPresent(string jsonString) {
+        jsonString = jsonString.Trim();
+        int count = CountOccurrences(jsonString, "recipe_name");
+        if (count < 3) return false;
+        if (count == 3) return true;
+        return false;
+    }
 
     public static string EnsureJsonWrappedWithRecipesKey(string jsonString)
     {
         // Trim any whitespace that might affect the check
         jsonString = jsonString.Trim();
-
+        
         // Check if the JSON string starts with an array indicator '['
         if (!jsonString.Contains("recipes"))
         {
             // The JSON is not wrapped with "recipes" key, wrap it
             jsonString = "{\"recipes\":" + jsonString + "}";
         }
+        
 
         return jsonString;
+    }
+
+    private static int CountOccurrences(string text, string pattern) {
+        int count = 0;
+        int i = 0;
+        while ((i = text.IndexOf(pattern, i)) != -1) {
+            i += pattern.Length;
+            count++;
+        }
+        return count;
     }
 
 }
