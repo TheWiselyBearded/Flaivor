@@ -8,6 +8,7 @@ using static AgentController;
 
 public class Debugger : MonoBehaviour
 {
+    public RawImage toSetRaw;
     public RawImage rawImage;
     public Texture2D debugFridgeTexture;
     public TMP_InputField userInput;
@@ -40,6 +41,7 @@ public class Debugger : MonoBehaviour
             //agent.SetAgentMode(1);
             //agent.thinkerModule.SubmitChatJSON("I have the following ingredients with me, Eggs, spices, green onions, steak, potatoes, tortilla, bread, sugar, and milk");
             agent.cookSessionController.SetRecipe(0);
+            //toSetRaw.texture = debugFridgeTexture;
         }
 
         if (Input.GetKeyDown(KeyCode.L))

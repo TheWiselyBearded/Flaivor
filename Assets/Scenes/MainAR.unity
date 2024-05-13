@@ -12962,6 +12962,18 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 885941428}
         m_TargetAssemblyTypeName: AgentController, Assembly-CSharp
+        m_MethodName: SetAgentMode
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 885941428}
+        m_TargetAssemblyTypeName: AgentController, Assembly-CSharp
         m_MethodName: SubmitChatImageRequest
         m_Mode: 1
         m_Arguments:
@@ -15931,13 +15943,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329261339}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4449745583679644931}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1193838876}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330929140
 GameObject:
@@ -21008,7 +21020,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: ea85bd49b69519b4eacd75a4e767e01e, type: 3}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -22293,6 +22305,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1094657016}
+    - target: {fileID: 6368626119781478954, guid: a097fe92d4b5a4f41a7ea1f40f5162ac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7450927013187354666, guid: a097fe92d4b5a4f41a7ea1f40f5162ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.321
@@ -24154,6 +24170,10 @@ PrefabInstance:
       propertyPath: rawImage
       value: 
       objectReference: {fileID: 529235113}
+    - target: {fileID: 6354909809246583487, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
+      propertyPath: toSetRaw
+      value: 
+      objectReference: {fileID: 688398470}
     - target: {fileID: 6354909809246583487, guid: 46abb243d1f25b64c9f01330ea6072fc, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -27457,7 +27477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1193838876
 Transform:
   m_ObjectHideFlags: 0
@@ -27476,6 +27496,8 @@ Transform:
   - {fileID: 8654076838921674605}
   - {fileID: 1592091675450974161}
   - {fileID: 2105236367592631752}
+  - {fileID: 329261340}
+  - {fileID: 1203812912}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1203812911
@@ -27502,7 +27524,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203812911}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -27510,7 +27532,7 @@ Transform:
   - {fileID: 1254682198}
   - {fileID: 1214337237}
   - {fileID: 764312819}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1193838876}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1209074419
 GameObject:
@@ -30898,6 +30920,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1094657016}
+    - target: {fileID: 6368626119781478954, guid: a097fe92d4b5a4f41a7ea1f40f5162ac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7212672130999106500, guid: a097fe92d4b5a4f41a7ea1f40f5162ac, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -48394,6 +48420,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1956792791}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2056322051}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -49950,7 +49988,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1627986386
 Transform:
   m_ObjectHideFlags: 0
@@ -49981,21 +50019,9 @@ MonoBehaviour:
   OnScreenShotLoadedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 885941428}
-        m_TargetAssemblyTypeName: AgentController, Assembly-CSharp
-        m_MethodName: SetAgentMode
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 885941428}
-        m_TargetAssemblyTypeName: AgentController, Assembly-CSharp
-        m_MethodName: SubmitChatImageRequest
+      - m_Target: {fileID: 1627986387}
+        m_TargetAssemblyTypeName: ScreenshotLoader, Assembly-CSharp
+        m_MethodName: LoadImageBytesToTexture
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -50005,18 +50031,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1232709922}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  imgBytes: 
   requestPermissionButton: {fileID: 1907204241}
   loadScreenShotButton: {fileID: 1903908552}
   rawImage: {fileID: 688398470}
@@ -62635,7 +62650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2056322052
 Transform:
   m_ObjectHideFlags: 0
@@ -77721,9 +77736,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1703715687}
-  - {fileID: 1203812912}
   - {fileID: 2483171112249589647}
-  - {fileID: 329261340}
   - {fileID: 373696579}
   - {fileID: 641942914}
   - {fileID: 314502925}
