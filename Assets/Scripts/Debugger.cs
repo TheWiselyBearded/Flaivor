@@ -43,6 +43,11 @@ public class Debugger : MonoBehaviour
             agent.cookSessionController.SetRecipe(0);
             //toSetRaw.texture = debugFridgeTexture;
         }
+        
+        if (Input.GetKeyDown(KeyCode.T)) {
+            string userinput = "I have the following ingredients with me, cheese, Eggs, spices, potatoes";
+            agent.thinkerModule.SubmitChatJSON(userinput);
+        }
 
         if (Input.GetKeyDown(KeyCode.L))
         {
@@ -63,9 +68,9 @@ public class Debugger : MonoBehaviour
         {
             agent.cookSessionController.SwipeRecipesRight();
         }
-        if (Input.GetKeyDown(KeyCode.T)) {
-            timerController.SwipeTimerLeft();
-        }
+        //if (Input.GetKeyDown(KeyCode.T)) {
+        //    timerController.SwipeTimerLeft();
+        //}
     }
 
     public void LoadRecipeBookJSON()
