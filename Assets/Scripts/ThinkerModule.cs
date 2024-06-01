@@ -67,7 +67,6 @@ public class ThinkerModule : MonoBehaviour
         };
 
         helpHistory = new List<Message>(messages);
-
     }
 
     public void UpdateChatHistory(Recipe r) {
@@ -129,6 +128,7 @@ public class ThinkerModule : MonoBehaviour
     {
         api = new OpenAIClient();
         CookSessionController.OnRecipeSet += CookSessionController_OnRecipeSet;
+
     }
 
     private void OnDestroy() {
@@ -164,7 +164,7 @@ public class ThinkerModule : MonoBehaviour
 
         try
         {
-            var chatRequest = new ChatRequest(chatMessages, Model.GPT3_5_Turbo_16K);
+            var chatRequest = new ChatRequest(chatMessages, "gpt-4o");
             var result = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
             var response = result.ToString();
 
@@ -410,7 +410,7 @@ public class ThinkerModule : MonoBehaviour
         try
         {
             //var chatRequest = new ChatRequest(chatMessages, Model.GPT4_Turbo, responseFormat: ChatResponseFormat.Json, temperature: 1, maxTokens: 14421, topP: 1, frequencyPenalty: 0, presencePenalty: 0);
-            var chatRequest = new ChatRequest(chatMessages, Model.GPT4_Turbo, responseFormat: ChatResponseFormat.Json, temperature: 1, topP: 1, frequencyPenalty: 0, presencePenalty: 0);
+            var chatRequest = new ChatRequest(chatMessages, "gpt-4o", temperature: 1, topP: 1, frequencyPenalty: 0, presencePenalty: 0);
             var result = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
             var response = result.ToString();
 
@@ -526,7 +526,7 @@ public class ThinkerModule : MonoBehaviour
 
         while (attemptCount < maxAttempts && !success) {
             try {
-                var chatRequest = new ChatRequest(messages, model: Model.GPT4_Turbo);
+                var chatRequest = new ChatRequest(messages, model: "gpt-4o");
                 var result = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
 
                 var response = RemoveEmbeddedCharacters(result.ToString());

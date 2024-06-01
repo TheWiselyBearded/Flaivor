@@ -190,7 +190,7 @@ public class TimerCountdown : MonoBehaviour
             float rightRotationAngle = -leftRotationAngle;
 
             // Rotate the object
-            vrPanel.transform.rotation = Quaternion.Euler(vrPanel.transform.rotation.x, vrPanel.transform.rotation.y, leftRotationAngle);
+            vrPanel.transform.localEulerAngles = new Vector3(vrPanel.transform.localEulerAngles.x, vrPanel.transform.localEulerAngles.y, leftRotationAngle);
 
             // Uncomment below line if you want the object to rotate back and forth
             //transform.rotation = Quaternion.Euler(0f, leftRotationAngle, 0f);
@@ -200,6 +200,7 @@ public class TimerCountdown : MonoBehaviour
     public void SetTimerOff() {
         if (isFloater) {
             background.color = bgColorAlarm;
+            timerText.text = "00:00";
             DestroyButton.SetActive(true);
             alarmSound.Play();
         }

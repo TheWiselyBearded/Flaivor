@@ -26,6 +26,16 @@ public class Debugger : MonoBehaviour
     private void Start()
     {
         //agent.thinkerModule.OnChatGPTInputReceived += ThinkerModule_OnChatGPTInputReceived;
+        ListModels();
+    }
+
+    public async void ListModels() {
+        var api = new OpenAIClient();
+        var models = await api.ModelsEndpoint.GetModelsAsync();
+
+        foreach (var model in models) {
+            Debug.Log(model.ToString());
+        }
     }
 
     private void Update()
