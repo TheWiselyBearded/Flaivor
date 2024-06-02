@@ -6,8 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimerCountdown : MonoBehaviour
-{
+public class TimerCountdown : MonoBehaviour {
     public GameObject vrPanel;
 
     public GameObject root;
@@ -41,8 +40,7 @@ public class TimerCountdown : MonoBehaviour
 
     public static event Action<TimerCountdown> OnTimerCountdownDuplicate;
 
-    private void Start()
-    {
+    private void Start() {
         if (vrPanel == null) vrPanel = transform.GetChild(0).gameObject;
         if (timerText == null) timerText = GetComponent<TextMeshProUGUI>();
         //countdownTime = minutes * 60 + seconds;
@@ -77,8 +75,7 @@ public class TimerCountdown : MonoBehaviour
     }
 
 
-    public void SetTimer(int targetTime)
-    {
+    public void SetTimer(int targetTime) {
         countdownTime = targetTime;
         timerText.text = targetTime.ToString();
     }
@@ -88,49 +85,42 @@ public class TimerCountdown : MonoBehaviour
     }
 
     // Method to increase minutes
-    public void IncreaseMinutes()
-    {
+    public void IncreaseMinutes() {
         countdownTime += 60f; // Increase by 1 minute (60 seconds)
         UpdateTimerText();
     }
 
     // Method to increase tenths of seconds
-    public void IncreaseTenthsSeconds()
-    {
+    public void IncreaseTenthsSeconds() {
         countdownTime += 10f; // Increase by 0.1 seconds
         UpdateTimerText();
     }
 
     // Method to increase ones place seconds
-    public void IncreaseOnesSeconds()
-    {
+    public void IncreaseOnesSeconds() {
         countdownTime += 1f; // Increase by 1 second
         UpdateTimerText();
     }
 
     // Method to increase minutes
-    public void DecreaseMinutes()
-    {
+    public void DecreaseMinutes() {
         countdownTime -= 60f; // Increase by 1 minute (60 seconds)
         UpdateTimerText();
     }
 
     // Method to increase tenths of seconds
-    public void DecreaseTenthsSeconds()
-    {
+    public void DecreaseTenthsSeconds() {
         countdownTime -= 10f; // Increase by 0.1 seconds
         UpdateTimerText();
     }
 
     // Method to increase ones place seconds
-    public void DecreaseOnesSeconds()
-    {
+    public void DecreaseOnesSeconds() {
         countdownTime -= 1f; // Increase by 1 second
         UpdateTimerText();
     }
 
-    public void StartTimer()
-    {
+    public void StartTimer() {
         timeSet = true;
         StartButton.SetActive(false);
         TimerControlButtons.SetActive(false);
@@ -140,11 +130,10 @@ public class TimerCountdown : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    
+
 
     // Update timer text to display the current countdown time
-    void UpdateTimerText()
-    {
+    void UpdateTimerText() {
         int minutes = Mathf.FloorToInt(countdownTime / 60);
         int seconds = Mathf.FloorToInt(countdownTime % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
@@ -177,9 +166,9 @@ public class TimerCountdown : MonoBehaviour
                 timeFinished = true;
                 SetTimerOff();
                 //enabled = false; // Disable this script to stop updating the timer
-            } 
+            }
         }
-        if (countdownTime <=0 && !isFloater) {
+        if (countdownTime <= 0 && !isFloater) {
             Destroy(this.gameObject);
         }
 
@@ -190,7 +179,7 @@ public class TimerCountdown : MonoBehaviour
             float rightRotationAngle = -leftRotationAngle;
 
             // Rotate the object
-            vrPanel.transform.rotation = Quaternion.Euler(vrPanel.transform.rotation.x, vrPanel.transform.rotation.y, leftRotationAngle);
+            vrPanel.transform.localEulerAngles = new Vector3(vrPanel.transform.localEulerAngles.x, vrPanel.transform.localEulerAngles.y, leftRotationAngle);
 
             // Uncomment below line if you want the object to rotate back and forth
             //transform.rotation = Quaternion.Euler(0f, leftRotationAngle, 0f);
@@ -200,6 +189,7 @@ public class TimerCountdown : MonoBehaviour
     public void SetTimerOff() {
         if (isFloater) {
             background.color = bgColorAlarm;
+            timerText.text = "00:00";
             DestroyButton.SetActive(true);
             alarmSound.Play();
         }

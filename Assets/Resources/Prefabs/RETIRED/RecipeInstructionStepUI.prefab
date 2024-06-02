@@ -3638,6 +3638,7 @@ MonoBehaviour:
   contentViewParent: {fileID: 3295014041017245231}
   PFB_InstructionSubstepDescription: {fileID: 2245890263100792402, guid: c415892d14470d342ac241d31d39d5b0, type: 3}
   instructionStepUIs: []
+  recipeImg: {fileID: 0}
 --- !u!1 &8263369242267141159
 GameObject:
   m_ObjectHideFlags: 0

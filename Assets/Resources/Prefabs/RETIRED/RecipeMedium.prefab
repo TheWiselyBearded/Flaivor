@@ -1726,6 +1726,8 @@ MonoBehaviour:
   recipeName: {fileID: 4307640514550932848}
   recipeDescription: {fileID: 4308321361937689187}
   ingredientDescription: {fileID: 8456680218903031933}
+  dishImage: {fileID: 0}
+  canvasGroup: {fileID: 0}
 --- !u!1 &8570676968783722174
 GameObject:
   m_ObjectHideFlags: 0
