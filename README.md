@@ -1,5 +1,7 @@
 # Flaivor
 
+<img src="https://i.imgur.com/VBTLZXb.png" alt="Meta Quest Banner" width="30%"/>
+
 ## Inspiration
 Flaivor emerged from our genuine excitement about the possibilities with AI and mixed reality, inspired by the latest from Meta's presence platform. We saw a chance to create something truly unique in the kitchen space—turning cooking into an interactive, high-tech experience.
 
