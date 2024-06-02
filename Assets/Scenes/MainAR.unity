@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 413434047}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -62534,6 +62533,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 586736008250877776, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0074999984
+      objectReference: {fileID: 0}
     - target: {fileID: 1113818314358763704, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -62543,16 +62546,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 885941428}
     - target: {fileID: 5277305044248350890, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0074999984
+      objectReference: {fileID: 0}
+    - target: {fileID: 5277305044248350890, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.0000000011920929
+      objectReference: {fileID: 0}
+    - target: {fileID: 7623648227506675495, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0074999984
+      objectReference: {fileID: 0}
+    - target: {fileID: 7623648227506675495, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0000000047683715
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519583069322650223, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0074999984
       objectReference: {fileID: 0}
     - target: {fileID: 8519583069322650223, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0000000017881393
+      value: -5.9604643e-10
       objectReference: {fileID: 0}
     - target: {fileID: 8593756155648290056, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.2
+      value: 0.61
       objectReference: {fileID: 0}
     - target: {fileID: 8593756155648290056, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -62560,7 +62579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8593756155648290056, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.2
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 8593756155648290056, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -62593,6 +62612,10 @@ PrefabInstance:
     - target: {fileID: 8593756155648290059, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
       propertyPath: m_Name
       value: Chef Interactable
+      objectReference: {fileID: 0}
+    - target: {fileID: 8593756155648290062, guid: 306521eab56d49248ad70a19158f8ce9, type: 3}
+      propertyPath: _constraints.MaxScale.Value
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
