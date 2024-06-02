@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
@@ -160,18 +161,28 @@ public class AgentController : MonoBehaviour
     {
         Debug.Log($"Thinker Mode response fed to chef");
         cookSessionController.CreateRecipeBook(obj);
-        if (cookSessionController.recipeBook.Recipes.Count > 0)
-        {
-            foreach (Recipe recipe in cookSessionController.recipeBook.Recipes)
-            {
-                // create prefab of recipe
+        if (cookSessionController.recipeBook.Recipes.Count > 0) {
+            foreach (Recipe recipe in cookSessionController.recipeBook.Recipes) { // create prefab of recipe                
                 Texture generatedTexture = await thinkerModule.SubmitChatImageGenerator(recipe.RecipeName + "\n Description: " + recipe.Description);
                 cookSessionController.CreateRecipeObjects(recipe, generatedTexture);
             }
+            // Assuming you have at least three recipes in your recipeBook
+            /*string[] recipes = new string[3]
+            {
+                cookSessionController.recipeBook.Recipes[0].RecipeName + "\n Description: " + cookSessionController.recipeBook.Recipes[0].Description,
+                cookSessionController.recipeBook.Recipes[1].RecipeName + "\n Description: " + cookSessionController.recipeBook.Recipes[1].Description,
+                cookSessionController.recipeBook.Recipes[2].RecipeName + "\n Description: " + cookSessionController.recipeBook.Recipes[2].Description
+            };
+            List<Texture2D> genTextures = new List<Texture2D>();
+            genTextures = await thinkerModule.ExecuteParallelImageGeneratorRequest(recipes);
+            for (int i = 0; i < genTextures.Count; i++) {
+                cookSessionController.CreateRecipeObjects(cookSessionController.recipeBook.Recipes[i], genTextures[i]);
+            }*/
         }
         avatar.SetActive(true);
         SetMode(AgentState.Speaking);
     }
+
 
     public void SetMode(AgentState newState)
     {

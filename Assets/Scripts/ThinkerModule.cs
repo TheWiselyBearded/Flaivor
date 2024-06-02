@@ -313,6 +313,7 @@ public class ThinkerModule : MonoBehaviour
     }
 
 
+   
 
     public async void SubmitChatHelpJSON(string userInput)
     {
@@ -578,6 +579,55 @@ public class ThinkerModule : MonoBehaviour
         return input;
     }
 
+    public async Task<List<Texture2D>> ExecuteParallelImageGeneratorRequest(string[] recipes) {
+        if (isChatPending) { return null; }
+        isChatPending = true;
+
+        List<Task<Texture2D>> tasks = new List<Task<Texture2D>>();
+
+        Debug.Log("Sending image generator request");
+
+        try {
+            for (int i = 0; i < recipes.Length; i++) {
+                int taskNumber = i; // Create a local copy of the loop variable
+                tasks.Add(Task.Run(async () => {
+                    Debug.Log($"Task {taskNumber} started.");
+                    var msg = "I will give you example prompts of how to generate an image titled `EXAMPLE`. Then I will give you the actual prompt, titled `ACTUAL`:";
+                    msg += "\nEXAMPLE: Role.System: I'll give you a dish name and description and you generate a prompt to produce a detailed photo-realistic version of the dish in DALL-E. The photo must have the food on a white plate with a blank white background at a 45-degree angle facing the camera. Nothing else should be in the scene.";
+                    msg += "\nEXAMPLE: Role.User: French Toast\n Description: Indulge in a classic breakfast favorite with this easy French toast recipe. Thick slices of bread are soaked in a sweet and creamy mixture of eggs, milk, and sugar, then cooked to golden perfection. Serve with maple syrup or your favorite toppings for a delectable morning ";
+                    msg += "\nEXAMPLE: Role.Assistant: Create a detailed photo-realistic version of French Toast on a white plate with a blank white background at a 45-degree angle facing the camera. The French Toast should be thick slices of bread soaked in a sweet and creamy mixture of eggs, milk, and sugar, cooked to golden perfection. Include a side of maple syrup or other toppings to accompany the dish.";
+                    msg += $"\nACTUAL: Role.User + {recipes[taskNumber]}";
+
+                    ImageGenerationRequest request = null;
+                    IReadOnlyList<ImageResult> imageResults = null;
+
+                    
+
+                    // Dispatch the image generation API call to the main thread
+                    Dispatcher.Instance.Enqueue(async () =>
+                    {
+                        request = new ImageGenerationRequest(msg, Model.DallE_3);
+                        imageResults = await api.ImagesEndPoint.GenerateImageAsync(request);
+                    });
+
+                    // Wait until the imageResults are obtained
+                    while (imageResults == null) await Task.Yield();
+
+                    Debug.Log($"Task {taskNumber} executed.");
+                    return imageResults[0].Texture;
+                }));
+            }
+        } catch (Exception e) {
+            Debug.LogError(e);
+            return null;
+        } finally {
+            isChatPending = false;
+        }
+
+        Texture2D[] results = await Task.WhenAll(tasks);
+        Debug.Log("All tasks completed.");
+        return new List<Texture2D>(results);
+    }
 
 }
 

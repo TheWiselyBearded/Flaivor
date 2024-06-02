@@ -26,7 +26,7 @@ public class Debugger : MonoBehaviour
     private void Start()
     {
         //agent.thinkerModule.OnChatGPTInputReceived += ThinkerModule_OnChatGPTInputReceived;
-        ListModels();
+        //ListModels();
     }
 
     public async void ListModels() {
