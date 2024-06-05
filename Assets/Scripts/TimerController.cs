@@ -208,7 +208,7 @@ public class TimerController : MonoBehaviour
         //    child.gameObject.SetActive(status);
         //}
         foreach (GameObject timer in timerSet) {
-            timer.SetActive(status);
+            if (timer != null) timer.SetActive(status);
         }
     }
 
