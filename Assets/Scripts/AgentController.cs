@@ -50,6 +50,7 @@ public class AgentController : MonoBehaviour
         listenerModule.OnUserHelpInputReceived += ListenerModule_OnUserHelpInputReceived;
         thinkerModule.OnChatGPTInputReceived += ThinkerModule_OnChatGPTInputReceived;
         ThinkerModule.OnChatGPTHelpInputReceived += ThinkerModule_OnChatGPTHelpInputReceived;
+        thinkerModule.OnTextureGenerated += HandleTextureGenerated;
     }
 
     /// <summary>
@@ -139,6 +140,7 @@ public class AgentController : MonoBehaviour
         listenerModule.OnUserHelpInputReceived -= ListenerModule_OnUserHelpInputReceived;
         thinkerModule.OnChatGPTInputReceived -= ThinkerModule_OnChatGPTInputReceived;
         ThinkerModule.OnChatGPTHelpInputReceived -= ThinkerModule_OnChatGPTHelpInputReceived;
+        thinkerModule.OnTextureGenerated -= HandleTextureGenerated;
     }
 
     /// <summary>
@@ -156,7 +158,37 @@ public class AgentController : MonoBehaviour
         requestRecipes = true;
     }
 
-    private async void ThinkerModule_OnChatGPTInputReceivedTask(string obj)
+    private async void ThinkerModule_OnChatGPTInputReceivedTask(string obj) {
+        Debug.Log($"Thinker Mode response fed to chef");
+        cookSessionController.CreateRecipeBook(obj);
+        if (cookSessionController.recipeBook.Recipes.Count > 0) {
+            string[] recipes = new string[3]
+            {
+                cookSessionController.recipeBook.Recipes[0].RecipeName + "\n Description: " + cookSessionController.recipeBook.Recipes[0].Description,
+                cookSessionController.recipeBook.Recipes[1].RecipeName + "\n Description: " + cookSessionController.recipeBook.Recipes[1].Description,
+                cookSessionController.recipeBook.Recipes[2].RecipeName + "\n Description: " + cookSessionController.recipeBook.Recipes[2].Description
+            };
+
+            await thinkerModule.ExecuteParallelImageGeneratorRequests(recipes);
+        }        
+    }
+
+    int recipeCounter = 0;
+    private void HandleTextureGenerated(Texture2D texture) {
+        // Handle the texture, e.g., create recipe objects
+        Debug.Log("Received texture from ThinkerModule.");
+        // Assuming you have a way to identify which recipe the texture belongs to
+        Recipe associatedRecipe = cookSessionController.recipeBook.Recipes[recipeCounter]; // Replace with actual logic
+        cookSessionController.CreateRecipeObjects(associatedRecipe, texture);
+        recipeCounter++;
+        if (recipeCounter >3) {
+            avatar.SetActive(true);
+            SetMode(AgentState.Speaking);
+        }
+    }
+
+
+    private async void ThinkerModule_OnChatGPTInputReceivedTaskOld(string obj)
     {
         Debug.Log($"Thinker Mode response fed to chef");
         cookSessionController.CreateRecipeBook(obj);
@@ -165,7 +197,7 @@ public class AgentController : MonoBehaviour
             foreach (Recipe recipe in cookSessionController.recipeBook.Recipes)
             {
                 // create prefab of recipe
-                Texture generatedTexture = await thinkerModule.SubmitChatImageGenerator(recipe.RecipeName + "\n Description: " + recipe.Description);
+                Texture generatedTexture = await thinkerModule.SubmitChatImageGeneratorTexture(recipe.RecipeName + "\n Description: " + recipe.Description);
                 cookSessionController.CreateRecipeObjects(recipe, generatedTexture);
             }
         }

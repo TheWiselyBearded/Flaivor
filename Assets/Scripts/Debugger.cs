@@ -79,7 +79,7 @@ public class Debugger : MonoBehaviour
         if (recipeJSON != null)
         {
             agent.ThinkerModule_OnChatGPTInputReceived(recipeJSON);
-            agent.RecipeChatRequest();
+            //agent.RecipeChatRequest();
         }
     }
 

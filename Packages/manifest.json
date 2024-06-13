@@ -4,7 +4,7 @@
     "com.meta.xr.sdk.interaction": "64.0.0",
     "com.meta.xr.sdk.interaction.ovr.samples": "64.0.0",
     "com.meta.xr.sdk.voice.dictation": "64.0.0",
-    "com.openai.unity": "7.7.7",
+    "com.openai.unity": "8.0.1",
     "com.readyplayerme.core": "https://github.com/readyplayerme/rpm-unity-sdk-core.git",
     "com.rest.elevenlabs": "3.2.9",
     "com.unity.cloud.gltfast": "6.4.0",

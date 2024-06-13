@@ -5,6 +5,7 @@ using OpenAI.Images;
 using OpenAI.Models;
 using OVR.OpenVR;
 using OVRSimpleJSON;
+using PimDeWitte.UnityMainThreadDispatcher;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -274,7 +275,64 @@ public class ThinkerModule : MonoBehaviour
         isChatPending = false;
     }
 
-    public async Task<Texture> SubmitChatImageGenerator(string userInput)
+    public event Action<Texture2D> OnTextureGenerated;
+
+    public async Task<string> SubmitChatImageGenerator(string userInput) {
+        if (string.IsNullOrWhiteSpace(userInput)) { return null; }
+
+        var msg = "I will give you example prompts of how to generate an image titled `EXAMPLE`. Then I will give you the actual prompt, titled `ACTUAL`:";
+        msg += "\nEXAMPLE: Role.System: I'll give you a dish name and description and you generate a prompt to produce a detailed photo-realistic version of the dish in DALL-E. The photo must have the food on a white plate with a blank white background at a 45-degree angle facing the camera. Nothing else should be in the scene.";
+        msg += "\nEXAMPLE: Role.User: French Toast\n Description: Indulge in a classic breakfast favorite with this easy French toast recipe. Thick slices of bread are soaked in a sweet and creamy mixture of eggs, milk, and sugar, then cooked to golden perfection. Serve with maple syrup or your favorite toppings for a delectable morning ";
+        msg += "\nEXAMPLE: Role.Assistant: Create a detailed photo-realistic version of French Toast on a white plate with a blank white background at a 45-degree angle facing the camera. The French Toast should be thick slices of bread soaked in a sweet and creamy mixture of eggs, milk, and sugar, cooked to golden perfection. Include a side of maple syrup or other toppings to accompany the dish.";
+        msg += $"\nACTUAL: Role.User + {userInput}";
+
+        //Debug.Log("Sending image generator request");
+
+        try {
+            var request = new ImageGenerationRequest(msg, Model.DallE_3, responseFormat: ImageResponseFormat.B64_Json);
+            var imageResults = await api.ImagesEndPoint.GenerateImageAsync(request);
+            
+
+            var base64String = imageResults[0].B64_Json; // Assuming the response contains Base64String property
+            //Debug.Log($"Obtained results {base64String}");
+            return base64String;
+        }
+        catch (Exception e) {
+            Debug.LogError(e);
+            return null;
+        }
+    }
+
+    public async Task ExecuteParallelImageGeneratorRequests(string[] recipes) {
+        List<Task<string>> tasks = new List<Task<string>>();
+
+        for (int i = 0; i < recipes.Length; i++) {
+            int taskNumber = i;
+            tasks.Add(Task.Run(() => SubmitChatImageGenerator(recipes[taskNumber])));
+        }
+
+        var results = await Task.WhenAll(tasks);
+        //Debug.Log($"All tasks completed {results.Length}");
+
+        for (int i = 0; i < results.Length; i++) {
+            if (results[i] != null) {
+                int index = i;
+                UnityMainThreadDispatcher.Instance().Enqueue(() => {
+                    CreateTextureFromBase64(results[index], recipes[index]);
+                });
+            }
+        }
+    }
+
+    private void CreateTextureFromBase64(string base64String, string recipeInfo) {
+        byte[] imageBytes = Convert.FromBase64String(base64String);
+        Texture2D texture = new Texture2D(2, 2);
+        texture.LoadImage(imageBytes); // Load image data into Texture2D
+        OnTextureGenerated?.Invoke(texture);
+        //Debug.Log($"Texture generated for recipe: {recipeInfo}");
+    }
+
+    public async Task<Texture> SubmitChatImageGeneratorTexture(string userInput)
     {
         if (isChatPending || string.IsNullOrWhiteSpace(userInput)) { return null; }
         isChatPending = true;
@@ -285,7 +343,7 @@ public class ThinkerModule : MonoBehaviour
         msg += "\nEXAMPLE: Role.Assistant: Create a detailed photo-realistic version of French Toast on a white plate with a blank white background at a 45-degree angle facing the camera. The French Toast should be thick slices of bread soaked in a sweet and creamy mixture of eggs, milk, and sugar, cooked to golden perfection. Include a side of maple syrup or other toppings to accompany the dish.";
         msg += $"\nACTUAL: Role.User + {userInput}";
         //foreach (var message in messages) chatMessages.Add(message);
-        Debug.Log("Sending image generator request");
+        //Debug.Log("Sending image generator request");
 
         try
         {
@@ -526,7 +584,7 @@ public class ThinkerModule : MonoBehaviour
 
         while (attemptCount < maxAttempts && !success) {
             try {
-                var chatRequest = new ChatRequest(messages, model: Model.GPT4_Turbo);
+                var chatRequest = new ChatRequest(messages, model: Model.GPT4o);
                 var result = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
 
                 var response = RemoveEmbeddedCharacters(result.ToString());
