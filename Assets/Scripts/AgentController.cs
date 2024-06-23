@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
@@ -158,21 +159,6 @@ public class AgentController : MonoBehaviour
         requestRecipes = true;
     }
 
-    private async void ThinkerModule_OnChatGPTInputReceivedTask(string obj) {
-        Debug.Log($"Thinker Mode response fed to chef");
-        cookSessionController.CreateRecipeBook(obj);
-        if (cookSessionController.recipeBook.Recipes.Count > 0) {
-            string[] recipes = new string[3]
-            {
-                cookSessionController.recipeBook.Recipes[0].RecipeName + "\n Description: " + cookSessionController.recipeBook.Recipes[0].Description,
-                cookSessionController.recipeBook.Recipes[1].RecipeName + "\n Description: " + cookSessionController.recipeBook.Recipes[1].Description,
-                cookSessionController.recipeBook.Recipes[2].RecipeName + "\n Description: " + cookSessionController.recipeBook.Recipes[2].Description
-            };
-
-            await thinkerModule.ExecuteParallelImageGeneratorRequests(recipes);
-        }        
-    }
-
     int recipeCounter = 0;
     private void HandleTextureGenerated(Texture2D texture) {
         // Handle the texture, e.g., create recipe objects
@@ -187,20 +173,30 @@ public class AgentController : MonoBehaviour
         }
     }
 
-
-    private async void ThinkerModule_OnChatGPTInputReceivedTaskOld(string obj)
-    {
-        Debug.Log($"Thinker Mode response fed to chef");
+    private async void ThinkerModule_OnChatGPTInputReceivedTask(string obj) {
+        Debug.Log("Thinker Mode response fed to chef");
         cookSessionController.CreateRecipeBook(obj);
-        if (cookSessionController.recipeBook.Recipes.Count > 0)
-        {
-            foreach (Recipe recipe in cookSessionController.recipeBook.Recipes)
-            {
-                // create prefab of recipe
-                Texture generatedTexture = await thinkerModule.SubmitChatImageGeneratorTexture(recipe.RecipeName + "\n Description: " + recipe.Description);
-                cookSessionController.CreateRecipeObjects(recipe, generatedTexture);
+
+        if (cookSessionController.recipeBook.Recipes.Count > 0) {
+            var tasks = new List<Task<Texture2D>>();
+            var semaphore = new SemaphoreSlim(1);  // Adjust the number to limit concurrent requests
+
+            foreach (var recipe in cookSessionController.recipeBook.Recipes) {
+                tasks.Add(thinkerModule.SubmitImageGeneratorRequestAsync(recipe.RecipeName, recipe.Description, semaphore));
+            }
+
+            var results = await Task.WhenAll(tasks).ConfigureAwait(true);
+
+            for (int i = 0; i < results.Length; i++) {
+                if (results[i] != null) {
+                    cookSessionController.CreateRecipeObjects(cookSessionController.recipeBook.Recipes[i], results[i]);
+                }
+                else {
+                    Debug.LogError($"Failed to generate image for {cookSessionController.recipeBook.Recipes[i].RecipeName}");
+                }
             }
         }
+
         avatar.SetActive(true);
         SetMode(AgentState.Speaking);
     }
