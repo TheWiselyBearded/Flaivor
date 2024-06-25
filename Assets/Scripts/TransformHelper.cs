@@ -22,8 +22,10 @@ public class TransformHelper : MonoBehaviour {
 
     public void SetPoseFromTransform(Transform target)
     {
-        Debug.Log($"Updating transform to {target.transform.position} rot {target.transform.rotation}");
-        PanelObject.transform.position = target.position;
-        PanelObject.transform.rotation = target.rotation;
+        if (target != null) {
+            Debug.Log($"Updating transform to {target.transform.position} rot {target.transform.rotation}");
+            PanelObject.transform.position = target.position;
+            PanelObject.transform.rotation = target.rotation;
+        }
     }
 }

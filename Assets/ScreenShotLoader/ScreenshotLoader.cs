@@ -41,8 +41,10 @@ public class ScreenshotLoader : MonoBehaviour
 
         texture = new Texture2D(1, 1);
         rawImage.texture = texture;
-        
+
+#if UNITY_ANDROID && !UNITY_EDITOR
         RequestCheckPermission();
+#endif
     }
 
     private void OnDestroy()

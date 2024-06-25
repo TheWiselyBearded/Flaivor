@@ -1,8 +1,9 @@
 {
   "dependencies": {
-    "com.meta.xr.sdk.core": "64.0.0",
-    "com.meta.xr.sdk.interaction": "64.0.0",
-    "com.meta.xr.sdk.interaction.ovr.samples": "64.0.0",
+    "com.meta.xr.sdk.core": "66.0.0",
+    "com.meta.xr.sdk.interaction": "65.0.0",
+    "com.meta.xr.sdk.interaction.ovr.samples": "65.0.0",
+    "com.meta.xr.sdk.platform": "66.0.0",
     "com.meta.xr.sdk.voice.dictation": "64.0.0",
     "com.openai.unity": "7.7.9",
     "com.readyplayerme.core": "https://github.com/readyplayerme/rpm-unity-sdk-core.git",
