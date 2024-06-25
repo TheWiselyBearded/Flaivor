@@ -292,7 +292,7 @@ public class ThinkerModule : MonoBehaviour
         //Debug.Log("Sending image generator request");
 
         try {
-            var request = new ImageGenerationRequest(msg, Model.DallE_3, responseFormat: OpenAI.Images.ResponseFormat.B64_Json);
+            var request = new ImageGenerationRequest(msg, Model.DallE_3, responseFormat: OpenAI.Images.ImageResponseFormat.B64_Json);
             var imageResults = await api.ImagesEndPoint.GenerateImageAsync(request);
             
 
@@ -594,7 +594,7 @@ public class ThinkerModule : MonoBehaviour
 
         while (attemptCount < maxAttempts && !success) {
             try {
-                var chatRequest = new ChatRequest(messages, model: "gpt-4o");
+                var chatRequest = new ChatRequest(messages, model: Model.GPT4o);
                 var result = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
 
                 var response = RemoveEmbeddedCharacters(result.ToString());
