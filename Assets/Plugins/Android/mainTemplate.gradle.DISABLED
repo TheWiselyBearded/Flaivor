@@ -3,13 +3,15 @@ apply plugin: 'com.android.library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-**DEPS**}
+    **DEPS**
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+}
 
 android {
     ndkPath "**NDKPATH**"
 
-    compileSdkVersion **APIVERSION**
-    buildToolsVersion '**BUILDTOOLS**'
+    compileSdkVersion 33
+    buildToolsVersion '30.0.3'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -17,8 +19,8 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion **MINSDKVERSION**
-        targetSdkVersion **TARGETSDKVERSION**
+        minSdkVersion 23
+        targetSdkVersion 33
         ndk {
             abiFilters **ABIFILTERS**
         }
@@ -33,12 +35,10 @@ android {
 
     aaptOptions {
         noCompress = **BUILTIN_NOCOMPRESS** + unityStreamingAssets.tokenize(', ')
-        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~"
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*!~"
     }**PACKAGING_OPTIONS**
 }
+
 **IL_CPP_BUILD_SETUP**
 **SOURCE_BUILD_SETUP**
 **EXTERNAL_SOURCES**
-dependencies {
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-}
