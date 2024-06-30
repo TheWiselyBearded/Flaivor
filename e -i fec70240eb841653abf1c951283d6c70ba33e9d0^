@@ -1,0 +1,159 @@
+[33m09046f3[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Remove mOpenAIConfiguration.asset from repository and add to .gitignore
+[33m925af19[m updated gitignore
+[33mfec7024[m package updates, formatting for app lab
+[33me4c3e1a[m[33m ([m[1;31morigin/main[m[33m)[m openai package update
+[33mcce3d07[m updated packaging. added meta platforms sdk. Removed locomotion interactors
+[33mc188e14[m ui moves back/forward from last set position
+[33ma4e2527[m fixed runtime bug in quest build for async parallel image gen requests
+[33mb545a43[m updated openai. added 4o for image analysis. parallelized image gen requests
+[33mef3fb39[m Merge branch 'main' of https://github.com/TheWiselyBearded/ChefGPT
+[33m1730dd6[m fixed timer issue, changed tmp min/max font size
+[33m86475da[m Update README.md
+[33md951e33[m resize martha
+[33m552e390[m prefab ui fix and timer fix
+[33m35d04c8[m Update README.md
+[33m57265b9[m Update README.md
+[33mdadd7c0[m Merge pull request #16 from TheWiselyBearded/dev
+[33ma140965[m recipe checker after request
+[33mdf09d46[m fix(ui): updated screenshot panel backgrounds
+[33m1e4a427[m fixed stretching of video on loading panel
+[33mcbc477b[m recipe handoff for helper
+[33m1636f14[m audio 3d for timer
+[33m0994c4d[m Merge pull request #15 from TheWiselyBearded/dev
+[33mff501fc[m timer x,y reset
+[33mbb04529[m turned off voice from start
+[33m7202bde[m bug fix with chef icon going away on palm menu when listing ingredients
+[33mcf0e798[m fix(carousel): reversed swipe directions
+[33m87fde68[m fix(carousel): carousel should now properly position itself
+[33mbf04ef0[m delete all ui objects including full menu ui
+[33mb7a758b[m home menu button
+[33m674c0f6[m turn off avatar on start
+[33m37d9e55[m more titles for ui card
+[33me35806c[m Merge branch 'dev' of https://github.com/TheWiselyBearded/ChefGPT into dev
+[33ma342ad7[m recipe title and ingredients included
+[33m9b42f7d[m fix(carousel): removed multi-swiping from carousel
+[33m5403f70[m Merge branch 'dev' of https://github.com/TheWiselyBearded/ChefGPT into dev
+[33m3c6803b[m fix(panels): loading panel should now match previous panel location
+[33mb7afeaf[m destroy on tap for timer
+[33m153f103[m resize instruction step
+[33m46f2e81[m remove audio sound from wristwatch
+[33m925f9ab[m removed rotator colliders for the prev/next button in image capture pipeline
+[33m6b34800[m Merge pull request #14 from TheWiselyBearded/dev
+[33m73ef525[m Merge pull request #13 from TheWiselyBearded/feature/avatar-rpm
+[33m1dc9343[m timer alarm
+[33m48aaf3b[m[33m ([m[1;31morigin/feature/avatar-rpm[m[33m)[m Merge branch 'dev' into feature/avatar-rpm
+[33m288d55c[m feat(avatar): fixed lip sync and added help history
+[33med03e1b[m avatar response to help
+[33m3327b76[m Merge pull request #12 from TheWiselyBearded/feature/avatar-rpm
+[33ma003c59[m hand menu ui interface with chef
+[33m42c58e8[m feat(avatar): avatar now looks at the player (main camera)
+[33m125bc1f[m Merge branch 'dev' into feature/avatar-rpm
+[33m7d77936[m feat(avatar): updated chef prefab with rpm avatar
+[33mca4c67d[m update listening text with dictation events for voice panel
+[33m3ead853[m panels update to last known position from prev panel
+[33m675ef97[m audio panel fix
+[33ma4a5127[m intro ui reference fix
+[33m7b7c6f6[m intro ui connection
+[33m4b792bb[m medium ui image size updates
+[33m38ab653[m updated panel ui prefabs reset to same position
+[33m254dabf[m functional image upload
+[33mc25ccd1[m image generator
+[33ma629175[m loading screen
+[33mbb29498[m Merge pull request #11 from TheWiselyBearded/feature/loading
+[33m804cdee[m Merge pull request #10 from TheWiselyBearded/dev
+[33m29e309e[m truncated floater menu with progress ui
+[33me6f1d9e[m voice request generator
+[33m58fae0b[m recipe ui image loader full pipeline
+[33mad19904[m camera load panels
+[33m094b8fd[m[33m ([m[1;31morigin/feature/loading[m[33m)[m feat(loading): first swing at the generation loading screen
+[33m9c00b23[m minor update to image upload ui
+[33m87887f9[m remainig image ui panels
+[33mfe21de9[m screenshot ui
+[33m8855ecf[m fix(ui-ux): replaced toggles with buttons in intro ui
+[33m2ef9d8e[m feat(ui): added camera capture assets
+[33m116c5de[m Merge pull request #9 from TheWiselyBearded/dev
+[33m7d2ac73[m Merge pull request #8 from TheWiselyBearded/feature/ui-ux
+[33m2815185[m[33m ([m[1;31morigin/feature/ui-ux[m[33m)[m Merge branch 'dev' into feature/ui-ux
+[33m55120cf[m feat(dictation): finished ingredient dictation
+[33m815b88c[m swipe + bug fix for assigning image
+[33m817fa7c[m Merge branch 'dev' into feature/ui-ux
+[33m906e3f5[m fix(ui-ux): separating dictation from completion
+[33m6e9fad9[m integrations
+[33m4493d91[m end result dictation
+[33m79d42ad[m Merge branch 'dev' of https://github.com/TheWiselyBearded/ChefGPT into dev
+[33m7aa9056[m feat(ui-ux): updating welcome and dictation panels
+[33mb3a7f82[m full watch functionality
+[33m0478e56[m Merge pull request #7 from TheWiselyBearded/feature/carousel
+[33mf422066[m[33m ([m[1;31morigin/feature/carousel[m[33m)[m Merge branch 'dev' into feature/carousel
+[33m0cd7029[m feat(carousel): added carousel animations and swipe methods
+[33ma789bd2[m offset parameters + duplication
+[33mb0e18b0[m spawn position offset for timers controlled
+[33mb5d07b5[m timer list per hand
+[33me107fd8[m Merge pull request #6 from TheWiselyBearded/feature/chef_ai
+[33m0a0aa4b[m[33m ([m[1;31morigin/feature/chef_ai[m[33m)[m Merge branch 'dev' into feature/chef_ai
+[33m5d9d154[m timer duplication
+[33meb21e99[m feat(chef): added json to help completion for eventual timer creation
+[33m697a9c6[m Merge pull request #5 from TheWiselyBearded/main
+[33mf6482b5[m Merge pull request #4 from TheWiselyBearded/feature/avatar
+[33mc10be60[m Merge pull request #3 from TheWiselyBearded/dev
+[33m599f050[m[33m ([m[1;31morigin/feature/avatar[m[33m)[m fix(tts): added audio loopback so chef can speak
+[33m1ae05df[m pass raw image to all ui elements
+[33mde6021e[m feat(lipsync): added ovr lip sync to chef avatar
+[33mab87940[m fix(tts): added voice to tts
+[33m692d5cd[m description and ui image for medium ui
+[33m6e18efe[m feat(tts): added speech on help completion
+[33mac7c07c[m Merge branch 'dev' into feature/avatar
+[33mf277f29[m fix(tts): added elevenlabs auth
+[33m62db7ef[m feat(elevenlabs): added elevenlabs library
+[33m031b95b[m image generator
+[33m35aceb4[m feat(avatars): upgrade to URP, created cutoff shader
+[33m59b4169[m Update README.md
+[33m5778658[m Help response functionality
+[33mc5de7a3[m response window ui prefab
+[33m7c252ab[m feat(avatars): import RPM and added example avatars w/ agentcontroller
+[33ma35cc5a[m Update README.md
+[33mba2bf11[m sticky palm menu. collider updates to panels
+[33m6233274[m Update README.md
+[33m6e8ae0a[m Update README.md
+[33m11b86a1[m Merge pull request #2 from TheWiselyBearded/dev
+[33m0352330[m Update README.md
+[33m144e320[m ar scene
+[33m28eeceb[m Update README.md
+[33m6371406[m end to end functionality
+[33mba7bac4[m prev button on progress ui functional
+[33m978a99f[m end to end functionality with sequencing of progress
+[33m516cf32[m full flow to progress complete.
+[33m2fd4d6a[m instnatiate prefabs in front of user sight
+[33md9d9a88[m Update README.md
+[33m91fcd91[m start/end button for timer
+[33mf351332[m Update README.md
+[33m6c00d8e[m Update README.md
+[33m8170279[m Merge pull request #1 from TheWiselyBearded/dev
+[33m607a4e3[m countdown timer + gesture recognition
+[33ma5e00d3[m wristwatch timer controls
+[33mbaf7312[m full recipe prefab instance
+[33m8e3eace[m recipe medium fully vr interactable
+[33md4fce42[m hand pose recognition both hands for timer. timer is grabbable as well
+[33m0ad5f6a[m fix prefab generation for recipes, ensuring json response is formatted with a recipes block
+[33mfdd23a6[m updated ui, palm menu
+[33mdbe001b[m Progress interactable vr menu
+[33m2e61a0c[m full menu vr interactable
+[33md3ce638[m Image input connected to pipeline in vr
+[33m01c9082[m voice input flowing in vr, canvas updated to use buttons for vr
+[33m26506e7[m voice dictation prefab in vr
+[33m81fbf83[m interactable vr ui with all controls
+[33m73b9f10[m create all instances of recipes at runtime from chatgpt response
+[33m24c3581[m intro ui prefabs and functionality in main vr scene. Mic input, screenshot.
+[33mb6830c1[m barebones timer with setter methods
+[33m21f5a04[m ui buttons desktop and vr, invoking subscribable events
+[33mb2e8cba[m avatar + gltfast package
+[33md5c9492[m directory cleanup. CookingAgent prefab.
+[33m0b834cc[m Instruction Step prefab ui + runtime generating
+[33m3b9f4dd[m Instruction steps ui prefab, integrated into pipeline.
+[33m062458d[m prefabs + runtime generation of prefabs
+[33m1cc4942[m functional object generation from json response
+[33m319eb51[m API code for chatgpt integrated
+[33m670901f[m controller scripts for experience
+[33medafa47[m meta voice sdk in main scene
+[33ma94a1e2[m ux samples in single scene
+[33m99ac2d9[m init
