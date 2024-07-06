@@ -44662,17 +44662,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2056322051}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1627986387}
+        m_TargetAssemblyTypeName: ScreenshotLoader, Assembly-CSharp
+        m_MethodName: SetImageLoaderActive
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 833612909}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -46707,11 +46707,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1232709922}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   imgBytes: 
   requestPermissionButton: {fileID: 1907204241}
   loadScreenShotButton: {fileID: 1903908552}
   rawImage: {fileID: 688398470}
   checkPermissionInterval: 1
+  checkImageIntervalPerSecond: 1
+  maxAttempts: 30
+  autoLoadActive: 1
 --- !u!1 &1630432655
 GameObject:
   m_ObjectHideFlags: 0
@@ -47921,6 +47936,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1627986387}
+        m_TargetAssemblyTypeName: ScreenshotLoader, Assembly-CSharp
+        m_MethodName: SetImageLoaderActive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1232709922}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
