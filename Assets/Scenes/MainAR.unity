@@ -45914,6 +45914,10 @@ PrefabInstance:
       value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 545651466611892585, guid: 0ed8849ad3fe5f44c827778a84562c0b, type: 3}
+      propertyPath: vrPanel
+      value: 
+      objectReference: {fileID: 1642435379}
+    - target: {fileID: 545651466611892585, guid: 0ed8849ad3fe5f44c827778a84562c0b, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1448539748}
