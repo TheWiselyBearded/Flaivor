@@ -163,6 +163,9 @@ public class CookSessionController : MonoBehaviour
                 SetRecipe(i);
             }
         }
+
+        // carousel no longer needed
+        carouselInteractable.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -509,7 +512,7 @@ public class CookSessionController : MonoBehaviour
 
         Vector3 spawnPosition = userObject.transform.position + spawnDirection * 1.1f + (spawnOffset * numCallsFull); // Adjust the distance as needed
 
-        GameObject instance = Instantiate(recipeFullUIPrefab, spawnPosition, Quaternion.identity, uiParent);
+        GameObject instance = Instantiate(recipeFullUIPrefab, spawnPosition, Quaternion.identity, null);
 
         numCallsFull++;
 
@@ -540,7 +543,7 @@ public class CookSessionController : MonoBehaviour
 
         Vector3 spawnPosition = userObject.transform.position + spawnDirection * 1.1f + (spawnOffset * numCallsFull); // Adjust the distance as needed
 
-        GameObject instance = Instantiate(recipeStepUITruncate, spawnPosition, Quaternion.identity, uiParent);
+        GameObject instance = Instantiate(recipeStepUITruncate, spawnPosition, Quaternion.identity, null);
 
         numCallsFull++;
 
@@ -573,7 +576,7 @@ public class CookSessionController : MonoBehaviour
         //Vector3 spawnPosition = userObject.transform.position + spawnDirection * 1.1f + (spawnOffset * (numCallsFull-1)); // Adjust the distance as needed
         Vector3 spawnPosition = userObject.transform.position + spawnDirection * 0.5f;
         // Instantiate the prefab as a child of uiParent
-        GameObject instance = Instantiate(recipeStepUIPrefab, spawnPosition, Quaternion.identity, uiParent);
+        GameObject instance = Instantiate(recipeStepUIPrefab, spawnPosition, Quaternion.identity, null);
         recipeProgressUI = instance;
         // Get the RecipeMediumUI component and set the recipe details
         InstructionStepProgressUI recipeUI = instance.GetComponent<InstructionStepProgressUI>();
