@@ -12,6 +12,8 @@ public class IntroUI : MonoBehaviour
     public UnityEvent voiceRequest;
     public UnityEvent cameraRequest;
 
+    public GameObject vrPanel;
+
     // Reference to the main camera
     public Camera mainCamera;
 
@@ -19,6 +21,11 @@ public class IntroUI : MonoBehaviour
     public float distance = 0.6f;
 
     private void Start() {
+        vrPanel.SetActive(false);
+        Invoke("SetHeadLevel", 1.5f);
+    }
+
+    private void SetHeadLevel() {
         if (mainCamera == null) mainCamera = Camera.main;
         // If the main camera is found
         if (mainCamera != null) {
@@ -26,11 +33,12 @@ public class IntroUI : MonoBehaviour
             Vector3 newPosition = mainCamera.transform.position + mainCamera.transform.forward * distance;
 
             // Adjust y-coordinate to be at head level
-            newPosition.y = -1* mainCamera.transform.position.y;
+            newPosition.y = mainCamera.transform.position.y;
 
             // Set the position of the GameObject to the calculated position
             transform.position = newPosition;
         }
+        vrPanel.SetActive(true);
     }
 
     public void InvokeVoiceRequest()
