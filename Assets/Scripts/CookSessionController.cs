@@ -545,6 +545,11 @@ public class CookSessionController : MonoBehaviour
 
         GameObject instance = Instantiate(recipeStepUITruncate, spawnPosition, Quaternion.identity, null);
 
+        // make face user
+        instance.transform.LookAt(userObject.transform);
+        instance.transform.Rotate(0, 180, 0);
+        instance.transform.eulerAngles = new Vector3(0, instance.transform.eulerAngles.y, 0);
+
         numCallsFull++;
 
         // Get the RecipeMediumUI component and set the recipe details
@@ -577,6 +582,11 @@ public class CookSessionController : MonoBehaviour
         Vector3 spawnPosition = userObject.transform.position + spawnDirection * 0.5f;
         // Instantiate the prefab as a child of uiParent
         GameObject instance = Instantiate(recipeStepUIPrefab, spawnPosition, Quaternion.identity, null);
+        // make face user
+        instance.transform.LookAt(userObject.transform);
+        instance.transform.Rotate(0, 180, 0);
+        instance.transform.eulerAngles = new Vector3(0, instance.transform.eulerAngles.y, 0);
+
         recipeProgressUI = instance;
         // Get the RecipeMediumUI component and set the recipe details
         InstructionStepProgressUI recipeUI = instance.GetComponent<InstructionStepProgressUI>();
