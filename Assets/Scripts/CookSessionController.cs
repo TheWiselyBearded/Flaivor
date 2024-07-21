@@ -24,6 +24,7 @@ public class CookSessionController : MonoBehaviour
     [SerializeField] private GameObject recipeMediumUIPrefab; // Drag your prefab here in the Inspector
     [SerializeField] private GameObject recipeFullUIPrefab; // Drag your prefab here in the Inspector
     [SerializeField] private Transform uiParent; // Assign a parent transform to control the layout
+    [SerializeField] private Transform carouselInteractable;
     public GameObject userObject;
 
     public Vector3 spawnOffset = new Vector3(0f, 0f, 0.25f); // Adjust the offset as needed
@@ -67,8 +68,10 @@ public class CookSessionController : MonoBehaviour
                 Destroy(goRef);
             }
         }
-        for (int i = 0; i < fullMenuUIs.Length; i++) {
-            if (fullMenuUIs[i] != null) {
+        for (int i = 0; i < fullMenuUIs.Length; i++)
+        {
+            if (fullMenuUIs[i] != null)
+            {
                 GameObject goRef = fullMenuUIs[i];
                 fullMenuUIs[i] = null;
                 Destroy(goRef);
@@ -160,6 +163,9 @@ public class CookSessionController : MonoBehaviour
                 SetRecipe(i);
             }
         }
+
+        // carousel no longer needed
+        carouselInteractable.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -352,10 +358,17 @@ public class CookSessionController : MonoBehaviour
         instance.SetActive(false);
         if (numCallsMedium > 3)
         {
-            uiParent.position = userObject.transform.position + (userObject.transform.forward * 1f);
-            uiParent.LookAt(userObject.transform);
-            uiParent.Rotate(0, 180, 0);
-            uiParent.eulerAngles = new Vector3(0, uiParent.eulerAngles.y, 0);
+            // uiParent.position = userObject.transform.position + (userObject.transform.forward * 1f);
+            // uiParent.LookAt(userObject.transform);
+            // uiParent.Rotate(0, 180, 0);
+            // uiParent.eulerAngles = new Vector3(0, uiParent.eulerAngles.y, 0);
+
+            carouselInteractable.position = userObject.transform.position + (userObject.transform.forward * 1f);
+            carouselInteractable.LookAt(userObject.transform);
+            carouselInteractable.Rotate(0, 180, 0);
+            carouselInteractable.eulerAngles = new Vector3(0, carouselInteractable.eulerAngles.y, 0);
+
+            carouselInteractable.gameObject.SetActive(true);
 
             foreach (GameObject go in mediumMenuUIs) { go.SetActive(true); }
 
@@ -499,7 +512,7 @@ public class CookSessionController : MonoBehaviour
 
         Vector3 spawnPosition = userObject.transform.position + spawnDirection * 1.1f + (spawnOffset * numCallsFull); // Adjust the distance as needed
 
-        GameObject instance = Instantiate(recipeFullUIPrefab, spawnPosition, Quaternion.identity, uiParent);
+        GameObject instance = Instantiate(recipeFullUIPrefab, spawnPosition, Quaternion.identity, null);
 
         numCallsFull++;
 
@@ -530,7 +543,12 @@ public class CookSessionController : MonoBehaviour
 
         Vector3 spawnPosition = userObject.transform.position + spawnDirection * 1.1f + (spawnOffset * numCallsFull); // Adjust the distance as needed
 
-        GameObject instance = Instantiate(recipeStepUITruncate, spawnPosition, Quaternion.identity, uiParent);
+        GameObject instance = Instantiate(recipeStepUITruncate, spawnPosition, Quaternion.identity, null);
+
+        // make face user
+        instance.transform.LookAt(userObject.transform);
+        instance.transform.Rotate(0, 180, 0);
+        instance.transform.eulerAngles = new Vector3(0, instance.transform.eulerAngles.y, 0);
 
         numCallsFull++;
 
@@ -563,7 +581,12 @@ public class CookSessionController : MonoBehaviour
         //Vector3 spawnPosition = userObject.transform.position + spawnDirection * 1.1f + (spawnOffset * (numCallsFull-1)); // Adjust the distance as needed
         Vector3 spawnPosition = userObject.transform.position + spawnDirection * 0.5f;
         // Instantiate the prefab as a child of uiParent
-        GameObject instance = Instantiate(recipeStepUIPrefab, spawnPosition, Quaternion.identity, uiParent);
+        GameObject instance = Instantiate(recipeStepUIPrefab, spawnPosition, Quaternion.identity, null);
+        // make face user
+        instance.transform.LookAt(userObject.transform);
+        instance.transform.Rotate(0, 180, 0);
+        instance.transform.eulerAngles = new Vector3(0, instance.transform.eulerAngles.y, 0);
+
         recipeProgressUI = instance;
         // Get the RecipeMediumUI component and set the recipe details
         InstructionStepProgressUI recipeUI = instance.GetComponent<InstructionStepProgressUI>();
@@ -590,8 +613,9 @@ public class CookSessionController : MonoBehaviour
         }
         return ingredientsText.TrimEnd(); // Remove the last newline character for cleaner formatting
     }
-    
-    public bool ThreeRecipesPresent(string jsonString) {
+
+    public bool ThreeRecipesPresent(string jsonString)
+    {
         jsonString = jsonString.Trim();
         int count = CountOccurrences(jsonString, "recipe_name");
         if (count < 3) return false;
@@ -603,22 +627,24 @@ public class CookSessionController : MonoBehaviour
     {
         // Trim any whitespace that might affect the check
         jsonString = jsonString.Trim();
-        
+
         // Check if the JSON string starts with an array indicator '['
         if (!jsonString.Contains("recipes"))
         {
             // The JSON is not wrapped with "recipes" key, wrap it
             jsonString = "{\"recipes\":" + jsonString + "}";
         }
-        
+
 
         return jsonString;
     }
 
-    private static int CountOccurrences(string text, string pattern) {
+    private static int CountOccurrences(string text, string pattern)
+    {
         int count = 0;
         int i = 0;
-        while ((i = text.IndexOf(pattern, i)) != -1) {
+        while ((i = text.IndexOf(pattern, i)) != -1)
+        {
             i += pattern.Length;
             count++;
         }
